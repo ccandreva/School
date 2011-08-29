@@ -1,0 +1,375 @@
+<!--[* $Id: School_user_application.                                        $ *]-->
+<!--[pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_user_application.js]-->
+<!--[if $redirect]-->
+    <script type="text/javascript">
+           redirect = "index.php?module=School&type=admin&func=<!--[$redirect]-->";
+    </script>
+<!--[/if]-->
+<h1>Resurrection Grammar School Application</h1>
+
+<!--[pnform cssClass="application"]-->
+<!--[pnformvalidationsummary]-->
+<!--[if $errormsg != '']-->
+<div class="validationSummary pn-errormsg">
+<!--[$errormsg]-->
+</div>
+<!--[/if]-->
+<h3>Studentid: '<!--[$id]-->' <!--[$Mes]--></h3>
+
+<fieldset id="General">
+<legend>Student Registration</legend>
+  <ul>
+      <li>
+          <ul>
+            <li>
+                <!--[pnformlabel for=AppDate text="Date of Application" ]-->
+                <!--[pnformdateinput id=AppDate width=10em]-->
+            </li>
+            <li>
+                <!--[pnformlabel for=Grade text="Grade Applying For" ]-->
+                <!--[pnformdropdownlist id=Grade mandatory=1]-->
+            </li>
+            <li>
+                <!--[pnformlabel for=Teacher text="Current Teacher" ]-->
+                <!--[pnformtextinput id=Teacher width=20em maxLength=50 ]-->
+            </li>
+            <!--[if $admin]-->
+            <li>
+                <!--[pnformlabel for=ClassYear text="Current Grade / Grad Year" ]-->
+                <!--[pnformdropdownlist id=ClassYear mandatory=1]-->
+            </li>
+            <!--[/if]-->
+          </ul>
+      </li>
+      <li>
+                <!--[pnformlabel for=Returning cssClass="Checkbox"
+                  text="Will this student be returning in the fall?"]-->
+                <!--[pnformdropdownlist id=Returning mandatory=1]-->
+
+      </li>
+  </ul>
+</fieldset>
+
+<fieldset id="ChildsInfo">
+<legend>Child's Information</legend>
+
+  <ul>
+      <li>
+          <h3>
+              Names and all other information should be exactly as written on the child's birth certificate.
+          </h3>
+      </li>
+      <li>
+          <ul>
+                <li>
+                  <!--[pnformlabel for=LastName text="Last Name" ]-->
+                  <!--[pnformtextinput id=LastName width=10em maxLength=50 mandatory=1]-->
+                </li>
+                <li>
+                  <!--[pnformlabel for=FirstName text="First Name" ]-->
+                  <!--[pnformtextinput id=FirstName width=10em maxLength=50 mandatory=1]-->
+                </li>
+                <li>
+                  <!--[pnformlabel for=MiddleName text="Middle Name" ]-->
+                  <!--[pnformtextinput id=MiddleName width=10em maxLength=50 ]-->
+                </li>
+                <li>
+                  <!--[pnformlabel for=NickName text="Preferred / Nick Name" ]-->
+                  <!--[pnformtextinput id=NickName width=10em maxLength=50 ]-->
+                </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+                <li>
+                  <!--[pnformlabel for=DOB text="Date of Birth" ]-->
+                  <!--[pnformdateinput id=DOB mandatory=1 width=10em]-->
+                </li>
+                <li>
+                  <!--[pnformlabel for=POB text="Place of Birth" ]-->
+                  <!--[pnformtextinput id=POB width=10em maxLength=50 mandatory=1]-->
+                </li>
+                <li>
+                  <!--[pnformlabel for=BirthCertificate text="Birth Certificate Number" ]-->
+                  <!--[pnformtextinput id=BirthCertificate width=15em maxLength=75 mandatory=1]-->
+                </li>
+          </ul>
+      </li>
+      
+      <li>
+          <ul>
+              <li>
+                  <!--[pnformlabel for=Gender text="Gender"]-->
+                  <!--[pnformdropdownlist id=Gender mandatory=1]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=Religion text="Religion"]-->
+                  <!--[pnformtextinput id=Religion width=10em maxLength=15 ]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=Parish text="Parish"]-->
+                  <!--[pnformtextinput id=Parish width=10em maxLength=15 mandatory=1 ]-->
+              </li>
+          </ul>
+      </li>
+
+      <li>
+          <ul>
+              <li>
+                  <!--[pnformlabel for=Resides text="Child resides with"]-->
+                  <!--[pnformtextinput id=Resides width=15em maxLength=30 ]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=Relationship text="Relationship"]-->
+                  <!--[pnformtextinput id=Relationship width=10em maxLength=15 ]-->
+              </li>
+          </ul>
+      </li>
+
+  </ul>
+</fieldset>
+
+<fieldset id="Sacraments">
+    <legend>Sacraments</legend>
+
+    <table>
+        <tr>
+            <th>Sacrament</th>
+            <th>Date</th>
+            <th>Church</th>
+            <th>Location</th>
+        </tr>
+        <!--[foreach from=$Sacraments item=label key=s]-->
+        <tr>
+            <td><!--[$label]--></td>
+            <td>
+                <!--[*pnformlabel for="`$s`Date" text="Date of Baptisim"*]-->
+                <!--[pnformdateinput id="`$s`Date" width=10em]-->
+            </td>
+
+            <td>
+                <!--[*pnformlabel for="`$s`Church" text="Church Performed in"*]-->
+                <!--[pnformtextinput id="`$s`Church" width=20em maxLength=30]-->
+            </td>
+            <td>
+                <!--[*pnformlabel for="`$s`Loc" text="Location "*]-->
+                <!--[pnformtextinput id="`$s`Loc" width=20em maxLength=30]-->
+            </td>
+        </tr>
+      <!--[/foreach]-->
+    </table>
+</fieldset>
+
+
+<fieldset>
+    <legend>Custody of Child (if applicaable)</legend>
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <!--[pnformlabel for=CustodialParent text="Custodial Parent"]-->
+                    <!--[pnformdropdownlist id=CustodialParent ]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=CustodialDocumentation text="Documentation"]-->
+                    <!--[pnformtextinput id=CustodialDocumentation width=40em maxLength=50 ]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=CustodialDocumentationDate text="Date provided" ]-->
+                    <!--[pnformdateinput id=CustodialDocumentationDate width=10em]-->
+                </li>
+            </ul>
+        </li>
+    </ul>
+</fieldset>
+
+<fieldset>
+    <legend>Guardianship of Child (if applicable)</legend>
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <!--[pnformlabel for=GuardianName text="Guardian Name"]-->
+                    <!--[pnformtextinput id=GuardianName width=40em maxLength=50]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=GuardianRelation text="Guardian Relationship"]-->
+                    <!--[pnformtextinput id=GuardianRelation width=20em maxLength=50]-->
+                </li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>
+                    <!--[pnformlabel for=GuardianDocumentation text="Documentation"]-->
+                    <!--[pnformtextinput id=GuardianDocumentation width=40em maxLength=50 ]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=GuardianDocumentationDate text="Date provided" ]-->
+                    <!--[pnformdateinput id=GuardianDocumentationDate width=10em]-->
+                </li>
+            </ul>
+        </li>
+    </ul>
+</fieldset>
+
+<fieldset id="Education">
+    <legend>Education</legend>
+    <fieldset id="PreviousSchools">
+        <legend>Previous Schools Attended</legend>
+        <table>
+            <tr>
+                <th>Name of School</th>
+                <th>Address</th>
+                <th>Grades<br />Completed</th>
+                <th>Dates</th>
+            </tr>
+            <!--[section name=loop start=1 loop=5 step=1]-->
+            <!--[assign var='i' value=`$smarty.section.loop.index`]-->
+            <tr>
+                <td>
+                    <!--[pnformtextinput id="PrevSchool`$i`" width=20em maxLength=30]-->
+                </td>
+                <td>
+                    <!--[pnformtextinput id="PrevSchoolAddress`$i`" width=20em maxLength=30]-->
+                </td>
+                <td>
+                    <!--[pnformtextinput id="PrevSchoolGrades`$i`" width=8em maxLength=10]-->
+                </td>
+                <td>
+                    <!--[pnformtextinput id="PrevSchoolDates`$i`" width=10em maxLength=20]-->
+                </td>
+            </tr>
+            <!--[/section]-->
+        </table>
+
+    </fieldset>
+
+    <fieldset id="Evaluations">
+        <legend>Evaluations</legend>
+
+        <ul>
+            <li>
+                <!--[pnformlabel for=DistrictEval cssClass="Checkbox"
+                  text="Has the child been evaluated by the district Committee on Special Education ?"]-->
+                <!--[pnformdropdownlist id=DistrictEval mandatory=1]-->
+            </li>
+            <li>
+                <!--[pnformlabel for=PrivateEval cssClass="Checkbox"
+                  text="Has the child been evaluated by a private psychological or educational agency ?"]-->
+                <!--[pnformdropdownlist id=PrivateEval mandatory=1]-->
+            </li>
+
+        </ul>
+
+        <table id="EvaluationInfo">
+            <tr>
+                <th>Type of Evaluation</th>
+                <th>Date of Evaluation</th>
+                <th>Name of Agency</th>
+                <th>Contact Name</th>
+                <th>Contact Phone</th>
+            </tr>
+            <!--[foreach from=$Evaluations item=label key=e]-->
+            <tr>
+                <td><!--[$label]--><!--[if $e == 'Other']-->
+                    <!--[pnformtextinput id=OtherEvalName width=10em maxLength=20]-->
+                     <!--[/if]-->
+                </td>
+                <td>
+                    <!--[pnformdateinput id="`$e`Date" width=10em]-->
+                </td>
+                <td>
+                    <!--[pnformtextinput id="`$e`AgencyName" width=10em maxLength=20]-->
+                </td>
+                <td>
+                    <!--[pnformtextinput id="`$e`AgencyContact" width=10em maxLength=20]-->
+                </td>
+                <td>
+                    <!--[pnformtextinput id="`$e`AgencyPhone" width=10em maxLength=14]-->
+                </td>
+            </tr>
+            <!--[/foreach]-->
+        </table>
+
+
+        <ul id="DistrictEvalInfo">
+            <li>
+                <ul>
+                    <li>
+                        <!--[pnformlabel for=IEP text="Was an IEP generated" ]-->
+                        <!--[pnformdropdownlist id=IEP]-->
+                    </li>
+                    <li>
+                        <!--[pnformlabel for=IEPSubmitDate text="Date Submitted" ]-->
+                        <!--[pnformdateinput id=IEPSubmitDate width=8em ]-->
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>
+                        <!--[pnformlabel for=504Plan text="Child has Section 504 Accommodatin Plan" ]-->
+                        <!--[pnformdropdownlist id=504Plan]-->
+                    </li>
+                    <li>
+                        <!--[pnformlabel for=504PlanSubmitDate text="Date Submitted" ]-->
+                        <!--[pnformdateinput id=504PlanSubmitDate width=8em ]-->
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <ul>
+                    <li>
+                        <!--[pnformlabel for=DistrictName text="District Name and #"]-->
+                        <!--[pnformtextinput id=DistrictName width=15em maxLength=30]-->
+                    </li>
+                    <li>
+                        <!--[pnformlabel for=LastIEPDate text="Date of Last IEP"]-->
+                        <!--[pnformdateinput id=LastIEPDate width=8em maxLength=10 ]-->
+                    </li>
+                    <li>
+                        <!--[pnformlabel for=LastPsychDate text="Date of Last Psychological Eval"]-->
+                        <!--[pnformdateinput id=LastPsychDate width=8em maxLength=10 ]-->
+                    </li>
+                    <li>
+                        <!--[pnformlabel for=Placement text="Classification and Recommended Placement"]-->
+                        <!--[pnformtextinput id=Placement width=20em maxLength=40]-->
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+    </fieldset>
+
+</fieldset>
+
+<!--[if !$ShowSaveAnyway]-->
+<!--[assign var=hide value='style="display: none;"']-->
+<!--[/if]-->
+<fieldset <!--[$hide]-->>
+    <legend>Save Progress</legend>
+    <p>Your form is incomplete. If you would like to save what you have entered so far and finish later, check this box.
+        <!--[pnformcheckbox id="SaveAnyway" ]-->
+    </p>
+</fieldset>
+
+<div class="z-buttons z-formbuttons"">
+<!--[pnformbutton commandName="submit" text="Submit" ]-->
+<input type="submit" name="cancel" title="Cancel" value="Cancel" id="Cancel">
+</div>
+
+<!--[*
+<div class="z-buttons z-formbuttons">
+
+    <button type="submit" name="submit" title="Save"><img src="images/icons/extrasmall/button_ok.gif" alt="Save" /> Save</button>
+    <button type="submit" name="cancel" title="Cancel"><img src="images/icons/extrasmall/button_cancel.gif" alt="Cancel" /> Cancel</button>
+    <a href="http://dorcas.westnet.com/cms/index.php?module=settings&amp;type=admin" title="Cancel"><img src="images/icons/extrasmall/button_cancel.gif" alt="Cancel" title="Cancel" width="16" height="16" /> Cancel</a>
+</div>
+*]-->
+
+<!--[/pnform]-->
+

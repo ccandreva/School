@@ -1,0 +1,171 @@
+<!--[* $Id: School_user_main.htm 22155 2007-06-04 11:35:23Z markwest $ *]-->
+<h1> Resurrection Enrollment Portal</h1>
+
+<!--[insert name='getstatusmsg' module='School']-->
+
+<h2><!--[$LastName]--> Family Information</h2>
+<h3>(Please make sure this is kept up to date)</h3>
+
+<table class="School_familyinfo">
+    <tr><td>
+        <h4>Address</h4>
+        <ul class="School_address">
+            <li><!--[$Address]--><!--[if $Apt]-->, Apt #<!--[$Apt]--><!--[/if]--></li>
+            <li><!--[$City]-->, <!--[$State]--> <!--[$Zip]--></li>
+        </ul>
+    </td>
+    <td>
+        <h4>Mother</h4>
+        <ul class="School_address">
+            <li><!--[$MotherLastName]-->, <!--[$MotherFirstName]--></li>
+            <!--[if $MotherHasAddress == 'Yes']-->
+                <li><!--[$MotherAddress]--><!--[if $MotherApt]-->, Apt #<!--[$MotherApt]--><!--[/if]--></li>
+                <li><!--[$MotherCity]-->, <!--[$MotherState]--> <!--[$MotherZip]--></li>
+                <li><!--[$MotherPhone]--></li>
+            <!--[/if]-->
+            <!--[if $MotherWorkAddress]-->
+                <li><h4>Business Address</h4></li>
+                <li><!--[$MotherWorkAddress]--></li>
+                <li><!--[$MotherWorkCityStateZip]--></li>
+            <!--[/if]-->
+            <!--[if $MotherEmail]--><li><!--[$MotherEmail]--></li><!--[/if]-->
+            <!--[if $MotherWorkPhone]--><li>Phone: <!--[$MotherPhone]--></li><!--[/if]-->
+            <!--[if $MotherCell]--><li>Cell: <!--[$MotherCell]--></li><!--[/if]-->
+        </ul>
+    </td>
+    <td>
+        <h4>Father</h4>
+        <ul class="School_address">
+            <li><!--[$FatherLastName]-->, <!--[$FatherFirstName]--></li>
+            <!--[if $FatherHasAddress == 'Yes']-->
+                <li><!--[$FatherAddress]--><!--[if $FatherApt]-->, Apt #<!--[$FatherApt]--><!--[/if]--></li>
+                <li><!--[$FatherCity]-->, <!--[$FatherState]--> <!--[$FatherZip]--></li>
+                <li><!--[$FatherPhone]--></li>
+            <!--[/if]-->
+            <!--[if $FatherWorkAddress]-->
+                <li><h4>Business Address</h4></li>
+                <li><!--[$FatherWorkAddress]--></li>
+                <li><!--[$FatherWorkCityStateZip]--></li>
+            <!--[/if]-->
+            <!--[if $FatherEmail]--><li><!--[$FatherEmail]--></li><!--[/if]-->
+            <!--[if $FatherWorkPhone]--><li>Phone: <!--[$FatherPhone]--></li><!--[/if]-->
+            <!--[if $FatherCell]--><li>Cell: <!--[$FatherCell]--></li><!--[/if]-->
+        </ul>
+    </td>
+    </tr>
+</table>
+<br />
+
+<h2>Step 1: Review Family information</h2>
+<div class="EnrollStep">
+<!--[if $lu_date < $EnrollStart ]-->
+    <p><img src="images/icons/small/button_cancel.gif"/> Please
+        <a href="<!--[pnmodurl modname="School" type="user" func="editfamily"]-->"> Review and Update</a>
+        your family information for this enrollment period.
+    </p>
+<!--[else]-->
+    <p><img src="images/icons/small/button_ok.gif"/> If anything has changed, please
+    <a href="<!--[pnmodurl modname="School" type="user" func="editfamily"]-->">
+       Edit Your Family Information</a>.
+    </p>
+</div>
+    <h2>Step 2: Review Currently Enrolled Students</h2>
+<div class="EnrollStep">
+    <table class="School">
+        <tr>
+            <th>Name</th>
+            <th>Grade Last<br />Applied For</th>
+            <th>Last Edited</th>
+            <th>Registration<br />Updated</th>
+        </tr>
+    <!--[assign var=students value=0]-->
+    <!--[assign var=OKstudents value=0]-->
+    <!--[foreach item=Student from=$Students]-->
+        <!--[assign var=students value=`$students+1`]-->
+        <!--[if $Student.ClassYear == $NextYearStart]-->
+            <!--[assign var=OKstudents value=`$OKstudents+1`]-->
+            <!--[assign var=valid value=2]-->
+        <!--[elseif $EnrollStart < $Student.lu_date && $Student.LastSaveValid]-->
+            <!--[assign var=valid value=1]-->
+            <!--[assign var=OKstudents value=`$OKstudents+1`]-->
+        <!--[else]-->
+            <!--[assign var=valid value=0]-->
+        <!--[/if]-->
+
+        <!--[pnmodurl modname="School" type="user" func="editstudent" id=$Student.id assign=editurl ]-->
+        <!--[pnmodurl modname="School" type="print" func="student" id=$Student.id assign=applicationurl]-->
+        <tr>
+            <td><!--[$Student.FirstName]--></td>
+            <td><!--[$Student.Grade]--></td>
+            <!--[if $Student.lu_date == '1970-01-01 00:00:00']-->
+                <td>&nbsp;</td>
+            <!--[else]-->
+                <td><!--[$Student.lu_date]--></td>
+            <!--[/if]-->
+            <td>
+                <!--[if $valid==1 ]--><img src="images/icons/small/button_ok.gif" />
+                <!--[elseif $valid==2 ]--><img src="modules/School/pnimages/Grad-22.jpg" />
+                <!--[else]--><img src="images/icons/small/button_cancel.gif" /><!--[/if]-->
+                <td><a href="<!--[$editurl]-->">Edit</a></td>
+            <!--[if $valid == 1]-->
+            <td><a href="<!--[$applicationurl]-->" target="_res_print">Print Application</a></td>
+            <!--[elseif $valid == 2]-->
+            <td><strong>Congratulations!</strong></td>
+            <!--[/if]-->
+        </tr>
+    <!--[/foreach]-->
+    </table>
+
+    <p>
+    <a href="<!--[pnmodurl modname="School" type="user" func="addstudent"]-->">Enroll New Student</a>
+    </p>
+
+        <!--[if $OKstudents < $students]-->
+        <p>
+        <strong>Please update all students' information.</strong>  Once all students have been
+        edited you can procede to the next step.
+        </p>
+        <!--[else]-->
+
+        <p><img src="images/icons/small/button_ok.gif" />
+            <strong>All student forms have been updated</strong>. You can now print an Enrollment Application
+            for each student, using the "Print Application" links in list of <strong>Currently Enrolled Students</strong> above,
+            before proceeding to Step 3.
+        </p>
+        <p>
+            <strong>Forms need to be printed out, signed, and sent in to the office along with
+            the Re-Registration fees of $200.00 per child.</strong> If you are already set up for direct deposit,
+            you may also pay through the <a href="<!--[pnmodurl modname="FormExpress" func="display_form" form_id=3]-->">online payment form</a>.
+        </p>
+</div>
+            <h2>Step 3: Tuition Payment</h2>
+<div class="EnrollStep">
+            <!--[if $Tuition.lu_date < $EnrollStart]-->
+                <p><img src="images/icons/small/button_cancel.gif" />
+                Next, update your <a href="<!--[pnmodurl modname="School" type="user" func="tuition"]-->">Tuition
+                Payment Preferences</a>.
+                </p>
+            <!--[else]-->
+                <p><img src="images/icons/small/button_ok.gif" />
+                    <strong>Tuition information is up to date.</strong> You may still
+                    <a href="<!--[pnmodurl modname="School" type="user" func="tuition"]-->">Review and Update
+                       Payment Options</a> before  proceeding to Step 4.
+                </p>
+</div>
+                <h2>Step 4: Print Family Forms</h2>
+<div class="EnrollStep">
+                <!--[pnmodurl modname="School" type="print" func="textbook" assign=printfam]-->
+                <p><a href="<!--[$printfam]-->" target="_res_print"><img src="images/icons/small/folder_print.gif" /></a>
+                    <strong>All necessary forms have been filled out.</strong> You may now
+                    <a href="<!--[$printfam]-->" target="_res_print">print the Textbook and Tuition Forms</a>.
+                    Sign and return these to the office.
+                </p>
+            <!--[/if]-->
+
+        <!--[/if]-->
+    </p>
+
+<!--[/if]--><!--[* Step 1 *]-->
+</div>
+
+

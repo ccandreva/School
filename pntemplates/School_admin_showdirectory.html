@@ -1,0 +1,71 @@
+<!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
+<!--[include file="School_admin_menu.htm"]-->
+
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+
+<div class="pn-admincontainer">
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
+  <h2>Blue Directory Administration</h2>
+
+  <h3>
+      Show as:
+  </h3>
+  <ul>
+      <li><a href="<!--[pnmodurl modname="School" type="admin" func="showdirectory" view="table"]-->">Table</a></li>
+      <li><a href="<!--[pnmodurl modname="School" type="admin" func="showdirectory" view="print"]-->">2-column</a></li>
+      <li><a href="<!--[pnmodurl modname="School" type="admin" func="showdirectory" view="csv"]-->">Download as CSV</a></li>
+  </ul>
+ </div>
+   <!--[assign var=i value=0]-->
+  <!--[if $view == 'print']-->
+      <div id="BluebookPrint">
+      <h1>Blue Book 2010/2011</h1>
+
+        <!--[foreach item=d from=$data]-->
+          <!--[assign var=i value=`$i+1`]-->
+          <div>
+            <b><!--[$d.FamilyName]--></b><br />
+            <!--[$d.Address]--><br />
+            <!--[$d.City]-->, <!--[$d.State]--> <!--[$d.Zip]--><br />
+            <!--[$d.Phone]--><br />
+            <!--[$d.Students]--><br />
+            <!--[$d.Email]--><br />
+            <br />
+          </div>
+        <!--[/foreach]-->
+      </div>
+  <br clear="all"/> <p>Total: <!--[$i]--></p>
+  <!--[elseif $view == 'table']-->
+      <table>
+
+          <tr>
+              <th>&nbsp;</th>
+              <th>Family Name</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Zip</th>
+              <th>Phone</th>
+              <th>Students</th>
+              <th>Email</th>
+              <th>Last Updated</th>
+          </tr>
+          <!--[foreach item=d from=$data]-->
+          <!--[assign var=i value=`$i+1`]-->
+          <tr>
+        <td><a href="<!--[pnmodurl modname="school" type="admin" func="editdirectoryform" familyid=$d.id ]-->"
+               title="Edit this family's directory entry."><!--[$editIcon.imgtag]--></a></td>
+            <td><!--[$d.FamilyName]--></td>
+            <td><!--[$d.Address]--></td>
+            <td><!--[$d.City]--></td>
+            <td><!--[$d.State]--></td>
+            <td><!--[$d.Zip]--></td>
+            <td><!--[$d.Phone]--></td>
+            <td><!--[$d.Students]--></td>
+            <td><!--[$d.Email]--></td>
+            <td><!--[$d.lu_date]--></td>
+          </tr>
+        <!--[/foreach]-->
+      </table
+      <p>Total: <!--[$i]--></p>
+  <!--[/if]-->

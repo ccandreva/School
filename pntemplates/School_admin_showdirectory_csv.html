@@ -1,0 +1,8 @@
+<!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
+FamilyID,FamilyName,Address,City State Zip,Phone,Students,Email,"Last Updated","Students2"
+<!--[foreach item=d from=$data]--><!--[School_splitname students=$d.Students]--><!--[$d.id]-->,<!--[$d.FamilyName|csv]-->,<!--[$d.Address|csv]-->,<!--["`$d.City`, `$d.State` `$d.Zip`"|csv]-->,<!--[$d.Phone|csv]-->,<!--[$Students1|csv]-->,<!--[$d.Email|csv]-->,<!--[$d.lu_date|csv]-->,<!--[$Students2|csv]-->
+<!--[/foreach]-->
+
+<!--[* <!--[School_splitname students=$d.Students]--><!--[$d.id]-->,"<!--[$d.FamilyName]-->","<!--[$d.Address]-->","<!--[$d.City]-->, <!--[$d.State]--> <!--[$d.Zip]-->","<!--[$d.Phone]-->","<!--[$Students1]-->","<!--[$d.Email]-->","<!--[$d.lu_date]-->","<!--[$Students2]-->"
+*]-->
+<!--[* <!--[$d.id]-->,"<!--[$d.FamilyName]-->","<!--[$d.Address]-->","<!--[$d.City]-->, <!--[$d.State]--> <!--[$d.Zip]-->","<!--[$d.Phone]-->","<!--[$d.Students]-->","<!--[$d.Email]-->","<!--[$d.lu_date]-->" *]-->

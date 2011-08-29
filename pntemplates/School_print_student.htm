@@ -1,0 +1,595 @@
+<!--[pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_print_auto.js]-->
+    <div class="print">
+        <div id="reslogo">
+            <img src="images/formlogo.gif"/>
+    </div>
+    <h1>
+        Resurrection Grammar School Application
+    </h1>
+        <br clear="both" />
+<!--[* h3>Studentid: <!--[$id]--> <!--[$Mes]--></h3 *]-->
+<fieldset id="General">
+<legend>Student Registration</legend>
+  <ul>
+      <li>
+          <ul>
+            <li>
+                <strong>Date of Application: </strong>
+              <!--[$AppDate]-->
+            </li>
+            <li>
+                <strong>Grade Applying For: </strong>
+              <!--[$Grade]-->
+            </li>
+            <li>
+                <strong>Current Teacher: </strong>
+                <!--[$Teacher]-->
+            </li>
+          </ul>
+      </li>
+  </ul>
+</fieldset>
+
+<fieldset id="ChildsInfo">
+<legend>Child's Information</legend>
+  <ul>
+      <li>
+          <ul>
+                <li>
+                  <strong>Last Name:</strong>
+                  <!--[$LastName]-->
+                </li>
+                <li>
+                  <strong>First Name:</strong>
+                  <!--[$FirstName]-->
+                </li>
+                <li>
+                  <strong>Middle Name:</strong>
+                  <!--[$MiddleName]-->
+                </li>
+                <li>
+                  <strong>Preferred Name:</strong>
+                  <!--[$NickName]-->
+                </li>
+          </ul>
+      </li>
+
+      <li>
+          <ul>
+                <li>
+                  <strong>Date of Birth:</strong>
+                  <!--[$DOB]-->
+                </li>
+                <li>
+                  <strong>Place of Birth:</strong>
+                  <!--[$POB]-->
+                </li>
+                <li>
+                    <strong>Birth Cert #: </strong>
+                    <!--[$BirthCertificate]-->
+                </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Address: </strong> <!--[$Address]-->
+              </li>
+              <li>
+                  <strong>Apt #: </strong> <!--[$Apt]-->
+              </li>
+              <li>
+                  <strong>City: </strong> <!--[$City]-->
+              </li>
+              <li>
+                  <strong>State: </strong> <!--[$State]-->
+              </li>
+              <li>
+                  <strong>Zip: </strong> <!--[$Zip]-->
+              </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Phone: </strong>
+                  <!--[$Phone]-->
+              </li>
+              <li>
+                  <strong>Cell: </strong>
+                  <!--[$Cell]-->
+              </li>
+              <li>
+                  <strong>Primary lang used at home: </strong>
+                  <!--[$Lang]-->
+              </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Gender:</strong>
+                  <!--[$Gender]-->
+              </li>
+              <li>
+                  <strong>Religion:</strong>
+                  <!--[$Religion]-->
+              </li>
+              <li>
+                  <strong>Parish:</strong>
+                  <!--[$Parish]-->
+              </li>
+          </ul>
+      </li>
+
+      <li>
+          <ul>
+              <li>
+                  <strong>Child resides with:</strong>
+                  <!--[$Resides]-->
+              </li>
+              <li>
+                  <strong>Relationship:</strong>
+                  <!--[$Relationship]-->
+              </li>
+          </ul>
+      </li>
+
+  </ul>
+</fieldset>
+
+<fieldset id="Sacraments">
+    <legend>Sacraments</legend>
+
+    <table>
+        <tr>
+            <th>Sacrament</th>
+            <th>Date</th>
+            <th>Church</th>
+            <th>Location</th>
+        </tr>
+        <!--[foreach from=$Sacraments item=label key=s]-->
+        <tr>
+            <td><!--[$label]--></td>
+            <td>
+                <!--[getval  var="`$s`Date" ]-->
+            </td>
+
+            <td>
+                <!--[getval var="`$s`Church"]-->
+            </td>
+            <td>
+                <!--[getval var="`$s`Loc" ]-->
+            </td>
+        </tr>
+      <!--[/foreach]-->
+    </table>
+</fieldset>
+
+<fieldset id="MotherInfo">
+    <legend>Mother's Information</legend>
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <strong>Last Name: </strong>
+                    <!--[$MotherLastName]-->
+                </li>
+                <li>
+                    <strong>First Name: </strong>
+                    <!--[$MotherFirstName]-->
+                </li>
+                <li>
+                    <strong>Middle Name: </strong>
+                    <!--[$MotherMiddleName]-->
+                </li>
+                <li>
+                    <strong>Maiden Name: </strong>
+                    <!--[$MotherMaidenName]-->
+                </li>
+                <li>
+                    <strong>Marital Status: </strong>
+                    <!--[$MotherStatus]-->
+                </li>
+                <li>
+                    <strong>Separate address?: </strong>
+                    <!--[$MotherHasAddress]-->
+                </li>
+            </ul>
+        </li>
+
+        <li id="MotherAddressInfo">
+          <ul>
+              <li>
+                  <strong>Address: </strong>
+                  <!--[$MotherAddress]-->
+              </li>
+              <li>
+                  <strong>Apt #: </strong>
+                  <!--[$MotherApt]-->
+              </li>
+              <li>
+                  <strong>City: </strong>
+                  <!--[$MotherCity]-->
+              </li>
+              <li>
+                  <strong>State: </strong>
+                  <!--[$MotherState]-->
+              </li>
+              <li>
+                  <strong>Zip: </strong>
+                  <!--[$MotherZip]-->
+              </li>
+              <li>
+                  <strong>Phone: </strong>
+                  <!--[$MotherPhone]-->
+              </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Birthplace: </strong>
+                  <!--[$MotherBirthplace]-->
+              </li>
+              <li>
+                  <strong>Religion: </strong>
+                  <!--[$MotherReligion]-->
+              </li>
+              <li>
+                  <strong>Occupation: </strong>
+                  <!--[$MotherOccupation]-->
+              </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Business Name: </strong>
+                  <!--[$MotherWorkName]-->
+              </li>
+              <li>
+                  <strong>Business Address: </strong>
+                  <!--[$MotherWorkAddress]-->
+              </li>
+              <li>
+                  <strong>City, State Zip: </strong>
+                  <!--[$MotherWorkCityStateZip]-->
+              </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Email: </strong>
+                  <!--[$MotherEmail]-->
+              </li>
+              <li>
+                  <strong>Work Phone: </strong>
+                  <!--[$MotherWorkPhone]-->
+              </li>
+              <li>
+                  <strong>Cell Phone: </strong>
+                  <!--[$MotherCell]-->
+              </li>
+          </ul>
+      </li>
+
+
+    </ul>
+
+</fieldset>
+
+<fieldset id="FatherInfo">
+    <legend>Father's Information</legend>
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <strong>Last Name: </strong>
+                    <!--[$FatherLastName]-->
+                </li>
+                <li>
+                    <strong>First Name: </strong>
+                    <!--[$FatherFirstName]-->
+                </li>
+                <li>
+                    <strong>Middle Name: </strong>
+                    <!--[$FatherMiddleName]-->
+                </li>
+                <li>
+                    <strong>Marital Status: </strong>
+                    <!--[$FatherStatus]-->
+                </li>
+                <li>
+                    <strong>Separate address?: </strong>
+                    <!--[$FatherHasAddress]-->
+                </li>
+            </ul>
+        </li>
+
+        <li id="FatherAddressInfo">
+          <ul>
+              <li>
+                  <strong>Address: </strong>
+                  <!--[$FatherAddress]-->
+              </li>
+              <li>
+                  <strong>Apt #: </strong>
+                  <!--[$FatherApt]-->
+              </li>
+              <li>
+                  <strong>City: </strong>
+                  <!--[$FatherCity]-->
+              </li>
+              <li>
+                  <strong>State: </strong>
+                  <!--[$FatherState]-->
+              </li>
+              <li>
+                  <strong>Zip: </strong>
+                  <!--[$FatherZip]-->
+              </li>
+              <li>
+                  <strong>Phone: </strong>
+                  <!--[$FatherPhone]-->
+              </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Birthplace: </strong>
+                  <!--[$FatherBirthplace]-->
+              </li>
+              <li>
+                  <strong>Religion: </strong>
+                  <!--[$FatherReligion]-->
+              </li>
+              <li>
+                  <strong>Occupation: </strong>
+                  <!--[$FatherOccupation]-->
+              </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Business Name: </strong>
+                  <!--[$FatherWorkName]-->
+              </li>
+              <li>
+                  <strong>Business Address: </strong>
+                  <!--[$FatherWorkAddress]-->
+              </li>
+              <li>
+                  <strong>City, State Zip: </strong>
+                  <!--[$FatherWorkCityStateZip]-->
+              </li>
+          </ul>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <strong>Email: </strong>
+                  <!--[$FatherEmail]-->
+              </li>
+              <li>
+                  <strong>Work Phone: </strong>
+                  <!--[$FatherWorkPhone]-->
+              </li>
+              <li>
+                  <strong>Cell Phone: </strong>
+                  <!--[$FatherCell]-->
+              </li>
+          </ul>
+      </li>
+
+
+    </ul>
+
+</fieldset>
+
+
+<fieldset>
+    <legend>Custody of Child (if applicaable)</legend>
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <strong>Custodial Parent:</strong>
+                    <!--[$CustodialParent ]-->
+                </li>
+                <li>
+                    <strong>Documentation:</strong>
+                    <!--[$CustodialDocumentation]-->
+                </li>
+                <li>
+                    <strong>Date provided:</strong>
+                    <!--[$CustodialDocumentationDate]-->
+                </li>
+            </ul>
+        </li>
+    </ul>
+</fieldset>
+
+<fieldset>
+    <legend>Guardianship of Child (if applicable)</legend>
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <strong>Guardian Name:</strong>
+                    <!--[$GuardianName]-->
+                </li>
+                <li>
+                    <strong>Guardian Relationship:</strong>
+                    <!--[$GuardianRelation]-->
+                </li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>
+                    <strong>Documentation:</strong>
+                    <!--[$GuardianDocumentation]-->
+                </li>
+                <li>
+                    <strong>Date provided:</strong>
+                    <!--[$GuardianDocumentationDate]-->
+                </li>
+            </ul>
+        </li>
+    </ul>
+</fieldset>
+
+<fieldset id="Education">
+    <legend>Child's Education</legend>
+    <fieldset id="PreviousSchools">
+        <legend>Previous Schools Attended</legend>
+        <table>
+            <tr>
+                <th>Name of School</th>
+                <th>Address</th>
+                <th>Grades<br />Completed</th>
+                <th>Dates</th>
+            </tr>
+            <!--[section name=loop start=1 loop=5 step=1]-->
+                <!--[assign var='i' value=`$smarty.section.loop.index`]-->
+                <!--[getval var="PrevSchool`$i`" assign=prevschool]-->
+                <!--[if $prevschool != '&nbsp;']-->
+                    <tr>
+                        <td>
+                            <!--[$prevschool]-->
+                        </td>
+                        <td>
+                            <!--[getval var="PrevSchoolAddress`$i`" ]-->
+                        </td>
+                        <td>
+                            <!--[getval var="PrevSchoolGrades`$i`" ]-->
+                        </td>
+                        <td>
+                            <!--[getval var="PrevSchoolDates`$i`" ]-->
+                        </td>
+                    </tr>
+                <!--[/if]-->
+            <!--[/section]-->
+        </table>
+
+    </fieldset>
+
+    <fieldset id="Evaluations">
+        <legend>Evaluations</legend>
+
+        <ul>
+            <li>
+                <strong>Has the child been evaluated by the distrct Committe on Special Education ? </strong>
+                <!--[$DistrictEval]-->
+            </li>
+            <li>
+                <strong>Has the child been evaluated by a private psychological or educational agency ? </strong>
+                <!--[$PrivateEval]-->
+            </li>
+
+        </ul>
+
+        <table id="EvaluationInfo">
+            <tr>
+                <th>Type of Evaluation</th>
+                <th>Date of Evaluation</th>
+                <th>Name of Agency</th>
+                <th>Contact Name</th>
+                <th>Contact Phone</th>
+            </tr>
+            <!--[foreach from=$Evaluations item=label key=e]-->
+            <tr>
+                <td><!--[$label]--><!--[if $e == 'Other']-->
+                    <!--[$OtherEvalName]-->
+                     <!--[/if]-->
+                </td>
+                <td>
+                    <!--[getval var="`$e`Date"]-->
+                </td>
+                <td>
+                    <!--[getval var="`$e`AgencyName" ]-->
+                </td>
+                <td>
+                    <!--[getval var="`$e`AgencyContact" ]-->
+                </td>
+                <td>
+                    <!--[getval var="`$e`AgencyPhone" ]-->
+                </td>
+            </tr>
+            <!--[/foreach]-->
+        </table>
+
+
+        <ul id="DistrictEvalInfo">
+            <li>
+                <ul>
+                    <li>
+                        <strong>Was an IEP generated:</strong>
+                        <!--[$IEP]-->
+                    </li>
+                    <li>
+                        <strong>Date Submitted:</strong>
+                        <!--[$IEPSubmitDate]-->
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>
+                        <strong>Child has Section 504 Accommodatin Plan:</strong>
+                        <!--[$504Plan]-->
+                    </li>
+                    <li>
+                        <strong>Date Submitted:</strong>
+                        <!--[$504PlanSubmitDate]-->
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <ul>
+                    <li>
+                        <strong>District Name and #:</strong>
+                        <!--[$DistrictName]-->
+                    </li>
+                    <li>
+                        <strong>Date of Last IEP:</strong>
+                        <!--[$LastIEPDate]-->
+                    </li>
+                    <li>
+                        <strong>Date of Last Psychological Eval:</strong>
+                        <!--[$LastPsychDate]-->
+                    </li>
+                    <li>
+                        <strong>Classification and Recommended Placement:</strong>
+                        <!--[$Placement]-->
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+    </fieldset>
+
+</fieldset>
+
+    </div>
+
+    <p>
+        I affirm that the above information is true to the best of my knowledge. I understand that failure to provide the required documentation
+        stops the application process. Furthermore, should my child be accepted/admitted under false, incomplete or negligent information, my child
+        will be dismissed from the school. I also agree that should my child be accepted/admitted, my child and I will be bound by the terms and
+        conditions of the school's parent/student handbook including those provisions referencing inoculations. Final acceptance is also dependent
+        on all fees being paid in full to previous school. Acceptance notices will be mailed.
+    </p>
+
+    <div class="signature">
+        <p>
+        Signature of Parent of Guardian: ____________________________________________________ &nbsp; &nbsp; &nbsp; &nbsp;
+        Date: _______________
+    </div>

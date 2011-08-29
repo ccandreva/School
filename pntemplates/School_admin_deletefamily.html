@@ -1,0 +1,9 @@
+<h2>Delete Family <!--[$family.LastName]--> (<!--[$family.id]-->)</h2>
+
+<h3>Do you really really delete this family completely from the web system ?</h3>
+<form action="<!--[pnmodurl modname="School" type="admin" func="deletefamily"]-->" method="POST">
+    <input type="hidden" name="familyid" value="<!--[$family.id]-->" />
+    <input type="hidden" name="confirmdelete" value="yes" />
+    <input type="submit" name="submit" value="Delete" />
+    <a href="<!--[pnmodurl modname="school" type="admin" func="showregistration"]-->"> Cancel </a>
+</form>

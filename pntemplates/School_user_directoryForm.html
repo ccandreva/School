@@ -1,0 +1,111 @@
+<!--[* $Id: School_user_directoryform.                                        $ *]-->
+<!--[ pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_user_directoryForm.js ]-->
+
+<h1>2010/2011 Resurrection School Directory</h1>
+ <p>Each year we print a directory of our families, also known as the Blue Book
+     or Family Directory. We would like to include your Family Information and e-mail
+     addresses in this directory which we will send home to families who have paid their
+     PTO dues. This will hopefully make correspondence easier for the Class Mom’s, Committee
+     Heads and the P.T.O.
+</p>
+
+<p>In oder to have your family information published in this directory, please fill out
+    the form below with the information you wish to include in the directory. Leave blank
+    any information you do not wish to show, however you must provide at least your names
+    to appear in the directory.
+    <font color="#ff6969"> (EVEN IF YOU HAVE ALREADY DONE THIS IN THE PREVIOUS YEAR,
+        PLEASE REVIEW THE INFORMATIONIN THE FORM AND RESUBMIT IT.) </font>
+</p>
+
+<p>
+    Under the form you will see a preview of your entry,
+    exactly as it will appear in the directory.
+</p>
+
+<!--[if $showId]--><h2>Family ID: <!--[$id]--></h2> <!--[/if]-->
+
+<!--[insert name='getstatusmsg' module='School']-->
+
+<!--[pnform cssClass="application"]-->
+<!--[pnformvalidationsummary]-->
+<!--[if $errormsg != '']-->
+<div class="validationSummary pn-errormsg">
+<!--[$errormsg]-->
+</div>
+<!--[/if]-->
+
+<fieldset id="Emergency" >
+    <legend>Family Information</legend>
+
+    <ul>
+        <li>
+            <!--[pnformlabel for=FamilyName text="Last Name, Father's Name and Mother's Name (as printed in the Directory)" ]-->
+            <!--[pnformtextinput id=FamilyName width=25em maxLength=50 mandatory=1]-->
+        </li>
+        <li>
+          <!--[pnformlabel for=Address text="Home Address"]-->
+          <!--[pnformtextinput id=Address width=20em maxLength=50 ]-->
+        </li>
+
+        <li>
+          <ul>
+              <li>
+                  <!--[pnformlabel for=City text="City"]-->
+                  <!--[pnformtextinput id=City width=10em maxLength=20 ]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=State text="State"]-->
+                  <!--[pnformtextinput id=State width=2em maxLength=2 ]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=Zip text="Zip"]-->
+                  <!--[pnformtextinput id=Zip width=5em maxLength=5 ]-->
+              </li>
+          </ul>
+            <li>
+                <!--[pnformlabel for=Phone text="Home Phone (only 1)"]-->
+                <!--[pnformtextinput id=Phone width=10em maxLength=15 ]-->
+            </li>
+            <li>
+                <!--[pnformlabel for=Students text="Childrens names and grade"]-->
+                <!--[pnformtextinput id=Students width=25em maxLength=90 ]-->
+            </li>
+        <li>
+          <ul>
+            <li>
+                <!--[pnformlabel for=Email text="Email Address (only 1)"]-->
+                <!--[pnformtextinput id=Email width=10em maxLength=40 ]-->
+            </li>
+            <li>
+                <strong>NOTE: This email is for the handbook only, and will not change where notices are sent.</strong>
+            </li>
+          </ul>
+        <li>
+
+      </li>
+
+    </ul>
+
+    <input type="button" id="Preview" name="Preview" value="Preview" />
+    <input type="hidden" id="Students" value="<!--[$Students]-->" />
+</fieldset>
+
+<br />
+<div id="PreviewBlock" style="border: 1px solid black; padding: 10px;">
+<div id="BlueBookPrint">
+
+
+<h2>This is how your entry will look:</h2>
+    <div>
+        <span id="CXC"></span>
+    </div>
+</div>
+
+<p>Once you are satisfied with your entry, submit your information to the
+   school directory here.
+</p>
+    <!--[pnformbutton commandName="submit" text="Submit" ]-->
+</div>
+
+<!--[/pnform]-->

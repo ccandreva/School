@@ -1,0 +1,156 @@
+<!--[pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_user_tuition.js]-->
+<h1>TUITION BILLING FORM SCHOOL YEAR <!--[$NextYear]--></h1>
+<br />
+
+<div style="float: right; padding-left: 15px;">
+
+    <!--[include file="School_tuitionrates.html"]-->
+<!--[*    
+    <table class="TuitionChart">
+    <caption><!--[$ThisYear]--> TUITION RATES</caption>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Parisioner</th>
+            <th>Non-<br />Parishioner</th>
+            <th>Difference</th>
+           <th>Minimum<br/>Weekly Contrib.</th>
+        </tr>
+        <tr>
+            <td>Pre-Kindergarten</td> <td>$6,258</td> <td>$7,222</td> <td>$964</td> <td>$18.54</td>
+        </tr>
+        <tr>
+            <td>Kindergarten</td> <td>$6,612</td> <td>$8,185</td> <td>$1,573</td> <td>$30.25</td>
+        </tr>
+        <tr>
+            <td>Gr 1-8 (1 Child)</td> <td>$5,314</td> <td>$6,982</td> <td>$1,668</td> <td>$32.08</td>
+        </tr>
+        <tr>
+            <td>Gr 1-8 (2 Children)</td> <td>$10,300</td> <td>$13,628</td> <td>$3,328</td> <td>$64.00</td>
+        </tr>
+        <tr>
+            <td>Gr 1-8 (3 Children)</td> <td>$14,140</td> <td>$19,108</td> <td>$4,968</td> <td>$95.54</td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                (Tuition rates for the upcoming <!--[$NextYear]--> school year are not yet available.)
+            </td>
+        </tr>
+    </table>
+*]-->
+</div>
+
+<h2>DEFINITION OF PARISHIONER:</h2>
+<p>
+
+             Tuition is based on your status as a member of the Resurrection Parish.
+             A Parishioner is an individual or a family who has been registered in
+             Resurrection Church, regularly attends services at Resurrection Church
+             and has been using the envelope system on a continuing basis.
+</p>
+<p>
+             (Minimum envelope contributions should total at least the difference between
+             Parishioner and Non-Parishioner tuition.) Please use the table above as a
+             guideline and please note that this is the minimum contribution in addition to
+             your regular Church donation.
+</p>
+
+<!--[pnform cssClass="application" name="TuitionForm"]-->
+<!--[pnformvalidationsummary]-->
+<!--[if $errormsg != '']-->
+<div class="validationSummary pn-errormsg">
+<!--[$errormsg]-->
+</div>
+<!--[/if]-->
+
+<fieldset style="border:none;">
+<ul class="orderform">
+    <li>
+        <ul>
+            <li>
+                <!--[pnformlabel for=Parishioner cssClass="Checkbox" text="Based on the above, are you a Parishioner?"]-->
+                <!--[pnformdropdownlist id=Parishioner mandatory=1]-->
+            </li>
+            <li>
+                <!--[pnformlabel for=EnvelopeNumber cssClass="Checkbox" text="If Yes, Envelope #"]-->
+                <!--[pnformtextinput id=EnvelopeNumber maxLength=6 width=4em ]-->
+            </li>
+        </ul>
+    </li>
+</ul>
+</fieldset>
+
+
+<h2>Contribution To Scholarship Program</h2>
+<p>
+You may elect to provide money to the school, in addition to the required tuition, which will be used
+towards the Scholarship Program. You may contribute to the Scholarship program by sending your
+donation to the Resurrection School Foundation at the School Office.
+</p>
+<p>
+    <span class="label">Contribution $</span>
+<!--[pnformtextinput id=Contribution maxLength=6 width=4em ]-->
+</p>
+<h2>Tuition Payment Preference</h2>
+<p>
+    We offer two options for the payment of tuition:
+</p>
+<ul>
+    <li>
+        <!--[pnformradiobutton cssClass="Checkbox" id=paymentpref1 dataField=PaymentPref value="One" mandatory=1]-->
+        <span class="label">One payment in full,</class> due by June 1, <!--[$NextYearStart]-->.
+    </li>
+    <li>
+        <!--[pnformradiobutton cssClass="Checkbox" id=paymentpref2 dataField=PaymentPref value="Direct" mandatory=1]-->
+        <span class="label">Direct deposit.</span> This will be done in 10 equal installments deducted from your checking account,
+        beginning Jun 5, <!--[$NextYearStart]--> and concluding on March 5, <!--[$NextYearStart+1]-->.
+    </li>
+</ul>
+
+<fieldset id="DirectForm">
+    <legend>Direct Deposit Form</legend>
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <!--[pnformlabel for=BankName text="Account Holder's Bank Name"]-->
+                    <!--[pnformtextinput id=BankName maxLength=50 width=20em]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=AcctNum text="Account Number"]-->
+                    <!--[pnformtextinput id=AcctNum maxLength=50 width=20em]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=RoutingNum text="Routing Number"]-->
+                    <!--[pnformtextinput id=RoutingNum maxLength=50 width=20em]-->
+                </li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>
+                    <!--[pnformlabel for=AcctHolderName text="Name of Account Holder"]-->
+                    <!--[pnformtextinput id=AcctHolderName maxLength=50 width=20em]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=AcctHolderName2 text="Name of Secondary Account Holder"]-->
+                    <!--[pnformtextinput id=AcctHolderName2 maxLength=50 width=20em]-->
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <p style="clear:left;"><strong>Please Note:</strong> Once your back account is set up to debit the tuition, you will
+        be able to use the same account for other payments needed to be made during the school year,
+        such as payments to your Lunch Account, or for the After School Club.
+    </p>
+    <p><strong>Billing statements will not be sent home on a regular basis.</strong>
+        You will only receive an initial statement in May.
+    </p>
+    <p style="font-size: 14px; border: 4px dotted red; padding: 15px;margin: 0 auto; width: 80%; text-align: center">
+    <strong>Please Note:</strong> You will need to attach a <strong>voided check</strong> to the forms printed in the next step.
+    </p>
+</fieldset>
+<p>
+    <!--[pnformbutton commandName="submit" text="Submit" ]-->
+</p>
+<!--[/pnform]-->

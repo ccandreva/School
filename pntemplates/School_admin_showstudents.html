@@ -1,0 +1,63 @@
+<!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
+<!--[include file="School_admin_menu.htm"]-->
+
+<!--[pnimg modname=core src=button_ok.gif set=icons/extrasmall alt='Done' assign=Done]-->
+<!--[pnimg modname=core src=button_cancel.gif set=icons/extrasmall alt='Notdone' assign=Notdone]-->
+<!--[pnimg modname=core src=agt_family.gif set=icons/extrasmall alt='Students' assign=studentIcon]-->
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
+
+<div class="pn-admincontainer">
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
+  <h2><!--[pnml name="Registration Forms (Students)"]--></h2>
+
+  <!--[* <p>
+  <a href="<!--[pnmodurl modname="School" type="admin" func="exportemergencyforms"]-->">Download as CSV</a>
+  </p> *]-->
+
+  <!--[assign var=notup value=0]-->
+  <table class="School"">
+      <tr>
+          <th>Edit</th>
+          <th>Current?</th>
+          <th>Name</th>
+          <th>Grade</th>
+          <th>Class Year</th>
+          <th>Form<br /> Updated</th>
+      </tr>
+      <!--[foreach item=student from=$students]-->
+      <tr>
+          <td>
+            <a href="<!--[pnmodurl modname="school" type="admin" func="editstudent" 
+               studentid=$student.id familyid=$student.Familyid]-->"
+               title="Edit student"><!--[$editIcon.imgtag]--></a>
+            <a href="<!--[pnmodurl modname="school" type="admin" func="deletestudent"
+               familyid=$student.familyid studentid=$student.id]-->"
+               title="Delete this student's form data."
+               onclick="return confirm('Really delete <!--[$student.FirstName]-->? ');"
+               ><!--[$delIcon.imgtag]--></a>
+
+          </td>
+        <!--[if $student.lu_date|truncate:10:'' < $EnrollStart or $student.LastSaveValid == 0 ]-->
+            <td><!--[$Notdone.imgtag]--></td>
+            <!--[assign var=notup value=`$notup+1`]-->
+        <!--[else]-->
+            <td><!--[$Done.imgtag]--></td>
+            <!--[assign var=up value=`$up+1`]-->
+        <!--[/if]-->
+        <td><!--[$student.FirstName]--></td>
+        <td><!--[$student.Grade]--></td>
+        <td><!--[$student.ClassYear]--></td>
+        <td><!--[$student.lu_date|truncate:10:'']--></td>
+      </tr>
+
+      <!--[/foreach]-->
+  </table>
+    <p>
+    <a href="<!--[pnmodurl modname="School" type="admin" func="addstudent" familyid=$student.Familyid]-->">Enroll New Student</a>
+    </p>
+
+  <p>Updated: <!--[$up]--></p>
+  <p>Not Updated: <!--[$notup]--></p>
+<!--[*  <p>Not Returning: <!--[$noreturn]--></p>  *]-->
+</div>

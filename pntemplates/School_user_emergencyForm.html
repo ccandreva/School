@@ -1,0 +1,236 @@
+<!--[* $Id: School_user_emergencyForm.                                        $ *]-->
+<!--[* pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_user_emergencyForm.js *]-->
+<h1>Resurrection School Student Emergency Form</h1>
+<!--[if $showId]--><h2>Family ID: <!--[$id]--></h2> <!--[/if]-->
+
+<!--[insert name='getstatusmsg' module='School']-->
+<!--[pnform cssClass="application"]-->
+<!--[pnformvalidationsummary]-->
+<!--[if $errormsg != '']-->
+<div class="validationSummary pn-errormsg">
+<!--[$errormsg]-->
+</div>
+<!--[/if]-->
+
+<fieldset id="Emergency">
+    <legend>Family Information</legend>
+
+    <ul>
+        <li>
+            <ul>
+               <li>
+                    <!--[pnformlabel for=LastName text="Last Name" ]-->
+                    <!--[pnformtextinput id=LastName width=25em maxLength=50 mandatory=1]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=Phone text="Home Phone"]-->
+                    <!--[pnformtextinput id=Phone width=10em maxLength=15 mandatory=1]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for=BusNumber text='Bus Number']-->
+                    <!--[pnformtextinput id=BusNumber width=6em maxLength=5 ]-->
+                </li>
+            </ul>
+        </li>
+
+      <li>
+          <ul>
+              <li>
+                  <!--[pnformlabel for=Address text="Home Address"]-->
+                  <!--[pnformtextinput id=Address width=20em maxLength=50 mandatory=1]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=Apt text="Apt #"]-->
+                  <!--[pnformtextinput id=Apt width=4em maxLength=10]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=City text="City"]-->
+                  <!--[pnformtextinput id=City width=10em maxLength=20 mandatory=1]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=State text="State"]-->
+                  <!--[pnformtextinput id=State width=2em maxLength=2 mandatory=1]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for=Zip text="Zip"]-->
+                  <!--[pnformtextinput id=Zip width=5em maxLength=10 mandatory=1]-->
+              </li>
+          </ul>
+      </li>
+
+
+
+
+    </ul>
+</fieldset>
+
+<!--[foreach from=$Parents item=parent]-->
+<fieldset id="<!--[$parent]-->Info">
+    <legend><!--[$parent]-->'s Information</legend>
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <!--[pnformlabel for="`$parent`FirstName" text="`$parent`/Guardian's Name"]-->
+                    <!--[pnformtextinput id="`$parent`FirstName" width=20em maxLength=30]-->
+                </li>
+              <li>
+                  <!--[pnformlabel for="`$parent`WorkPhone" text="Business Phone"]-->
+                  <!--[pnformtextinput id="`$parent`WorkPhone" width=15em maxLength=50 ]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for="`$parent`Cell" text="Cell Phone"]-->
+                  <!--[pnformtextinput id="`$parent`Cell" width=15em maxLength=50 ]-->
+              </li>
+            </ul>
+        </li>
+
+      <li>
+          <ul>
+              <li>
+                  <!--[pnformlabel for="`$parent`WorkAddress" text="Business Address"]-->
+                  <!--[pnformtextinput id="`$parent`WorkAddress" width=30em maxLength=80 ]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for="`$parent`WorkCityStateZip" text="City, State Zip"]-->
+                  <!--[pnformtextinput id="`$parent`WorkCityStateZip" width=30em maxLength=80 ]-->
+              </li>
+          </ul>
+      </li>
+    </ul>
+
+</fieldset>
+
+<!--[/foreach]-->
+
+
+<fieldset>
+    <legend>Student Information</legend>
+    <!--[section name=foo loop=$NumStudents]-->
+    <!--[assign var='i' value=$smarty.section.foo.iteration]-->
+
+    <ul id="StudentInfo<!--[$i]-->" >
+        <li>
+            <ul>
+                
+                <li>
+                    <!--[pnformlabel for="FirstName$i" text="Student's Name"]-->
+                    <!--[pnformtextinput id="FirstName$i" width=20em maxLength=20]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for="DOB$i" text="DOB"]-->
+                    <!--[pnformtextinput id="DOB$i" width=6em maxLength=10]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for="Grade$i" text="Grade"]-->
+                    <!--[pnformtextinput id="Grade$i" width=3em maxLength=10]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for="Teacher$i" text="Teacher"]-->
+                    <!--[pnformtextinput id="Teacher$i" width=10em maxLength=50]-->
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <!--[pnformlabel for="Allergies$i" text="Allergies" ]-->
+            <!--[pnformtextinput id="Allergies$i" width=40em maxLength=100]-->
+        </li>
+
+        <li>
+            <!--[pnformlabel for="Conditions$i" text="Medical Conditions" ]-->
+            <!--[pnformtextinput id="Conditions$i" width=40em maxLength=100]-->
+        </li>
+<!--[*        <li>
+            <!--[ assign var=delbutton value="DelStudent$i"]-->
+            <input type="button" id="<!--[$delbutton]-->" name="<!--[$delbutton]-->" value="Delete Student"/>
+        </li> *]-->
+        <!--[if $i < $NumStudents]--><li><hr /></li><!--[/if]-->
+    </ul>
+    <!--[/section]-->
+<!--[*    <input type="button" id="AddStudent" name="AddStudent" value="Add Student" />
+    Use this button to add additional students to the form (maximum 6). *]-->
+</fieldset>
+
+<fieldset>
+    <legend>Contact Information</legend>
+    <p>
+        Please list up to four relatives or friends <em>residing locally</em>
+        who will assume the care of your child if you cannot be reached.
+    </p>
+
+    <!--[section name=foo loop=4]-->
+    <!--[assign var='i' value=$smarty.section.foo.iteration]-->
+    <ul id="ContactInfo<!--[$i]-->" >
+        <li>
+          <ul>
+             <li>
+                  <!--[pnformlabel for="ContactName$i" text="Contact Name"]-->
+                  <!--[pnformtextinput id="ContactName$i" width=20em maxLength=50]-->
+             </li>
+              <li>
+                  <!--[pnformlabel for="ContactPhone$i" text="Home Phone"]-->
+                  <!--[pnformtextinput id="ContactPhone$i" width=15em maxLength=50 ]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for="ContactCell$i" text="Cell Phone"]-->
+                  <!--[pnformtextinput id="ContactCell$i" width=15em maxLength=50 ]-->
+              </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+              <li>
+                  <!--[pnformlabel for="ContactWork$i" text="Work Phone"]-->
+                  <!--[pnformtextinput id="ContactWork$i" width=20em maxLength=50 ]-->
+              </li>
+              <li>
+                  <!--[pnformlabel for="ContactRelation$i" text="Relationship To Student"]-->
+                  <!--[pnformtextinput id="ContactRelation$i" width=20em maxLength=50 ]-->
+              </li>
+          </ul>
+        </li>
+    </ul>
+    <!--[if $i < 4]--><br clear="left"><hr /><!--[/if]-->
+    <!--[/section]-->
+</fieldset>
+
+
+
+<fieldset>
+    <legend>Doctor's Information</legend>
+
+    <h2>
+        By filling out out the following section, I authorize the school to call
+        the doctor/dentist listed below and follow their instructions, in case
+        of serious illness or injury, or if the school is unable to reach me
+        or my emergency contacts.
+    </h2>
+
+    <!--[foreach from=$Doctors item=doc]-->
+    <ul>
+        <li>
+            <ul>
+                <li>
+                    <!--[pnformlabel for="`$doc`Name" text="`$doc`'s Name"]-->
+                    <!--[pnformtextinput id="`$doc`Name" width=30em maxLength=60]-->
+                </li>
+                <li>
+                    <!--[pnformlabel for="`$doc`Phone" text="Phone"]-->
+                    <!--[pnformtextinput id="`$doc`Phone" width=15em maxLength=60]-->
+                </li>
+            </ul>
+        </li>
+        <li>
+            <!--[pnformlabel for="`$doc`Address" text="Address"]-->
+            <!--[pnformtextinput id="`$doc`Address" width=45em maxLength=65]-->
+        </li>
+    </ul>
+
+    <hr />
+    <!--[/foreach]-->
+    <!--[pnformbutton commandName="submit" text="Submit" ]-->
+</fieldset>
+
+<!--[/pnform]-->

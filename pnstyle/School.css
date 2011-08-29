@@ -1,0 +1,291 @@
+/* $Id: School.css 19763 2006-08-21 17:06:24Z landseer $ */
+
+
+.Schoolblock {
+  margin:0px;
+  padding:0px;
+  border:0px;
+  border-spacing:0px;
+  border-collapse:collapse;
+  /* width:100% */
+}
+
+p.School {
+    text-align: center;
+}
+
+table.School td{
+    padding: 3px;
+}
+
+ul#SchoolMenu {
+}
+
+ul#SchoolMenu li{
+        display: inline;
+        background: none;
+        margin: 0 10px;
+}
+
+
+form.application legend
+{
+        font-size: 10pt;
+        font-weight: bold;
+}
+
+form.application fieldset ul, form.application fieldset ul ul{
+    padding: 0;
+    margin: 0 10px;
+}
+
+#middle-column1  form.application fieldset li,
+#middle-column2  form.application fieldset li
+{
+        clear: left;
+        list-style:none;
+        list-style-image: none;
+        margin: 0 0 10px 0;
+}
+
+
+ul.orderform label
+{
+        float: left;
+        width: 10em;
+        margin-right: 1em;
+        font-weight: bold;
+}
+
+form.application fieldset
+{
+        margin: 15px 0 0 0;
+}
+
+form.application fieldset > fieldset
+{
+        margin-right: 25px;
+}
+
+form.application ul
+{
+        padding: 0;
+        margin: 0 10px;
+}
+
+form.application ul ul
+{
+        padding: 0;
+        margin: 0;
+}
+
+.print + .print
+{
+    page-break-before: always;
+}
+.print, .print table{
+    font-size: 11px;
+}
+.print h1 {
+    font-family: "Cloister Black", Verdana,Tahoma, Arial,sans-serif;
+    font-size: 30px;
+    margin: 0;
+    padding: 10px 0 0 0;
+}
+.print h2,
+.print h3 {
+    text-align: center;
+}
+
+#reslogo
+{
+    float: left;
+    padding: 0 10px 0 0 ;
+}
+
+.print ul, .print li{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+form.application u li,
+.print ul li
+{
+        background: none;
+        background-position: 0 0;
+        margin: 0px 0 10px 0;
+}
+
+
+#middle-column1 form.application ul ul li,
+#middle-column2 form.application ul ul li,
+.print ul ul li
+{
+        float: left;
+        padding: 0 0 10px 0;
+        width: auto;
+        height: auto;
+}
+.print ul ul li {
+    padding-right: 20px;
+}
+#middle-column1 form.application label, form.application table,
+#middle-column2 form.application label
+{
+        display: block;
+        font-weight: bold;
+        color: #006969;
+}
+span.label {
+        font-weight: bold;
+        color: #006969;
+}
+
+.print table {
+    margin: 0 auto 20px auto;
+}
+.print table, .print tr, .print td, .print th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.print td, print th {
+    padding: 3px;
+}
+
+.print fieldset {
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+#middle-column1 form.application ul label.checkbox,
+#middle-column2 form.application ul label.checkbox,
+.print ul label.checkbox
+{
+        display: inline;
+        width: auto;
+        height: auto;
+}
+
+
+form.application ul li.title,
+.print ul li.title
+{
+        font-weight: bold;
+        color: #1e7dbe;
+        vertical-align: center;
+        height: auto;
+        font-size: 10pt;
+}
+
+#middle-column1 form.application ul li ul li,
+#middle-column2 form.application ul li ul li,
+.print ul li ul li
+{
+        float: left;
+        clear: none;
+        margin: 0 10px 0 0;
+}
+.print ul>li+li{
+    clear: left;
+}
+#middle-column1 form.application ul label.Checkbox,
+#middle-column2 form.application ul label.Checkbox,
+.print ul label.Checkbox
+{
+        float: none;
+        display: inline;
+        width: auto;
+        height: auto;
+}
+
+fieldset.radioline
+{
+        width: auto;
+        display: inline;
+        float: left;
+        color: #006969;
+        font-weight: bold;
+}
+
+fieldset.radioline span
+{
+        width: auto;
+        display: inline;
+        border: none;
+        float: left;
+        font-size: 10pt;
+}
+
+form.application table tr>td+td
+.print table tr>td+td
+{
+        width: 150px;
+}
+
+form.application table tr>td+td+td
+.print table tr>td+td+td
+{
+        width: auto;
+}
+
+#middle-column1 ul.School_address,
+#middle-column1 ul.School_address li
+{
+    list-style: none;
+    background: none;
+    background-position: 0 0;
+    padding: 0;
+    margin: 0;
+}
+
+div.School_familyinfo{
+    border: 1px solid black;
+}
+
+.School_familyinfo div{
+    border: 1px solid black;
+    float: left;
+    margin: 0 5px;
+    padding: 10px;
+}
+
+table.School_familyinfo
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table.School_familyinfo tr td {
+    border: 1px solid black;
+    vertical-align: top;
+    padding: 0 10px 5px 10px;
+}
+
+table.School td,
+table.School th {
+    text-align: center;
+    padding: 0 5px;
+}
+
+table.School th h2
+{
+    padding-top: 15px;
+}
+div.signature
+{
+    border: 1px solid black;
+    padding: 30px 5px 5px 5px;
+}
+span.signName{
+    border-bottom: 1px solid black;
+    width: 30em;
+}
+span.signDate{
+    border-bottom: 1px solid black;
+    width: 10em;
+}
+
+div.EnrollStep{
+        margin: 5px 20px 20px 20px;
+}

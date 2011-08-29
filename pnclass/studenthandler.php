@@ -1,0 +1,104 @@
+<?php
+
+class School_user_studentHandler extends pnFormHandler
+{
+
+  var $showId;
+  var $studentid, $familyid;
+  var $redirect;
+
+  function initialize(&$render)
+  {
+
+      /* Load Data from Database */
+      $studentid = $this->studentid;
+      if ($studentid > 0) {
+          $formData = DBUtil::selectObjectByID('School_student', $studentid);
+          if ( ($this->familyid > 0) && ($formData['Familyid'] != $this->familyid) ){
+               return false;
+          }
+          $formData['Grade'] = Year2Grade($formData['ClassYear'], 1);
+      } else {
+          $formData = array();
+      }
+      $formData['AppDate'] = date('Y-m-d');
+      $render->assign($formData);
+
+      $gender = array ( array(),
+            array('text' => 'Male', value => 'Male'),
+            array('text' => 'Female', value => 'Female'),
+        );
+        $Sacraments=array('Baptism' =>'Baptism', 'Reconciliation'=>'Reconciliation',
+            'Communion'=>'First Holy Communion', 'Confirmation' => 'Confirmation');
+        $parents = array('Mother', 'Father');
+        $MarStat = initListValues(array('Married','Single','Separated','Divorced','Deceased'));
+        $Custodial = initListValues(array('N/A','Mother','Father'));
+        $Evaluations = array('Edu'=>'Educational', 'Psych'=>'Psychological',
+            'Speech'=>'Speech','Other'=>'Other',
+            );
+        $GradeItems = initListValues(array('PK3', 'PK4', 'K', 1,2,3,4,5,6,7,8));
+        $yesno = initListValues(array( 'No', 'Yes'));
+        $yesnoBool = array( array('text' => '', 'value' => ''),
+            array('text' => 'Yes', 'value' => 1),
+            array('text' => 'No', 'value' => 0) );
+        $ey = EnrollYear();
+        $newyear = $ey + 11;
+        $ClassYearItems = array ( array(text=>"New ($newyear)", value=>$newyear));
+        for ($y = $ey+10; $y >=$ey; $y-- ) {
+            $text = Year2Grade($y) . " ($y)";
+            $ClassYearItems[] = array(text => $text, value => $y);
+        }
+        $render->assign( array(
+            'Lang' => 'English',
+            'Religion' => 'Catholic',
+            'Parish' => 'Resurrection',
+            'GenderItems' => $gender,
+            'GradeItems'  => $GradeItems,
+            'Sacraments' => $Sacraments,
+            'Parents' => $parents,
+            'MotherStatusItems' => $MarStat,
+            'FatherStatusItems' => $MarStat,
+            'CustodialParentItems' => $Custodial,
+            'DistrictEvalItems' => $yesno,
+            'ReturningItems' => $yesnoBool,
+            'PrivateEvalItems' => $yesno,
+            'Evaluations' => $Evaluations,
+            'IEPItems' => $yesno,
+            '504PlanItems' => $yesno,
+            'ClassYearItems' => $ClassYearItems
+        ) );
+    return true;
+  }
+
+  function handleCommand(&$render, &$args)
+  {
+    $formData = $render->pnFormGetValues();
+
+    if ($render->pnFormIsValid()) {
+        $formData[LastSaveValid] = 1;
+    } else {
+        if ($formData[SaveAnyway]) {
+            $formData[LastSaveValid] = 0;
+        } else {
+            $render->assign('ShowSaveAnyway', 1);
+            return false;
+        }
+    }
+
+    if ($this->studentid > 0) {
+        $formData[id] = $this->studentid;
+        LogUtil::registerStatus("Updated Student $this->studentid");
+        DBUtil::updateObject ($formData, 'School_student');
+    } else {
+        $formData[Familyid] = $this->familyid;
+        $formData[ClassYear] = Grade2Year($formData[Grade]);
+        LogUtil::registerStatus("Added Student");
+        DBUtil::insertObject ($formData, 'School_student');
+    }
+
+    if ($this->redirect) return pnRedirect($this->redirect);
+    return pnRedirect ( pnModURL('School', 'user', 'main') );
+  }
+
+}
+

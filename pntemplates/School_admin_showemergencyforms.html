@@ -1,0 +1,41 @@
+<!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
+<!--[include file="School_admin_menu.htm"]-->
+
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[* qpnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon *]-->
+
+<div class="pn-admincontainer">
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
+  <h2><!--[pnml name="Emergency Forms"]--></h2>
+
+  <p>
+  <a href="<!--[pnmodurl modname="School" type="admin" func="exportemergencyforms"]-->">Download as CSV</a>
+  </p>
+
+  <!--[assign var=notup value=0]-->
+  <table>
+      <tr>
+          <th>Edit</th><th>LastName</th><th>Address</th><th>Form Updated</th>
+      </tr>
+      <!--[foreach item=datum from=$data]-->
+      <tr>
+        <td>
+            <a href="<!--[pnmodurl modname="school" type="admin" func="editemergencyform" familyid=$datum.id ]-->"
+               title="Edit this family's form data."><!--[$editIcon.imgtag]--></a>
+<!--[*            <a href="<!--[pnmodurl modname="school" type="admin" func="deleteemergencyform" familyid=$datum.id ]-->"
+               title="Delete this family's form data."
+               onclick="return confirm('Really delete <!--[$datum.LastName]-->? ');"
+               ><!--[$delIcon.imgtag]--></a>  *]-->
+        </td>
+        <td><!--[$datum.LastName]--></td>
+        <td><!--[$datum.Address]--></td>
+        <td><!--[$datum.EmergencyLastUpdate]--></td>
+      </tr>
+      <!--[if $datum.lu_date|truncate:4:'' eq '1970']-->
+          <!--[assign var=notup value=`$notup+1`]-->
+      <!--[/if]-->
+      <!--[/foreach]-->
+  </table>
+
+  <p>Not Updated: <!--[$notup]--></p>
+</div>

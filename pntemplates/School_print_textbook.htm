@@ -1,0 +1,210 @@
+<!--[pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_print_auto.js]-->
+<!--[capture name=studenttable]-->
+<table>
+    <caption>
+            Students Enrolling
+    </caption>
+        <th>Name of student(s)</th> <th>Grade for September, <!--[$NextYearStart]--></th>
+    </tr>
+    <!--[foreach item=R from=$Returning]-->
+    <tr>
+        <td><!--[$R.Name]--></td>
+        <td><!--[$R.Grade]--></td>
+    </tr>
+    <!--[/foreach]-->
+</table>
+<!--[/capture]-->
+<!--[capture name=signature]-->
+<p>
+    <strong>Parent Signature:</strong> _____________________________________ &nbsp; &nbsp; <strong>Date:</strong> ____________________
+</p>
+<!--[/capture]-->
+<div class="print">
+    <div id="reslogo">
+        <img src="images/formlogo.gif"/>
+    </div>
+    <h1>
+        Resurrection Grammar School
+    </h1>
+    <br clear="both" />
+
+    <h2>REGISTRATION FOR <!--[$NextYear]--> SCHOOL YEAR</h2>
+
+    <p>
+        The student(s) listed below will be returning to Resurrection School in September, 2011.
+    </p>
+
+    <h3>STATE AID            		GRADES K through 8</h3>
+    <h3>TEXTBOOKS	- - -	LIBRARY BOOKS	- - -	COMPUTER SOFTWARE</h3>
+
+    <p>
+        As parent/guardian I am hereby authorizing that the Principal of
+        Resurrection School submit requests to the appropriate Board(s) of Education
+        for the loan of Textbooks, Library Materials and Computer Software on behalf
+        of my child under the NYSTL, NYSLIB and NYSSL programs of New York State.
+        These materials remain the property of the Board of Education and are “on
+        loan” to the non-public school.
+    </p>
+    <p>
+        Please sign the request below and list the names of each child in your
+        family with the corresponding grade for the <!--[$NextYear]--> school year.  In
+        compliance with Section 701 of the Education Law, I request the above
+        materials for:
+    </p>
+
+    <!--[$smarty.capture.studenttable]-->
+
+    <p>
+        We reside in and pay school taxes to the <strong><!--[$District]--></strong> Public School District.
+    </p>
+
+    <p>
+        <br /><br />
+        <!--[$smarty.capture.signature]-->
+        <b>Family Name:</b><br /> <!--[$LastName]--><br />
+        <!--[$Address]--><br/>
+        <!--[$City]-->, <!--[$State]--> <!--[$Zip]-->
+    </p>
+
+    <!--[if $NotReturning]-->
+    <hr/>
+
+    <h2>PLEASE FILL OUT FOR CHILD(REN) WHO WILL NOT BE RETURNING.</h2>
+    <p>
+        The following child(ren) will NOT be returning to Resurrection Grammar School in September, <!--[$NextYearStart]-->.
+    </p>
+
+    <table>
+        <tr>
+            <th>Name of student(s)</th>
+            <th>Current Grade</th>
+            <th>Current Teacher</th>
+        </tr>
+        <!--[foreach item=R from=$NotReturning]-->
+        <tr>
+            <td><!--[$R.Name]--></td>
+            <td><!--[$R.ClassYear|year2grade]--></td>
+            <td><!--[$R.Teacher]--></td>
+        </tr>
+        <!--[/foreach]-->
+    <br /><br />
+    <!--[$smarty.capture.signature]-->
+    </table>
+
+    <!--[/if]-->
+
+</div>
+
+<div class="print">
+    <div id="reslogo">
+        <img src="images/formlogo.gif"/>
+    </div>
+    <h1>
+        Resurrection Grammar School
+    </h1>
+    <br clear="both" />
+
+    <h2>Family Information Form <!--[$NextYear]--></h2>
+
+    <p>
+        <b>Family Name:</b> <!--[$LastName]--><br />
+        <b>Address:</b> <!--[$Address]--> <!--[$Apt]-->, <!--[$City]-->,<!--[$State]--> <!--[$Zip]--> <br />
+        <b>Parishioner:</b> <!--[if $Parishioner]-->Yes<!--[else]-->No<!--[/if]-->
+    </p>
+    <!--[* <p>Family Tuition Number: ____________________</p> *]-->
+
+    <!--[$smarty.capture.studenttable]-->
+
+    <!--[include file="School_tuitionrates.html"]-->
+
+    <table width="90%">
+        <caption>Tuition Payment Preference</caption>
+        <tr>
+            <td width="30%"><u>&nbsp;
+                    <!--[if $PaymentPref=='One']-->X<!--[else]-->&nbsp;<!--[/if]-->
+                    &nbsp;</u><strong>One Payment In Full</strong>
+            </td>
+            <td>Total tuition payment due on June 1, <!--[$NextYearStart]--></td>
+        </tr>
+        <tr>
+            <td><u>&nbsp;
+                    <!--[if $PaymentPref=='Direct']-->X<!--[else]-->&nbsp;<!--[/if]-->
+                    &nbsp;</u><strong>Direct Deposit</strong>
+            </td>
+            <td>
+                Please include the attached authorized form <strong>including a voided check</strong>
+                along with this form. Payments begin on June 5, <!--[$NextYearStart]--> through March 5, <!--[$NextYearStart+1]-->.
+            </td>
+        </tr>
+    </table>
+    <br />
+    <!--[$smarty.capture.signature]-->
+
+    <!--[if $Contribution > 0]-->
+            <br /><hr/><br />
+            <h2>Contribution to Scholarship Program</h2>
+            <p>You may elect to provide money to the school, in addition to the required tuition, which will be used
+towards the Scholarship Program. You may contribute to the Scholarship program by sending your
+donation to the Resurrection School Foundation at the School Office.
+            </p>
+            <p>Contribution $ <!--[$Contribution|string_format:"%.2f"]--></p>
+    <!--[/if]-->
+
+
+</div>
+
+<!--[if $PaymentPref == 'Direct']-->
+<div class="print">
+    <div id="reslogo">
+        <img src="images/formlogo.gif"/>
+    </div>
+    <h1>
+        Resurrection Grammar School
+    </h1>
+    <br clear="both" />
+
+    <h2>Authorization Agreement for Tuition Payment</h2>
+
+    <h3>For Direct Deposits Only</h3>
+    <h4>Ten automatic payments will be deducted from your checking account on the first business day of each
+    month from June 5, <!--[$NextYearStart]--> through March 5, <!--[$NextYearStart+1]--></h4>
+    <p>
+        <b>Family Name:</b> <!--[$LastName]--><br />
+        <b>Address:</b> <!--[$Address]--> <!--[$Apt]-->, <!--[$City]-->,<!--[$State]--> <!--[$Zip]--> <br />
+        <b>Parishioner:</b> <!--[if $Parishioner]-->Yes<!--[else]-->No<!--[/if]-->
+    </p>
+    <p>
+    I (we) authorize Resurrection School to deduct a tuition payment automatically from my (our) account
+    listed below each month
+    <!--[*in the amount of $<!--[$Payment]--> <strong>(the total amount divided by 10)</strong> *]-->
+    covering the total cost of the tuition for all children enrolled.
+    </p>
+
+    <p>
+    Payments will start on June 5, <!--[$NextYearStart]--> and continue through March 5, <!--[$NextYearStart+1]-->.
+    I (we) understand that this authority will remain in effect until I (we)
+    have cancelled it in writing.  <strong>A voided check is attached</strong>.
+    </p>
+    <ul>
+        <li>
+            <strong>Account Holder's Bank Name:</strong> <!--[$BankName]-->
+        </li>
+        <li>
+            <strong>Account Number:</strong> <!--[$AcctNum]-->
+        </li>
+        <li>
+            <strong>Routing Number:</strong> <!--[$RoutingNum]-->
+        </li>
+        <li><strong>Name of Account Holder:</strong> <!--[$AcctHolderName]--></li>
+        <li><!--[$smarty.capture.signature]--></li>
+        <!--[if $AcctHolderName2]-->
+            <li><strong>Name of Secondary Account Holder:</strong> <!--[$AcctHolderName2]--></li>
+            <li><!--[$smarty.capture.signature]--></li>
+        <!--[/if]-->
+    </ul>
+    <hr style="margin-top: 100px"/>
+    <h2 style="text-align: center; padding-top: 100px;">*** Attach Voided Check Here ***</h2>
+
+</div>
+<!--[/if]-->
