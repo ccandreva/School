@@ -113,6 +113,26 @@ function School_userapi_GetStudents($args)
 
 }
 
+function School_userapi_LoadDirectory($args)
+{
+    if ($args['familyid']) {
+        $familyid = $args['familyid'];
+    } else {
+        $user = pnUserGetVar('uid');
+        $uservars = pnUserGetVars($user);
+        $attr = $uservars['__ATTRIBUTES__'];
+        $familyid = $attr['FamilyID'];
+    }
+
+    if ( !($familyid >0) ) return false;
+
+    // Only procede if familyid is a positive integer
+    if (!(preg_match('/^\d+$/', $familyid))) return false;
+
+    $formData = DBUtil::selectObjectByID('School_directory', $familyid);
+    return $formData;
+}
+
 function School_userapi_MailFormUpdated($args)
 {
     $formname = $args['formname'];
