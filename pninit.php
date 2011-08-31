@@ -24,6 +24,8 @@ function School_init()
     // if (!DBUtil::createIndex('Indfamilyid', 'School_emergencyform', 'familyid')) return false;
     // if (!DBUtil::createIndex('Indfamilyid', 'School_emergencyStudent', 'familyid')) return false;
     if (!DBUtil::createIndex('Indfamilyid', 'School_emergencyContact', 'familyid')) return false;
+    if ( !DBUtil::createTable('School_tuition')) return false;
+    if ( !DBUtil::createTable('School_districts')) return false;
 
     return true;
 }
@@ -41,6 +43,8 @@ function School_upgrade($oldversion)
         if ( !DBUtil::changeTable('School_student') ) return false;
       case '0.4.3';
         if ( !DBUtil::createTable('School_tuition') ) return false;
+      case '0.4.4';
+        if ( !DBUtil::createTable('School_districts') ) return false;
     }
 
     return true;

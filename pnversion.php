@@ -11,7 +11,7 @@
 $modversion['name']         = 'School';
 $modversion['displayname']  = 'School';
 $modversion['description']  = 'Custom module for Resurrectionschool.com';
-$modversion['version']      = '0.4.4';
+$modversion['version']      = '0.4.5';
 $modversion['credits']      = 'pndocs/credits.txt';
 $modversion['help']         = 'pndocs/install.txt';
 $modversion['changelog']    = 'pndocs/changelog.txt';

@@ -20,6 +20,16 @@ class School_user_familyHandler extends pnFormHandler
         $this->ShouldInsert = true;
     }
 
+    // Load Districts for dropdown
+    $districtsObj = DBUtil::selectObjectArray ('School_districts', '', 'Name');
+    $districtsItems = array('','');
+    foreach ($districtsObj as $obj) {
+	    $districtsItems[] = array(
+		    'text'  => $obj['Name'],
+		    'value' => $obj['Code'],
+		    );
+    }
+    
     $gender = array ( array(),
         array('text' => 'Male', value => 'Male'),
         array('text' => 'Female', value => 'Female'),
@@ -38,6 +48,7 @@ class School_user_familyHandler extends pnFormHandler
         'Religion' => 'Catholic',
         'Parish' => 'Resurrection',
         'GenderItems' => $gender,
+	'DistrictItems' => $districtsItems,
         'Sacraments' => $Sacraments,
         'Parents' => $parents,
         'MotherStatusItems' => $MarStat,

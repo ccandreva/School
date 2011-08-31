@@ -234,7 +234,7 @@ function School_pntables()
 
 
     $table['School_family_column_def'] = array(
-        'id'            => 'I NOTNULL PRIMARY',
+        'id'            => 'I NOTNULL PRIMARY AUTOINCREMENT',
 	'LastName'		=> 'C(255)',
 	'Phone'		=> 'C(255)',
 	'Cell'		=> 'C(255)',
@@ -398,7 +398,7 @@ function School_pntables()
         );
 
     $table['School_student_column_def'] = array(
-        'id'            => 'I NOTNULL PRIMARY',
+        'id'            => 'I NOTNULL PRIMARY AUTOINCREMENT',
         'Familyid'            => 'I NOTNULL INDEX idx_familyid',
 	'AppDate'	=>	'C(255)',
         'Returning'     =>      'L',
@@ -507,7 +507,7 @@ function School_pntables()
         'AcctHolderName2'    =>  'School_tuition_AcctHolderName2',
     );
     $table['School_tuition_column_def'] = array(
-        'id'            => 'I NOTNULL PRIMARY',
+        'id'            => 'I NOTNULL PRIMARY AUTOINCREMENT',
         'Parishioner'   =>      'L',
         'EnvelopeNumber'   =>   'I',
         'Contribution'  =>      'N',
@@ -526,6 +526,28 @@ function School_pntables()
             $table['School_tuition_column_def']
             );
 
+    $table['School_districts'] = DBUtil::getLimitedTablename('School_districts');
+
+    $table['School_districts_column'] = array(
+	'id'	    => 'School_districts_id',
+	'Name'	    => 'School_districts_Name',
+	'Code'	    => 'School_districts_Code',
+    );
+    $table['School_districts_column_def'] = array(
+	'id'	    => 'I NOTNULL PRIMARY AUTOINCREMENT',
+	'Name'	    => 'C(255)',
+	'Code'	    => 'C(6)',
+    );
+    ObjectUtil::addStandardFieldsToTableDefinition(
+            $table['School_districts_column'],
+            'School_tuition_'
+            );
+    ObjectUtil::addStandardFieldsToTableDataDefinition(
+            $table['School_districts_column_def']
+            );
+    
+
+    
     return $table;
 
 }
