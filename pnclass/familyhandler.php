@@ -46,7 +46,7 @@ class School_user_familyHandler extends pnFormHandler
     $render->assign( array(
         'Lang' => 'English',
         'Religion' => 'Catholic',
-        'Parish' => 'Resurrection',
+        //'Parish' => 'Resurrection',
         'GenderItems' => $gender,
 	'DistrictItems' => $districtsItems,
         'Sacraments' => $Sacraments,
