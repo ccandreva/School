@@ -90,15 +90,59 @@ function School_print_textbook()
     School_initStudent($Render);
 
    return  $Render->fetch('School_print_textbook.htm');
-/*
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
-    $pdf->AddPage();
-    $pdf->writeHTML($html, true, false, true, false, '');
-    $pdf->Output('/tmp/example_006.pdf', 'F');
-    exit;
- *
- */
+   
+}
+
+function School_print_emergency()
+{
+    $ret = School_checkuser($user, $familyid);
+    if ($ret) return $ret;
+
+    $formData =  pnModAPIFunc('School', 'user', 'LoadEmergencyForm',
+	    array('familyid' => $familyid));
+
+    $Render = pnRender::getInstance('School');
+    $Render->caching=0;
+
+    $Render->assign($formData);
+    School_initStudent($Render);
+//    RenderSchoolYear($Render);
+
+    return $Render->fetch('School_print_student.htm');
+
+}
+
+
+function School_print_emergencyforms()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $tables = pnDBGetTables();
+    $ContactCol = $tables['School_emergencyContact_column'][familyid];
+    $StudentCol = $tables['School_student_column'][Familyid];
+
+    $objArray = DBUtil::selectObjectArray ('School_family', '', 'LastName', -1, 5);
+
+    // Loop through all Families and export
+    foreach ($objArray as &$obj) {
+        $familyid = $obj['id'];
+        $obj['MotherWorkAddress'] = preg_replace('/(^|\s)([A-Z])([A-Z]+)/e',"'$1$2' . strtolower('\\3')", $obj['MotherWorkAddress'] );
+        $obj['FatherWorkAddress'] = preg_replace('/(^|\s)([A-Z])([A-Z]+)/e',"'$1$2' . strtolower('\\3')", $obj['FatherWorkAddress'] );
+        $where = "WHERE $ContactCol=$familyid";
+        $obj['contactData'] = DBUtil::selectObjectArray ('School_emergencyContact', $where);
+        $where = "WHERE $StudentCol=$familyid";
+        $obj['studentData'] = DBUtil::selectObjectArray ('School_student', $where);
+    }
+    unset($obj);
+    
+    $Render = pnRender::getInstance('School');
+    $Render->caching=0;
+    $Render->assign('Families', $objArray);
+    RenderSchoolYear($Render);
+    return  $Render->fetch('School_print_emergencyforms.htm');
+   
 }
 

@@ -92,6 +92,11 @@ form.application ul ul
     margin: 0;
     padding: 10px 0 0 0;
 }
+.print h1.emergency {
+    font-family: Verdana,Tahoma, Arial,sans-serif;
+    font-style: italic;
+    text-align: center;
+}
 .print h2,
 .print h3 {
     text-align: center;
@@ -288,4 +293,28 @@ span.signDate{
 
 div.EnrollStep{
         margin: 5px 20px 20px 20px;
+}
+
+.emergency strong{
+    color: blue;
+}
+.emergency fieldset{
+	border: none;
+}
+.emergency legend{
+    display: none;
+}
+.emergency li{
+    font-size: 18px;
+}
+.emergency li.family{
+    font-size: 25px;
+}
+.emergency li.family strong,
+.emergency li.medical strong{
+    color: red;
+}
+.emergency p{
+    font-size: 18px;
+    margin: 10px;
 }
