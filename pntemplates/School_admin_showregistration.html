@@ -50,6 +50,14 @@
                 <td><!--[$Done.imgtag]--></td>
                 <!--[assign var=up value=`$up+1`]-->
             <!--[/if]-->
+        <!--[else]-->
+            <td>
+                <!--[* Don't show cap if they have no students in the first place *]-->
+                <!--[if $family.numStudents>0]--><img src="modules/School/pnimages/Grad-22.jpg" /><!--[/if]-->
+	    </td>
+            <!--[assign var=noreturn value=`$noreturn+1`]-->
+        <!--[/if]-->
+        <!--[if $family.numReturn > 0 || $family.numStudents == 0]-->
             <td>
                 <!--[if $family.tuition_lu_date|truncate:10:'' lt $EnrollStart]-->
                     <!--[$Notdone.imgtag]-->
@@ -57,13 +65,10 @@
                    <!--[$Done.imgtag]-->
                 <!--[/if]-->
             </td>
-         <!--[else]-->
-            <td>
-                <!--[* Don't show cap if they have no students in the first place *]-->
-                <!--[if $family.numStudents>0]--><img src="modules/School/pnimages/Grad-22.jpg" /><!--[/if]--></td>
-            <!--[assign var=noreturn value=`$noreturn+1`]-->
+        <!--[else]-->
             <td>N/A</td>
-            <!--[/if]-->
+        <!--[/if]-->
+	
         <td><!--[$family.LastName]--></td>
         <td><!--[$family.Address]--></td>
         <td><!--[$family.lu_date|truncate:10:'']--></td>
