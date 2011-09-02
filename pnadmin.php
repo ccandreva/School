@@ -486,3 +486,39 @@ function School_admin_export()
 
 
 }
+
+function School_admin_import()
+{
+    $file = "Imports/test.csv";
+    if (($handle = fopen($file, "r")) == FALSE) {
+	return LogUtil::registerError("Error opening file '$file' .");
+    }
+    
+    // Read header line into array.
+    $fields = fgetcsv($handle, 0, ",", '"');
+    $numfields = count($fields);
+    
+    // Now read each record.
+    while (($data = fgetcsv($handle, 0, ",", '"')) !== FALSE) {
+        $num = count($data);
+	echo "<p>$numfields $num ";
+	if ($num > $numfields) $num = $numfields;
+	$RawObj = array();
+	for ($i=0; $i<$num;$i++) {
+	    $RawObj[$fields[$i]] = $data[$i];
+	}
+
+	if ($RawObj['id'] && $RawObj['Teacher']) {
+	    $UpdateObj = array(
+		'id' => $RawObj['id'],
+		'Teacher' => $RawObj['Teacher'],
+	    );
+	    DBUtil::updateObject ($UpdateObj, 'School_student');
+	}
+	
+    }
+    fclose($handle);
+    LogUtil::registerStatus("File $file imported.");
+    return pnRedirect( pnModUrl('School', 'admin', 'main'));
+    
+}
