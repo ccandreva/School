@@ -38,9 +38,15 @@ class School_user_emergencyHandler extends pnFormHandler
             $formData["$k$i"] = $v;
         }
       }
+      $NumStudents = $i;
       $render->assign('NumStudents', $i);
       unset ($formData['ContactData']);
       unset ($formData['StudentData']);
+      
+      $TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'));
+      for ($i=1;$i<=$NumStudents;$i++) {
+          $render->assign('Teacher' . $i . 'Items', $TeacherItems);
+      }
       $render->assign($formData);
       if ($this->showId) $render->assign('showId', true);
       return true;

@@ -540,12 +540,29 @@ function School_pntables()
     );
     ObjectUtil::addStandardFieldsToTableDefinition(
             $table['School_districts_column'],
-            'School_tuition_'
+            'School_districts_'
             );
     ObjectUtil::addStandardFieldsToTableDataDefinition(
             $table['School_districts_column_def']
             );
     
+    $table['School_teachers'] = DBUtil::getLimitedTablename('School_teachers');
+
+    $table['School_teachers_column'] = array(
+	'id'	    => 'School_teachers_id',
+	'Name'	    => 'School_teachers_Name',
+    );
+    $table['School_teachers_column_def'] = array(
+	'id'	    => 'I NOTNULL PRIMARY AUTOINCREMENT',
+	'Name'	    => 'C(255)',
+    );
+    ObjectUtil::addStandardFieldsToTableDefinition(
+            $table['School_teachers_column'],
+            'School_teachers_'
+            );
+    ObjectUtil::addStandardFieldsToTableDataDefinition(
+            $table['School_teachers_column_def']
+            );
 
     
     return $table;

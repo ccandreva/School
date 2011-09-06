@@ -26,12 +26,11 @@ class School_user_studentHandler extends pnFormHandler
 
       $gender = array ( array(),
             array('text' => 'Male', value => 'Male'),
-            array('text' => 'Female', value => 'Female'),
+            array('text' => 'Femal$TeachersItemse', value => 'Female'),
         );
+	$TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'));
         $Sacraments=array('Baptism' =>'Baptism', 'Reconciliation'=>'Reconciliation',
             'Communion'=>'First Holy Communion', 'Confirmation' => 'Confirmation');
-        $parents = array('Mother', 'Father');
-        $MarStat = initListValues(array('Married','Single','Separated','Divorced','Deceased'));
         $Custodial = initListValues(array('N/A','Mother','Father'));
         $Evaluations = array('Edu'=>'Educational', 'Psych'=>'Psychological',
             'Speech'=>'Speech','Other'=>'Other',
@@ -54,10 +53,8 @@ class School_user_studentHandler extends pnFormHandler
             'Parish' => 'Resurrection',
             'GenderItems' => $gender,
             'GradeItems'  => $GradeItems,
+	    'TeacherItems' => $TeacherItems,
             'Sacraments' => $Sacraments,
-            'Parents' => $parents,
-            'MotherStatusItems' => $MarStat,
-            'FatherStatusItems' => $MarStat,
             'CustodialParentItems' => $Custodial,
             'DistrictEvalItems' => $yesno,
             'ReturningItems' => $yesnoBool,
