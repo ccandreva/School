@@ -15,5 +15,6 @@ function School_adminapi_getlinks()
 	array('url' => pnModUrl("School", "admin", "showdirectory"), 'text' => 'Directory'),
 	array('url' => pnModUrl("School", "admin", "showregistration"), 'text' => 'Registration'),
 	array('url' => pnModUrl("School", "admin", "classlist"), 'text' => 'Class List'),
+	array('url' => pnModUrl("School", "print", "emergencyforms"), 'text' => 'Emergency Contacts'),
     );
 }
