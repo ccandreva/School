@@ -551,10 +551,12 @@ function School_pntables()
     $table['School_teachers_column'] = array(
 	'id'	    => 'School_teachers_id',
 	'Name'	    => 'School_teachers_Name',
+	'Grade'	    => 'School_teachers_Grade',
     );
     $table['School_teachers_column_def'] = array(
 	'id'	    => 'I NOTNULL PRIMARY AUTOINCREMENT',
 	'Name'	    => 'C(255)',
+	'Grade'	    => 'C(3)',
     );
     ObjectUtil::addStandardFieldsToTableDefinition(
             $table['School_teachers_column'],
