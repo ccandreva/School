@@ -44,25 +44,27 @@ function school_formstatusblock_init()
 */
 function school_formstatusblock_display($blockinfo)
 {
+    if (!pnUserLoggedIn()) return;
     if (!SecurityUtil::checkPermission('Formstatusblock::', "$row[title]::", ACCESS_READ)) {
         return;
     }
-    if (!pnUserLoggedIn()) return;
     $ret = School_checkuser($user, $familyid);
     if ($ret) return;
     $args = array('familyid' => $familyid);
     $emergencyObj =  pnModAPIFunc('School', 'user', 'LoadEmergencyForm', $args);
+    if ( count($emergencyObj['StudentData']) == 0) { return; }
+    
     $directoryObj =  pnModAPIFunc('School', 'user', 'LoadDirectory', $args);
     
     $Render = pnRender::getInstance('School');
     $startdate = '2011-08-01';
     $n=0;
     if ($emergencyObj['EmergencyLastUpdate'] < $startdate) {
-        $Render->assign('EmergencyDate' ,$emergencyObj['EmergencyLastUpdate']);
+        $Render->assign('EmergencyDate', true);
 	$n++;
     }
     if ($directoryObj['lu_date'] < $startdate) {
-        $Render->assign('DirectoryDate' ,$directoryObj['lu_date']);
+        $Render->assign('DirectoryDate', true);
 	$n++;
     }
     if ($n==0) return;
