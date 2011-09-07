@@ -23,7 +23,7 @@ function EnrollYear()
 }
 function RenderSchoolYear(&$Render)
 {
-    $Render->assign(ThisYear, '2010-2011');
+    $Render->assign(ThisYear, '2011-2012');
     $Render->assign(NextYear, '2011-2012');
     $Render->assign(NextYearStart, '2011');
 }

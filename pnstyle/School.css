@@ -79,7 +79,8 @@ form.application ul ul
         margin: 0;
 }
 
-.print + .print
+.print + .print,
+.newpage
 {
     page-break-before: always;
 }
@@ -305,7 +306,7 @@ div.EnrollStep{
     display: none;
 }
 .emergency li{
-    font-size: 18px;
+    font-size: 16px;
 }
 .emergency li.family{
     font-size: 25px;

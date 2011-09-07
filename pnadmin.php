@@ -522,3 +522,35 @@ function School_admin_import()
     return pnRedirect( pnModUrl('School', 'admin', 'main'));
     
 }
+
+function School_admin_emergencyforms()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $tables = pnDBGetTables();
+    $ContactCol = $tables['School_emergencyContact_column'][familyid];
+    $StudentCol = $tables['School_student_column'][Familyid];
+
+    $objArray = DBUtil::selectObjectArray ('School_family', '', 'LastName', -1, 5);
+
+    // Loop through all Families and export
+    foreach ($objArray as &$obj) {
+        $familyid = $obj['id'];
+        $obj['MotherWorkAddress'] = preg_replace('/(^|\s)([A-Z])([A-Z]+)/e',"'$1$2' . strtolower('\\3')", $obj['MotherWorkAddress'] );
+        $obj['FatherWorkAddress'] = preg_replace('/(^|\s)([A-Z])([A-Z]+)/e',"'$1$2' . strtolower('\\3')", $obj['FatherWorkAddress'] );
+        $where = "WHERE $ContactCol=$familyid";
+        $obj['contactData'] = DBUtil::selectObjectArray ('School_emergencyContact', $where);
+        $where = "WHERE $StudentCol=$familyid";
+        $obj['studentData'] = DBUtil::selectObjectArray ('School_student', $where);
+    }
+    unset($obj);
+    
+    $Render = pnRender::getInstance('School');
+    $Render->caching=0;
+    $Render->assign('Families', $objArray);
+    RenderSchoolYear($Render);
+    return  $Render->fetch('School_admin_emergencyforms.htm');
+   
+}
