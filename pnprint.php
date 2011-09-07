@@ -94,26 +94,6 @@ function School_print_textbook()
    
 }
 
-function School_print_emergency()
-{
-    $ret = School_checkuser($user, $familyid);
-    if ($ret) return $ret;
-
-    $formData =  pnModAPIFunc('School', 'user', 'LoadEmergencyForm',
-	    array('familyid' => $familyid));
-
-    $Render = pnRender::getInstance('School');
-    $Render->caching=0;
-
-    $Render->assign($formData);
-    School_initStudent($Render);
-//    RenderSchoolYear($Render);
-
-    return $Render->fetch('School_print_student.htm');
-
-}
-
-
 function School_print_emergencyforms()
 {
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
