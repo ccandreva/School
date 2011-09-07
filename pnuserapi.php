@@ -57,7 +57,7 @@ function School_userapi_LoadEmergencyForm($args)
 
         $familyidCol = $tables['School_emergencyContact_column'][familyid];
         $where = "WHERE $familyidCol=$familyid";
-        $contactData = DBUtil::selectObjectArray ('School_emergencyContact', $where);
+        $contactData = DBUtil::selectObjectArray ('School_emergencyContact', $where, 'id');
 
         $familyidCol = $tables['School_student_column'][Familyid];
         $where = "WHERE $familyidCol=$familyid";
