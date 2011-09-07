@@ -61,10 +61,10 @@ function school_formstatusblock_display($blockinfo)
         $Render->assign('EmergencyDate' ,$emergencyObj['EmergencyLastUpdate']);
 	$n++;
     }
-    //if ($directoryObj['lu_date'] < $startdate) {
+    if ($directoryObj['lu_date'] < $startdate) {
         $Render->assign('DirectoryDate' ,$directoryObj['lu_date']);
 	$n++;
-    //}
+    }
     if ($n==0) return;
     
     $Render->assign('familyid', $familyid);
