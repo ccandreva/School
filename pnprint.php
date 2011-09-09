@@ -99,9 +99,9 @@ function School_print_emergencyforms()
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
-    $Render->assign('Families', pnModAPIFunc('School', 'admin', 'LoadEmergencyForms'));
     $Render = pnRender::getInstance('School');
     $Render->caching=0;
+    $Render->assign('Families', pnModAPIFunc('School', 'admin', 'LoadEmergencyForms'));
     RenderSchoolYear($Render);
     return  $Render->fetch('School_print_emergencyforms.htm');
    
