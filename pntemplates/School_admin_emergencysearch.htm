@@ -1,0 +1,227 @@
+<!--[* pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_print_auto.js *]-->
+
+<!--[ foreach item=obj from=$Families]-->
+    <div class="print emergency">
+	<ul>
+	    <li>
+		<ul>
+		    <li><!--[$ThisYear]--></li>
+		    <li style="float:right;"><strong>BUS#: </strong><!--[$BusNumber]--></li>
+		</ul>
+	    </li>
+	</ul>
+	<br />
+	<h1 class="emergency">
+	    Resurrection School Student Emergency Form
+	</h1>
+	<br clear="both" />
+
+	<fieldset id="General">
+	<legend>Family Info</legend>
+	  <ul>
+	    <li class="family">
+		<strong>FAMILY NAME:</strong>
+		<!--[$obj.LastName|upper]-->
+	    </li>
+	      <li>
+		  <strong>Home Address: </strong> <!--[$obj.Address]--><!--[if $obj.Apt]--> Apt <!--[$ob.jApt]--><!--[/if]-->,
+		<!--[$obj.City]-->, <!--[$obj.State]--> <!--[$obj.Zip]-->
+	      </li>
+		  <li>
+		      <strong>Home Phone #: </strong>
+		      <!--[$obj.Phone]-->
+		  </li>
+	  </ul>
+	</fieldset>
+	
+	<fieldset id="MotherInfo">
+	    <legend>Mother's Information</legend>
+	    <ul>
+		<li>
+		    <strong>Mother/Guardian's Name: </strong>
+		    <!--[$obj.MotherFirstName]--> <!--[$obj.MotherMiddleName]--> <!--[$obj.MotherLastName]-->
+		</li>
+		<li>
+		    <strong>Business Address: </strong>
+		    <!--[$obj.MotherWorkAddress]--> <!--[$obj.MotherWorkCityStateZip]-->
+		</li>
+	      <li>
+		  <ul>
+		      <li>
+			  <strong>Work Phone: </strong>
+			  <!--[$obj.MotherWorkPhone]-->
+		      </li>
+		      <li>
+			  <strong>Cell Phone: </strong>
+			  <!--[$obj.MotherCell]-->
+		      </li>
+		  </ul>
+	      </li>
+
+
+	    </ul>
+
+	</fieldset>
+	
+	<fieldset id="FatherInfo">
+	    <legend>Father's Information</legend>
+	    <ul>
+		<li>
+		    <strong>Father/Guardian's Name: </strong>
+		    <!--[$obj.FatherFirstName]--> <!--[$obj.FatherMiddleName]--> <!--[$obj.FatherLastName]-->
+		</li>
+		<li>
+		    <strong>Business Address: </strong>
+		    <!--[$obj.FatherWorkAddress]--> <!--[$obj.FatherWorkCityStateZip]-->
+		</li>
+	      <li>
+		  <ul>
+		      <li>
+			  <strong>Work Phone: </strong>
+			  <!--[$obj.FatherWorkPhone]-->
+		      </li>
+		      <li>
+			  <strong>Cell Phone: </strong>
+			  <!--[$obj.FatherCell]-->
+		      </li>
+		  </ul>
+	      </li>
+
+
+	    </ul>
+
+	</fieldset>
+
+	<!--[foreach item=child from=$obj.studentData]-->
+	
+	<fieldset >
+	<legend>Child's Information</legend>
+	  <ul>
+	      <li>
+		  <ul>
+			<li>
+			  <strong>Student's Name:</strong>
+			  <!--[$child.FirstName]-->
+			</li>
+			<li>
+			    <strong>DOB: </strong>
+			    <!--[$child.DOB]-->
+			</li>
+		    <li>
+			<strong>Grade: </strong>
+		      <!--[$child.Grade]-->
+		    </li>
+		    <li>
+			<strong>Teacher: </strong>
+			<!--[$child.Teacher]-->
+		    </li>
+		  </ul>
+	      </li>
+	      
+	      <li class="medical">
+		  <strong>Allergies:</strong>
+		  <!--[$obj.Allergies]-->
+	      </li>
+	      <li class="medical">
+		  <strong>Medical Conditions:</strong>
+		  <!--[$obj.Conditions]-->
+	      </li>
+	</fieldset>
+	<!--[/foreach]-->
+	
+	<p class="newpage">Please list up to four relatives/friends (residing locally) who will assume the care
+	    of your child if you cannot be reached:</p>
+	    
+        <!--[foreach item=contact from=$obj.contactData]-->
+	    <fieldset >
+		<legend>Contact</legend>
+		<ul>
+		    <li>
+			<strong>Name:</strong>
+			<!--[$contact.ContactName]-->
+		    </li>
+		    <li>
+			<ul>
+			    <li>
+				<strong>Home Phone:</strong>
+				<!--[$contact.ContactPhone]-->
+			    </li>
+			    <li>
+				<strong>Cell:</strong>
+				<!--[$contact.ContactCell]-->
+			    </li>
+			</ul>
+		    </li>
+		    <li>
+			<ul>
+			    <li>
+				<strong>Work Phone:</strong>
+				<!--[$contact.ContactWork]-->
+			    </li>
+			    <li>
+				<strong>Relationship to Student:</strong>
+				<!--[$contact.ContactRelationship]-->
+			    </li>
+			</ul>
+		    </li>
+		</ul>
+		
+	    </fieldset>
+        <!--[/foreach]-->
+	
+	<p>
+	    In case of serious illness or injury, or if the school is unable to reach me or my
+emergency contacts, I authorize the school to call the doctor/dentist listed below
+and follow his/her instructions:
+	</p>
+
+	<fieldset id="Doctor">
+	    <legend>Doctor</legend>
+	    <ul>
+		<li class="medical">
+		    <strong>Doctor's Name:</strong> <!--[$obj.DoctorName]-->
+		</li>
+		<li class="medical">
+		    <strong>Address:</strong> <!--[$obj.DoctorAddress]-->
+		</li>
+	    	<li class="medical">
+		    <strong>Phone:</strong> <!--[$obj.DoctorPhone]-->
+		</li>
+	    </ul>
+	</fieldset>
+
+	<fieldset id="Dentist">
+	    <legend>Dentist</legend>
+	    <ul>
+		<li class="medical">
+		    <strong>Dentist's Name:</strong> <!--[$obj.DentistName]-->
+		</li>
+		<li class="medical">
+		    <strong>Address:</strong> <!--[$obj.DentistAddress]-->
+		</li>
+	    	<li class="medical">
+		    <strong>Phone:</strong> <!--[$obj.DentistPhone]-->
+		</li>
+	    </ul>
+	</fieldset>
+
+	<fieldset id="Orthodontist">
+	    <legend>Orthodontist</legend>
+	    <ul>
+		<li class="medical">
+		    <strong>Orthodontist's Name:</strong> <!--[$obj.OrthodontistName]-->
+		</li>
+		<li class="medical">
+		    <strong>Address:</strong> <!--[$obj.OrthodontistAddress]-->
+		</li>
+	    	<li class="medical">
+		    <strong>Phone:</strong> <!--[$obj.OrthodontistPhone]-->
+		</li>
+	    </ul>
+	</fieldset>
+
+    </div>
+
+<!--[/foreach]-->
+
