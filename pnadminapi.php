@@ -27,7 +27,8 @@ function School_adminapi_LoadEmergencyForms($args)
     $ContactCol = $tables['School_emergencyContact_column'][familyid];
     $StudentCol = $tables['School_student_column'][Familyid];
 
-    $objArray = DBUtil::selectObjectArray ('School_family', $where, 'LastName', -1, 5);
+    $objArray = DBUtil::selectObjectArray ('School_family', $where, 'LastName');
+	// Limit to 5 for testing //, -1, 5);
 
     // Loop through all Families and export
     foreach ($objArray as &$obj) {
