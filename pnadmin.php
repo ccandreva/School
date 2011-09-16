@@ -39,33 +39,6 @@ function School_admin_showemergencyforms()
 
 }
 
-/* Emergency form is no longer it's own table.
-function School_admin_deleteemergencyform()
-{
-    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
-        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
-    }
-
-    // User who's information we are going to edit.
-    $familyid = FormUtil::getPassedValue('familyid');
-
-    $tables = pnDBGetTables();
-    $ContactCol = $tables['School_emergencyContact_column'][familyid];
-    $where = "WHERE $ContactCol=$familyid";
-    DBUtil::deleteWhere ('School_emergencyContact', $where);
-
-    $StudentCol = $tables['School_emergencyStudent_column'][familyid];
-    $where = "WHERE $StudentCol=$familyid";
-    DBUtil::deleteWhere ('School_emergencyStudent', $where);
-
-    DBUtil::deleteObjectByID('School_emergencyform' ,$familyid);
-    $url = pnModUrl('School', 'admin', 'showemergencyforms');
-
-    return pnRedirect($url);
-
-}
-*/
-
 function School_admin_exportemergencyforms()
 {
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
@@ -285,13 +258,6 @@ function School_admin_deletefamily()
     $ContactCol = $tables['School_emergencyContact_column'][familyid];
     $where = "WHERE $ContactCol=$familyid";
     DBUtil::deleteWhere ('School_emergencyContact', $where);
-
-    $StudentCol = $tables['School_emergencyStudent_column'][familyid];
-    $where = "WHERE $StudentCol=$familyid";
-    DBUtil::deleteWhere ('School_emergencyStudent', $where);
-
-    // Emergency form table no longer used.
-    // DBUtil::deleteObjectByID('School_emergencyform' ,$familyid);
 
     DBUtil::deleteObjectByID('School_directory' ,$familyid);
     DBUtil::deleteObjectByID('School_tuition' ,$familyid);
