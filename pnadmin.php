@@ -156,6 +156,7 @@ function School_admin_showdirectory()
         }
 
     }
+    RenderSchoolYear($render);
     return $render->fetch('School_admin_showdirectory.html');
 
 }
@@ -217,6 +218,7 @@ function School_admin_showregistration()
     }
     $render->assign('familyData', $familyData);
     $render->assign('EnrollStart', EnrollStart() );
+    RenderSchoolYear($render);
     return $render->fetch('School_admin_showregistration.html');
 
 }

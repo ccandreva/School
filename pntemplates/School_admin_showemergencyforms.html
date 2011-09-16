@@ -3,6 +3,8 @@
 
 <!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
 <!--[* qpnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon *]-->
+<!--[pnimg modname=core src=button_ok.gif set=icons/extrasmall alt='Done' assign=Done]-->
+<!--[pnimg modname=core src=button_cancel.gif set=icons/extrasmall alt='Notdone' assign=Notdone]-->
 
 <div class="pn-admincontainer">
   <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
@@ -30,11 +32,14 @@
         <td><!--[$datum.LastName]--></td>
         <td><!--[$datum.Address]--></td>
         <td><!--[$datum.EmergencyLastUpdate]--></td>
+	  <!--[if $datum.lu_date < '2011-08-01']-->
+	      <!--[assign var=notup value=`$notup+1`]-->
+	      <td><!--[$Notdone.imgtag]--></td>
+	  <!--[else]-->
+	      <td><!--[$Done.imgtag]--></td>
+	  <!--[/if]-->
+	  <!--[/foreach]-->
       </tr>
-      <!--[if $datum.lu_date|truncate:4:'' eq '1970']-->
-          <!--[assign var=notup value=`$notup+1`]-->
-      <!--[/if]-->
-      <!--[/foreach]-->
   </table>
 
   <p>Not Updated: <!--[$notup]--></p>

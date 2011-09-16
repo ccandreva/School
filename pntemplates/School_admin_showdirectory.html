@@ -2,6 +2,8 @@
 <!--[include file="School_admin_menu.htm"]-->
 
 <!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[pnimg modname=core src=button_ok.gif set=icons/extrasmall alt='Done' assign=Done]-->
+<!--[pnimg modname=core src=button_cancel.gif set=icons/extrasmall alt='Notdone' assign=Notdone]-->
 
 <div class="pn-admincontainer">
   <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
@@ -16,10 +18,11 @@
       <li><a href="<!--[pnmodurl modname="School" type="admin" func="showdirectory" view="csv"]-->">Download as CSV</a></li>
   </ul>
  </div>
-   <!--[assign var=i value=0]-->
+   <!--[assign var=updated value=0]-->
+   <!--[assign var=notup value=0]-->
   <!--[if $view == 'print']-->
       <div id="BluebookPrint">
-      <h1>Blue Book 2010/2011</h1>
+      <h1>Blue Book <!--[$ThisYear]--></h1>
 
         <!--[foreach item=d from=$data]-->
           <!--[assign var=i value=`$i+1`]-->
@@ -32,9 +35,14 @@
             <!--[$d.Email]--><br />
             <br />
           </div>
+  	  <!--[if $d.lu_date < '2011-08-01']-->
+	      <!--[assign var=notup value=`$notup+1`]-->
+	  <!--[else]-->
+	      <!--[assign var=updated value=`$updated+1`]-->
+	  <!--[/if]-->
+
         <!--[/foreach]-->
       </div>
-  <br clear="all"/> <p>Total: <!--[$i]--></p>
   <!--[elseif $view == 'table']-->
       <table>
 
@@ -51,7 +59,6 @@
               <th>Last Updated</th>
           </tr>
           <!--[foreach item=d from=$data]-->
-          <!--[assign var=i value=`$i+1`]-->
           <tr>
         <td><a href="<!--[pnmodurl modname="school" type="admin" func="editdirectoryform" familyid=$d.id ]-->"
                title="Edit this family's directory entry."><!--[$editIcon.imgtag]--></a></td>
@@ -64,8 +71,21 @@
             <td><!--[$d.Students]--></td>
             <td><!--[$d.Email]--></td>
             <td><!--[$d.lu_date]--></td>
+	  <!--[if $d.lu_date < '2011-08-01']-->
+	      <!--[assign var=notup value=`$notup+1`]-->
+	      <td><!--[$Notdone.imgtag]--></td>
+	  <!--[else]-->
+	      <!--[assign var=updated value=`$updated+1`]-->
+	      <td><!--[$Done.imgtag]--></td>
+	  <!--[/if]-->
+
           </tr>
         <!--[/foreach]-->
       </table
-      <p>Total: <!--[$i]--></p>
   <!--[/if]-->
+  <br clear="all"/>
+  <p>
+      Updated: <!--[$updated]-->
+      <br />
+      Not Updated: <!--[$notup]-->
+  </p>
