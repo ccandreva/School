@@ -209,27 +209,31 @@
         or my emergency contacts.
     </h2>
 
+    <!--[assign var=mand value=1]-->
     <!--[foreach from=$Doctors item=doc]-->
-    <ul>
-        <li>
-            <ul>
-                <li>
-                    <!--[pnformlabel for="`$doc`Name" text="`$doc`'s Name"]-->
-                    <!--[pnformtextinput id="`$doc`Name" width=30em maxLength=60]-->
-                </li>
-                <li>
-                    <!--[pnformlabel for="`$doc`Phone" text="Phone"]-->
-                    <!--[pnformtextinput id="`$doc`Phone" width=15em maxLength=60]-->
-                </li>
-            </ul>
-        </li>
-        <li>
-            <!--[pnformlabel for="`$doc`Address" text="Address"]-->
-            <!--[pnformtextinput id="`$doc`Address" width=45em maxLength=65]-->
-        </li>
-    </ul>
+	<!--[if $doc == 'Orthodontist']-->
+	    <!--[assign var=mand value=0]-->
+	<!--[/if]-->
+	<ul>
+	    <li>
+		<ul>
+		    <li>
+			<!--[pnformlabel for="`$doc`Name" text="`$doc`'s Name"]-->
+			<!--[pnformtextinput id="`$doc`Name" width=30em maxLength=60 mandatory=$mand]-->
+		    </li>
+		    <li>
+			<!--[pnformlabel for="`$doc`Phone" text="Phone"]-->
+			<!--[pnformtextinput id="`$doc`Phone" width=15em maxLength=60 mandatory=$mand]-->
+		    </li>
+		</ul>
+	    </li>
+	    <li>
+		<!--[pnformlabel for="`$doc`Address" text="Address"]-->
+		<!--[pnformtextinput id="`$doc`Address" width=45em maxLength=65 mandatory=$mand]-->
+	    </li>
+	</ul>
 
-    <hr />
+	<hr />
     <!--[/foreach]-->
     <!--[pnformbutton commandName="submit" text="Submit" ]-->
 </fieldset>

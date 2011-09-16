@@ -80,9 +80,17 @@ class School_user_emergencyHandler extends pnFormHandler
     $familyid= $this->familyid;
     $formData['id'] = $familyid;
 
+    $n = 0;
     foreach ($contactData as $k => $v) {
         if (empty($v['ContactName'])) unset($contactData[$k]);
-        else $contactData[$k]['familyid'] = $familyid;
+        else {
+	    $contactData[$k]['familyid'] = $familyid;
+	    $n++;
+	}
+    }
+    if ($n == 0) {
+	$render->assign('errormsg', "Please enter at least one emergency contact.");
+	return false;
     }
     foreach ($studentData as $k => $v) {
         if (empty($v['FirstName'])) unset($studentData[$k]);
