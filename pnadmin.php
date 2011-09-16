@@ -535,3 +535,18 @@ function School_admin_emergencyforms()
     return  $Render->fetch('School_admin_emergencyforms.htm');
    
 }
+
+function School_admin_emergencysearch()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $Render = pnRender::getInstance('School');
+    $obj = DBUtil::selectObjectArray('School_family', '', 'LastName', -1, -1, '', null, null, 
+            array('id', 'LastName'));
+    $Render->assign('Families', $obj);
+    RenderSchoolYear($Render);
+    return  $Render->fetch('School_admin_emergencysearch.htm');
+   
+}
