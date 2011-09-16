@@ -4,14 +4,16 @@
 	<ul>
 	    <li>
 		<ul>
+		    <li class="flright"><strong>BUS#: </strong><!--[$obj.BusNumber]--></li>
 		    <li><!--[$ThisYear]--></li>
-		    <li style="float:right;"><strong>BUS#: </strong><!--[$obj.BusNumber]--></li>
+		    <li style="clear:right;"><strong>Printed: </strong><!--[$smarty.now|date_format:"%F %r"]--></li>
+		    <li class="flright"><strong>Updated: </strong><!--[$obj.EmergencyLastUpdate|date_format:"%F %r"]--></li>
 		</ul>
 	    </li>
 	</ul>
-	<br />
+	<br clear="both"/>
 	<h1 class="emergency">
-	    Resurrection School Student Emergency Form
+	    Resurrection Student Emergency Form
 	</h1>
 	<br clear="both" />
 

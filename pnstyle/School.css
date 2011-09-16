@@ -95,6 +95,7 @@ form.application ul ul
 }
 .print h1.emergency {
     font-family: Verdana,Tahoma, Arial,sans-serif;
+    font-size: 30px;
     font-style: italic;
     text-align: center;
 }
@@ -318,4 +319,10 @@ div.EnrollStep{
 .emergency p{
     font-size: 18px;
     margin: 10px;
+}
+
+.emergency .flright
+{
+    float: right;
+    padding-right: 10px;
 }
