@@ -141,7 +141,7 @@ function School_userapi_MailFormUpdated($args)
     $obj = DBUtil::selectObjectByID('School_family', $familyid, 'id', array('LastName'));
     $familyname = $obj['LastName'];
     $subject = "$formname form updated by $familyname";
-    $toaddress= array('Doreenp@resurrectionschool.com', 'chris@westnet.com');
+    $toaddress= array('Doreenp@resurrectionschool.com'); //, 'chris@westnet.com');
     
     $mail = "\nThe \"$familyname\" family ($familyid) has updated their $formname form.\n\n";
     pnModAPIFunc('Mailer', 'user', 'sendmessage',
