@@ -12,7 +12,6 @@
 // (and Loader::requireOnce is used internally by PostNuke)
 Loader::requireOnce('includes/pnForm.php');
 require_once('common.php');
-require_once('pnclass/applicationformhandler.php');
 require_once('pnclass/emergencyformhandler.php');
 require_once('pnclass/directoryformhandler.php');
 require_once('pnclass/familyhandler.php');
