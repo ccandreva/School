@@ -25,8 +25,8 @@ class School_user_studentHandler extends pnFormHandler
       $render->assign($formData);
 
       $gender = array ( array(),
-            array('text' => 'Male', value => 'Male'),
-            array('text' => 'Femal$TeachersItemse', value => 'Female'),
+            array('text' => 'Male', 'value' => 'Male'),
+            array('text' => 'Female', 'value' => 'Female'),
         );
 	$TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'));
         $Sacraments=array('Baptism' =>'Baptism', 'Reconciliation'=>'Reconciliation',
