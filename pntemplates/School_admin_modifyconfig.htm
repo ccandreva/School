@@ -1,0 +1,40 @@
+
+<!--[ include file="School_admin_menu.htm"]-->
+
+<div class="z-admincontainer">
+    <div class="z-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='Settings' ]--></div>
+    <h2>Settings</h2>
+  
+    <!--[pnform cssClass="z-form"]-->
+    <!--[pnformvalidationsummary]-->
+    <!--[if $errormsg != '']-->
+        <div class="validationSummary pn-errormsg">
+        <!--[$errormsg]-->
+        </div>
+    <!--[/if]-->
+
+    <fieldset id="SchoolYear">
+        <legend>School Year</legend>
+        <div class="z-formrow">
+                <!--[pnformlabel for=ThisYear text="Current School Year" ]-->
+                <!--[pnformtextinput id=ThisYear width=6em maxLength=9]-->
+        </div>
+        <div class="z-formrow">
+                <!--[pnformlabel for=NextYear text="Current Registration Period" ]-->
+                <!--[pnformtextinput id=NextYear width=6em maxLength=9]-->
+        </div>
+        <div class="z-formrow">
+                <!--[pnformlabel for=NextYearStart text="Next Year Starts" ]-->
+                <!--[pnformtextinput id=NextYearStart width=4em maxLength=4]-->
+        </div>
+        <div class="z-formrow">
+                <!--[pnformlabel for=EnrollStart text="Start of Enrollment Persion" ]-->
+                <!--[pnformtextinput id=EnrollStart width=6em maxLength=10]-->
+        </div>
+    </fieldset>
+
+    <!--[pnformbutton commandName="submit" text="Submit" ]-->
+    
+    <!--[/pnform]-->
+    
+</div>

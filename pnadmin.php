@@ -14,6 +14,7 @@ require_once('pnclass/emergencyformhandler.php');
 require_once('pnclass/directoryformhandler.php');
 require_once('pnclass/familyhandler.php');
 require_once('pnclass/studenthandler.php');
+require_once('pnclass/confighandler.php');
 
 
 function School_admin_main()
@@ -516,11 +517,21 @@ function School_admin_emergencysearch()
         $table = pnDBGetTables();
         $familycolumn = $table['School_family_column'];
         $where = $familycolumn['LastName'] . " = '$familyname'";
-        $obj = DBUtil::selectObjectArray('School_family', $where);
-        $Render->assign('Families', $obj);
+        $Render->assign('Families', pnModAPIFunc('School', 'admin', 'LoadEmergencyForms',
+                array('where' => $where)
+                ));
     }
 
     RenderSchoolYear($Render);
     return  $Render->fetch('School_admin_emergencysearch.htm');
    
+}
+function School_admin_modifyconfig()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+    $render = FormUtil::newpnForm('School');
+    $formobj = new School_user_configHandler();
+    return $render->pnFormExecute('School_admin_modifyconfig.htm', $formobj);
 }

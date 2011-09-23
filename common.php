@@ -19,18 +19,19 @@ function initListValues($list)
 /* The year enrollments are being accepted for */
 function EnrollYear()
 {
-        return 2011;
+        return pnModGetVar('School', 'NextYearStart');  //2011
 }
+
 function RenderSchoolYear(&$Render)
 {
-    $Render->assign(ThisYear, '2011-2012');
-    $Render->assign(NextYear, '2011-2012');
-    $Render->assign(NextYearStart, '2011');
+    $Render->assign(ThisYear, pnModGetVar('School', 'ThisYear'));  //2011-2012
+    $Render->assign(NextYear, pnModGetVar('School', 'NextYear'));  //2011-2012
+    $Render->assign(NextYearStart, pnModGetVar('School', 'NextYearStart'));  //2011
 }
 
 function EnrollStart()
 {
-    return '2010-12-01';
+    return pnModGetVar('School', 'EnrollStart');  //2010-12-01
 }
 
 function Year2Grade($class, $promote)
