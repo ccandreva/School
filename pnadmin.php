@@ -511,9 +511,15 @@ function School_admin_emergencysearch()
     }
 
     $Render = pnRender::getInstance('School');
-    $obj = DBUtil::selectObjectArray('School_family', '', 'LastName', -1, -1, '', null, null, 
-            array('id', 'LastName'));
-    $Render->assign('Families', $obj);
+    $familyname = FormUtil::getpassedValue('familyname');
+    if ($familyname) {
+        $table = pnDBGetTables();
+        $familycolumn = $table['School_family_column'];
+        $where = $familycolumn['LastName'] . " = '$familyname'";
+        $obj = DBUtil::selectObjectArray('School_family', $where);
+        $Render->assign('Families', $obj);
+    }
+
     RenderSchoolYear($Render);
     return  $Render->fetch('School_admin_emergencysearch.htm');
    

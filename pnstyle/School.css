@@ -326,3 +326,32 @@ div.EnrollStep{
     float: right;
     padding-right: 10px;
 }
+
+#livefamilysearch {
+    margin: 1em 0 1em 0;
+}
+
+#livefamilysearch .autocomplete_family {
+    position: absolute;
+    width: 25em;
+    background-color: white;
+    border: 1px solid #888;
+    margin: 0;
+    padding: 0;
+}
+#livefamilysearch .autocomplete_family ul {
+    list-style:none;
+    margin: 0;
+    padding: 0;
+}
+#livefamilysearch .autocomplete_family ul li.selected {
+    background-color: #ffb;
+}
+
+#livefamilysearch .autocomplete_family ul li {
+    background:transparent url(../../../images/icons/extrasmall/edit_user.gif) no-repeat scroll 0 50%;
+    cursor:pointer;
+    margin:0;
+    padding:3px 0 3px 25px;
+}
+
