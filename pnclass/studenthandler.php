@@ -17,7 +17,8 @@ class School_user_studentHandler extends pnFormHandler
           if ( ($this->familyid > 0) && ($formData['Familyid'] != $this->familyid) ){
                return false;
           }
-          $formData['Grade'] = Year2Grade($formData['ClassYear'], 1);
+	  $rereg = pnModGetVar('School', 'ReregOpen');
+          $formData['Grade'] = Year2Grade($formData['ClassYear'], $rereg);
       } else {
           $formData = array();
       }
