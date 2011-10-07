@@ -1,0 +1,9 @@
+<h2>Delete Family <!--[$family.LastName]--> (<!--[$familyid]-->)</h2>
+
+<h3>Do you really really delete this family completely from the Blue Book Directory ?</h3>
+<form action="<!--[pnmodurl modname="School" type="admin" func="deletedirectory"]-->" method="POST">
+    <input type="hidden" name="familyid" value="<!--[$familyid]-->" />
+    <input type="hidden" name="confirmdelete" value="yes" />
+    <input type="submit" name="submit" value="Delete" />
+    <a href="<!--[pnmodurl modname="school" type="admin" func="showdirectory" view="table"]-->"> Cancel </a>
+</form>

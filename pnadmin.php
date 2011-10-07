@@ -277,6 +277,28 @@ function School_admin_deletefamily()
      */
 
 }
+function School_admin_deletedirectory()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    // User who's information we are going to delete.
+    $familyid = FormUtil::getPassedValue('familyid');
+
+    if (!FormUtil::getPassedValue('confirmdelete', '', 'POST' )) {
+
+        $render = pnRender::getInstance('School', false);
+        $render->assign('familyid', $familyid);
+        //$render->assign('family', $family);
+        return $render->fetch('School_admin_deletedirectory.html');
+    }
+
+    DBUtil::deleteObjectByID('School_directory' ,$familyid);
+    return pnRedirect( pnModUrl('School', 'admin', 'showdirectory',
+	    array('view' => 'table') ) );
+
+}
 
 function School_admin_showstudents()
 {

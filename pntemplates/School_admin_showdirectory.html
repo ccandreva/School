@@ -2,6 +2,7 @@
 <!--[include file="School_admin_menu.htm"]-->
 
 <!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
 <!--[pnimg modname=core src=button_ok.gif set=icons/extrasmall alt='Done' assign=Done]-->
 <!--[pnimg modname=core src=button_cancel.gif set=icons/extrasmall alt='Notdone' assign=Notdone]-->
 
@@ -48,6 +49,7 @@
 
           <tr>
               <th>&nbsp;</th>
+              <th>&nbsp;</th>
               <th>Family Name</th>
               <th>Address</th>
               <th>City</th>
@@ -60,8 +62,15 @@
           </tr>
           <!--[foreach item=d from=$data]-->
           <tr>
-        <td><a href="<!--[pnmodurl modname="school" type="admin" func="editdirectoryform" familyid=$d.id ]-->"
-               title="Edit this family's directory entry."><!--[$editIcon.imgtag]--></a></td>
+        <td>
+	    <a href="<!--[pnmodurl modname="school" type="admin" func="editdirectoryform" familyid=$d.id ]-->"
+               title="Edit this family's directory entry."><!--[$editIcon.imgtag]--></a>
+	</td>
+	<td>
+            <a href="<!--[pnmodurl modname="school" type="admin" func="deletedirectory" familyid=$d.id ]-->"
+               title="Delete this family's directory data." ><!--[$delIcon.imgtag]--></a>
+	</td>
+	       
             <td><!--[$d.FamilyName]--></td>
             <td><!--[$d.Address]--></td>
             <td><!--[$d.City]--></td>
