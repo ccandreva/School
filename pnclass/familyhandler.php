@@ -13,11 +13,15 @@ class School_user_familyHandler extends pnFormHandler
 
       /* Load Data from Database */
     $familyid = $this->familyid;
-    $formData = DBUtil::selectObjectByID('School_family', $familyid);
-    if (is_array($formData)) {
-        $render->assign($formData);
+    if ($familyid > 0) {
+	$formData = DBUtil::selectObjectByID('School_family', $familyid);
+	if (is_array($formData)) {
+	    $render->assign($formData);
+	} else {
+	    $this->ShouldInsert = true;
+	}
     } else {
-        $this->ShouldInsert = true;
+	$this->ShouldInsert = true;
     }
 
     // Load Districts for dropdown
@@ -64,7 +68,12 @@ class School_user_familyHandler extends pnFormHandler
     if (!$render->pnFormIsValid()) return false;
 
     $formData = $render->pnFormGetValues();
-    $formData[id] = $this->familyid;
+    if ($this->familyid > 0) {
+	    $familyid = $this->familyid;
+    } else {
+	    $familyid = pnModAPIFunc('School', 'user', 'AssignID');
+    }
+    $formData[id] = $familyid;
     if ($this->ShouldInsert) {
         LogUtil::registerStatus("Added Family Information");
         DBUtil::insertObject ($formData, 'School_family', true);
@@ -73,7 +82,7 @@ class School_user_familyHandler extends pnFormHandler
         DBUtil::updateObject ($formData, 'School_family');
     }
     pnModAPIFunc('School', 'user', 'MailFormUpdated',
-	    array('formname'=>'Family Information', 'familyid'=>$this->familyid)
+	    array('formname'=>'Family Information', 'familyid'=>$familyid)
 	    );
 
     if ($this->redirect) return pnRedirect($this->redirect);
