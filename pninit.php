@@ -48,6 +48,9 @@ function School_upgrade($oldversion)
         if ( !DBUtil::createTable('School_districts') ) return false;
       case '0.4.5';
 	if ( !DBUtil::createTable('School_teachers')) return false;
+      case '0.4.6';
+        if ( !DBUtil::changeTable('School_family') ) return false;
+        if ( !DBUtil::changeTable('School_student') ) return false;
     }
 
     return true;
