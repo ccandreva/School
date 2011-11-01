@@ -83,7 +83,7 @@ function Grade2Year($grade)
 
 
 
-function School_checkuser(&$user, &$familyid)
+function School_checkuser(&$user, &$familyid, $application)
 {
     // Check for family ID
     $user = pnUserGetVar('uid');
@@ -103,7 +103,9 @@ function School_checkuser(&$user, &$familyid)
 
     $attr = $uservars['__ATTRIBUTES__'];
     $familyid = $attr['FamilyID'];
-    if ( $familyid < 1) {
+    if ($application) return false;
+    
+    if ( $familyid < 1 ) {
         return "Your account is not configured for use of forms. Please contact webmaster@www.resurrectionschool.com for assistance.";
     }
     return false;
