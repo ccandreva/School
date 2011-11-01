@@ -54,7 +54,34 @@ function School_user_test()
         return $output;
 }
 
-function School_user_application()
+function School_user_apply()
+{
+    $ret = School_checkuser($user, $familyid, true);
+    if ($ret) return $ret;
+
+    $Render = pnRender::getInstance('School');
+    if ($familyid > 0) {
+        $familyData = DBUtil::selectObjectByID('School_family', $familyid);
+	
+	// If they are already accepted, redirect to registation portal;
+	if ($familyData{'Accepted'} == 1) {
+	    return pnredirect(pnModUrl('School', 'user', 'main'));
+	}
+	
+        $Render->assign($familyData);
+        $students = pnModAPIFunc('School', 'user', 'GetStudents', array('familyid' => $familyid));
+	if (is_array($students)) $Render->assign('Students', $students);
+    }
+    
+    
+    // $tuitionData = DBUtil::selectObjectByID('School_tuition', $familyid);
+    // $Render->assign('Tuition', $tuitionData);
+    $Render->assign('EnrollStart', EnrollStart());
+    RenderSchoolYear($Render);
+    return $Render->fetch('School_user_apply.htm');
+}
+
+/* function School_user_application()
 {
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_READ)) {
         return __("Not authorised to access School module.");
@@ -63,7 +90,7 @@ function School_user_application()
     $render = FormUtil::newpnForm('School');
     $formobj = new School_user_applicationHandler();
     return $render->pnFormExecute('School_user_application.htm', $formobj);
-}
+} */
 
 function School_user_emergencyForm()
 {
@@ -85,6 +112,18 @@ function School_user_directoryForm()
     $formobj->familyid = $familyid;
     $formobj->showId = true;
     return $render->pnFormExecute('School_user_directoryForm.html', $formobj);
+}
+
+function School_user_addfamily()
+{
+    $ret = School_checkuser($user, $familyid, true);
+    if ($ret) return $ret;
+
+    $render = FormUtil::newpnForm('School');
+    $formobj = new School_user_familyHandler();
+    $formobj->familyid = $familyid;
+    $formobj->redirect = pnModURL('School', 'user', 'apply' );
+    return $render->pnFormExecute('School_user_editfamily.htm', $formobj);
 }
 
 function School_user_editfamily()

@@ -1,0 +1,103 @@
+<!--[* $Id: School_user_main.htm 22155 2007-06-04 11:35:23Z markwest $ *]-->
+<h1> Resurrection Application Portal</h1>
+
+<!--[insert name='getstatusmsg' module='School']-->
+<!--[if $errormsg != '']-->
+<div class="validationSummary pn-errormsg">
+<!--[$errormsg]-->
+</div>
+<!--[/if]-->
+
+<br />
+
+<!--[if $id]-->
+    <h2><!--[$LastName]--> Family Information</h2>
+    <h3>(Please make sure this is kept up to date)</h3>
+    <!--[include file="School_familysummary.html"]-->
+<br />
+<!--[/if]-->
+
+<h2>Step 1: Enter Family information</h2>
+<div class="EnrollStep">
+<!--[if !$id ]-->
+    <p><img src="images/icons/small/button_cancel.gif"/> Please
+        <a href="<!--[pnmodurl modname="School" type="user" func="addfamily"]-->"> 
+        enter your family information</a>.
+    </p>
+<!--[else]-->
+    <p><img src="images/icons/small/button_ok.gif"/> If anything has changed, please
+    <a href="<!--[pnmodurl modname="School" type="user" func="addfamily"]-->">
+       Edit Your Family Information</a>.
+    </p>
+</div>
+
+<h2>Step 2: Submit Student Application</h2>
+<div class="EnrollStep">
+    <!--[if isset($students)]-->
+    <table class="School">
+        <tr>
+            <th>Name</th>
+            <th>Grade Last<br />Applied For</th>
+        </tr>
+    <!x--[foreach item=Student from=$Students]-->
+        <tr>
+            <td><!--[$Student.FirstName]--></td>
+            <td><!--[$Student.Grade]--></td>
+        </tr>
+    <!--[/foreach]-->
+    </table>
+    <!--[/if]-->
+
+    <p>
+    <a href="<!--[pnmodurl modname="School" type="user" func="addstudent"]-->">Enroll New Student</a>
+    </p>
+
+        <!--[if $OKstudents < $students]-->
+        <p>
+        <strong>Please update all students' information.</strong>  Once all students have been
+        edited you can procede to the next step.
+        </p>
+        <!--[else]-->
+
+        <p><img src="images/icons/small/button_ok.gif" />
+            <strong>All student forms have been updated</strong>. You can now print an Enrollment Application
+            for each student, using the "Print Application" links in list of <strong>Currently Enrolled Students</strong> above,
+            before proceeding to Step 3.
+        </p>
+        <p>
+            <strong>Forms need to be printed out, signed, and sent in to the office along with
+            the Re-Registration fees of $200.00 per child.</strong> If you are already set up for direct deposit,
+            you may also pay through the <a href="<!--[pnmodurl modname="FormExpress" func="display_form" form_id=3]-->">online payment form</a>.
+        </p>
+</div>
+            <h2>Step 3: Tuition Payment</h2>
+<div class="EnrollStep">
+            <!--[if $Tuition.lu_date < $EnrollStart]-->
+                <p><img src="images/icons/small/button_cancel.gif" />
+                Next, update your <a href="<!--[pnmodurl modname="School" type="user" func="tuition"]-->">Tuition
+                Payment Preferences</a>.
+                </p>
+            <!--[else]-->
+                <p><img src="images/icons/small/button_ok.gif" />
+                    <strong>Tuition information is up to date.</strong> You may still
+                    <a href="<!--[pnmodurl modname="School" type="user" func="tuition"]-->">Review and Update
+                       Payment Options</a> before  proceeding to Step 4.
+                </p>
+</div>
+                <h2>Step 4: Print Family Forms</h2>
+<div class="EnrollStep">
+                <!--[pnmodurl modname="School" type="print" func="textbook" assign=printfam]-->
+                <p><a href="<!--[$printfam]-->" target="_res_print"><img src="images/icons/small/folder_print.gif" /></a>
+                    <strong>All necessary forms have been filled out.</strong> You may now
+                    <a href="<!--[$printfam]-->" target="_res_print">print the Textbook and Tuition Forms</a>.
+                    Sign and return these to the office.
+                </p>
+            <!--[/if]-->
+
+        <!--[/if]-->
+    </p>
+
+<!--[/if]--><!--[* Step 1 *]-->
+</div>
+
+

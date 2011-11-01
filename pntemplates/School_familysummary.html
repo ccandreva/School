@@ -1,0 +1,53 @@
+<!--[*
+    Family Information Summary
+    User on Applicaiton and Registration main screens
+*]-->
+
+<table class="School_familyinfo">
+    <tr><td>
+        <h4>Address</h4>
+        <ul class="School_address">
+            <li><!--[$Address]--><!--[if $Apt]-->, Apt #<!--[$Apt]--><!--[/if]--></li>
+            <li><!--[$City]-->, <!--[$State]--> <!--[$Zip]--></li>
+        </ul>
+    </td>
+    <td>
+        <h4>Mother</h4>
+        <ul class="School_address">
+            <li><!--[$MotherLastName]-->, <!--[$MotherFirstName]--></li>
+            <!--[if $MotherHasAddress == 'Yes']-->
+                <li><!--[$MotherAddress]--><!--[if $MotherApt]-->, Apt #<!--[$MotherApt]--><!--[/if]--></li>
+                <li><!--[$MotherCity]-->, <!--[$MotherState]--> <!--[$MotherZip]--></li>
+                <li><!--[$MotherPhone]--></li>
+            <!--[/if]-->
+            <!--[if $MotherWorkAddress]-->
+                <li><h4>Business Address</h4></li>
+                <li><!--[$MotherWorkAddress]--></li>
+                <li><!--[$MotherWorkCityStateZip]--></li>
+            <!--[/if]-->
+            <!--[if $MotherEmail]--><li><!--[$MotherEmail]--></li><!--[/if]-->
+            <!--[if $MotherWorkPhone]--><li>Phone: <!--[$MotherPhone]--></li><!--[/if]-->
+            <!--[if $MotherCell]--><li>Cell: <!--[$MotherCell]--></li><!--[/if]-->
+        </ul>
+    </td>
+    <td>
+        <h4>Father</h4>
+        <ul class="School_address">
+            <li><!--[$FatherLastName]-->, <!--[$FatherFirstName]--></li>
+            <!--[if $FatherHasAddress == 'Yes']-->
+                <li><!--[$FatherAddress]--><!--[if $FatherApt]-->, Apt #<!--[$FatherApt]--><!--[/if]--></li>
+                <li><!--[$FatherCity]-->, <!--[$FatherState]--> <!--[$FatherZip]--></li>
+                <li><!--[$FatherPhone]--></li>
+            <!--[/if]-->
+            <!--[if $FatherWorkAddress]-->
+                <li><h4>Business Address</h4></li>
+                <li><!--[$FatherWorkAddress]--></li>
+                <li><!--[$FatherWorkCityStateZip]--></li>
+            <!--[/if]-->
+            <!--[if $FatherEmail]--><li><!--[$FatherEmail]--></li><!--[/if]-->
+            <!--[if $FatherWorkPhone]--><li>Phone: <!--[$FatherPhone]--></li><!--[/if]-->
+            <!--[if $FatherCell]--><li>Cell: <!--[$FatherCell]--></li><!--[/if]-->
+        </ul>
+    </td>
+    </tr>
+</table>
