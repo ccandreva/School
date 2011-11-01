@@ -7,9 +7,10 @@
 /* Take a list of items and format it
  * for a pnForm select list.
  */
-function initListValues($list)
+function initListValues($list, $firstnull)
 {
         $temp = array();
+	if ($firstnull ) $temp[] = array('text' => '', 'value' => '');
         foreach ($list as $item)
                 $temp[] = array('text' => $item, 'value' => $item);
 
