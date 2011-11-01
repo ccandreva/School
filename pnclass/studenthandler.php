@@ -29,14 +29,14 @@ class School_user_studentHandler extends pnFormHandler
             array('text' => 'Male', 'value' => 'Male'),
             array('text' => 'Female', 'value' => 'Female'),
         );
-	$TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'));
+	$TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'), true);
         $Sacraments=array('Baptism' =>'Baptism', 'Reconciliation'=>'Reconciliation',
             'Communion'=>'First Holy Communion', 'Confirmation' => 'Confirmation');
         $Custodial = initListValues(array('N/A','Mother','Father'));
         $Evaluations = array('Edu'=>'Educational', 'Psych'=>'Psychological',
             'Speech'=>'Speech','Other'=>'Other',
             );
-        $GradeItems = initListValues(array('PK3', 'PK4', 'K', 1,2,3,4,5,6,7,8));
+        $GradeItems = initListValues(array('', 'PK3', 'PK4', 'K', 1,2,3,4,5,6,7,8));
         $yesno = initListValues(array( 'No', 'Yes'));
         $yesnoBool = array( array('text' => '', 'value' => ''),
             array('text' => 'Yes', 'value' => 1),
