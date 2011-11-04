@@ -44,6 +44,8 @@ class School_user_studentHandler extends pnFormHandler
         $ey = EnrollYear();
         $newyear = $ey + 11;
         $ClassYearItems = array ( array(text=>"New ($newyear)", value=>$newyear));
+	$SessionPK3Items = initListValues(array('', 'AM (8:30-11:00)', 'PM (12:00-2:30)', 'Either'));
+	$SessionPK4Items = initListValues(array('', 'AM (8:30-11:00)', 'Full Day'));
         for ($y = $ey+10; $y >=$ey; $y-- ) {
             $text = Year2Grade($y) . " ($y)";
             $ClassYearItems[] = array(text => $text, value => $y);
@@ -63,7 +65,9 @@ class School_user_studentHandler extends pnFormHandler
             'Evaluations' => $Evaluations,
             'IEPItems' => $yesno,
             '504PlanItems' => $yesno,
-            'ClassYearItems' => $ClassYearItems
+            'ClassYearItems' => $ClassYearItems,
+	    'SessionPK3Items' => $SessionPK3Items,
+	    'SessionPK4Items' => $SessionPK4Items,
         ) );
     return true;
   }
