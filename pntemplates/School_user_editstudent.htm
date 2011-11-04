@@ -7,7 +7,7 @@
     </script>
 <!--[/if]-->
 <h1>Resurrection Grammar School Application</h1>
-
+<!--[insert name='getstatusmsg' module='School']-->
 <!--[pnform cssClass="application"]-->
 <!--[pnformvalidationsummary]-->
 <!--[if $errormsg != '']-->
@@ -45,12 +45,22 @@
           </ul>
       </li>
       <li id="sessionsPK3" style="display: none;">
-	<!--[pnformlabel for=SessionPK3 text="Preferred session:" ]-->
-	<!--[pnformdropdownlist id=SessionPK3 mandatory=1]-->
+          <ul>
+              <li><strong>
+                      We will try to place your child in the session you prefer, but this is not always possible. 
+                      Once enrolled into the Montessori program whether starting at age 3 or 4, you do not have
+                      the option of switching to the Traditional Kindergarten.
+                  </strong>
+              </li>
+              <li>
+                <!--[pnformlabel for=SessionPK3 text="Preferred session:" ]-->
+                <!--[pnformdropdownlist id=SessionPK3 ]-->
+              </li>
+          </ul>
       </li>
       <li id="sessionsPK4" style="display: none;">
 	    <!--[pnformlabel for=SessionPK4 text="Select session:" ]-->
-	    <!--[pnformdropdownlist id=SessionPK4 mandatory=1]-->
+	    <!--[pnformdropdownlist id=SessionPK4 ]-->
       </li>
       <!--[if $Accepted]-->
       <li>
