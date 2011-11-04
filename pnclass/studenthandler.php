@@ -87,6 +87,17 @@ class School_user_studentHandler extends pnFormHandler
         }
     }
 
+    $Grade = $formData['Grade'];
+    if (strlen($Grade) == 3) {
+	    $sesKey = "Session$Grade";
+	    if ($formData[$sesKey]) {
+		$formData['Sesson'] = $formData[$sesKey];
+	    } else {
+		$render->assign('errormsg', "Please select a session.");
+		return false;
+	    }
+    }
+    
     if ($this->studentid > 0) {
         $formData[id] = $this->studentid;
         LogUtil::registerStatus("Updated Student $this->studentid");
