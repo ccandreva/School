@@ -1,6 +1,5 @@
 /* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * functions called for editstudent form
  */
 
 var redirect;
@@ -10,6 +9,7 @@ function user_application_init()
 {
     Event.observe('DistrictEval', 'click', user_application_onchange );
     Event.observe('PrivateEval', 'click', user_application_onchange );
+    Event.observe('Grade', 'click', user_editstudent_onGrade );
     Event.observe('Cancel', 'click', function(event) {
         if ( !redirect) {
             redirect = "School.html";
@@ -18,7 +18,26 @@ function user_application_init()
         Event.stop(event);}
         );
     user_application_onchange();
+    user_editstudent_onGrade();
 
+}
+
+function user_editstudent_onGrade()
+{
+    if ( $('Grade').value=='PK3')
+    {
+	$('sessionsPK3').show();
+    }
+    else {
+	$('sessionsPK3').hide();
+    }
+    if ( $('Grade').value=='PK4')
+    {
+	$('sessionsPK4').show();
+    }
+    else {
+	$('sessionsPK4').hide();
+    }
 }
 
 function  user_application_onchange()
