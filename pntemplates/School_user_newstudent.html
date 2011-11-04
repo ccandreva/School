@@ -1,0 +1,160 @@
+<!--[* $Id: School_user_newstudent.                                        $ *]-->
+<!--[* Additional information for new students *]-->
+
+<!--[pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_user_newstudent.js]-->
+<!--[if $redirect]-->
+    <script type="text/javascript">
+           redirect = "index.php?module=School&type=admin&func=<!--[$redirect]-->";
+    </script>
+<!--[/if]-->
+<h1>Resurrection Grammar School New Student Application</h1>
+<!--[insert name='getstatusmsg' module='School']-->
+
+<!--[pnform cssClass="application"]-->
+<!--[pnformvalidationsummary]-->
+<!--[if $errormsg != '']-->
+<div class="validationSummary pn-errormsg">
+<!--[$errormsg]-->
+</div>
+<!--[/if]-->
+<h3>Application for Student: <!--[$FirstName]--> <!--[$LastName]--> (<!--[$id]-->)</h3>
+
+<h3>Grade Entering: <!--[$Grade]--></h3>
+
+<!--[if $Grade>1]-->
+<fieldset id="Transfer">
+    <legend>Transfer</legend>
+    <ul>
+        <li>
+            <!--[pnformlabel for=TransferReason text="Reason For Transfer"]-->
+            <!--[pnformtextinput textMode=Multiline id=TransferReason maxLength=800 width=60em rows=6]-->
+        </li>
+    </ul>
+</fieldset>
+<!--[/if]-->
+
+<fieldset id="Siblings">
+    <legend>Siblings</legend>
+    <table>
+        <tr>
+            <th>Name of Siblings</th>
+            <th>Age</th>
+            <th>Schiool</th>
+            <th>Grade</th>
+        </tr>
+        <!--[section name=loop start=1 loop=5 step=1]-->
+        <!--[assign var='i' value=`$smarty.section.loop.index`]-->
+        <tr>
+            <td>
+                <!--[pnformtextinput id="SibName`$i`" width=20em maxLength=30]-->
+            </td>
+            <td>
+                <!--[pnformtextinput id="SibAge`$i`" width=4em maxLength=2]-->
+            </td>
+            <td>
+                <!--[pnformtextinput id="SibSchool`$i`" width=20em maxLength=30]-->
+            </td>
+            <td>
+                <!--[pnformtextinput id="SibGrade`$i`" width=4em maxLength=4]-->
+            </td>
+        </tr>
+        <!--[/section]-->
+    </table>
+
+</fieldset>
+
+
+<fieldset>
+
+    <p><strong>
+    A parishioner is an individual or family who has been registered in 
+    Resurrection Church for one year, regularly attends services in Resurrection
+    Church, and uses the envelopes system on a continuing basis. (Minium
+    envelope contributions should at least total the difference between 
+    parishioner and non-parishioner tuition.
+    </strong>
+</p>
+
+<ul class="orderform">
+    <li>
+        <ul>
+            <li>
+                <!--[pnformlabel for=Parishioner cssClass="Checkbox" text="Based on the above, are you a Parishioner?"]-->
+                <!--[pnformdropdownlist id=Parishioner mandatory=1]-->
+            </li>
+            <li>
+                <!--[pnformlabel for=EnvelopeNumber cssClass="Checkbox" text="If Yes, Envelope #"]-->
+                <!--[pnformtextinput id=EnvelopeNumber maxLength=6 width=4em ]-->
+            </li>
+        </ul>
+    </li>
+</ul>
+
+        <ul>
+            <li>
+            <!--[if $Grade < 1]-->
+                <!--[pnformlabel for=PreviousSchool text="If your child has attented a previous Pre-School Program, where and for how long ?"]-->
+            <!--[else]-->
+                <!--[pnformlabel for=PreviousSchool text="School Previously Attended (Name and Address)"]-->
+             <!--[/if]-->
+                <!--[pnformtextinput id=PreviousSchool maxLength=80 width=55em ]-->
+            </li>
+	</ul>
+
+        <!--[if $Grade < 1]-->
+        <ul>
+                    <li><strong>Why have you chosen Resurrection ? Please check:</strong></li>
+	    <li><ul>
+            <li>
+	        <!--[pnformcheckbox id="ChooseMont" ]-->
+                <!--[pnformlabel for=ChooseMont cssClass="Checkbox" text="Montessori Program"]-->
+            </li>
+            <li>
+	        <!--[pnformcheckbox id="ChooseCatholic" ]-->
+                <!--[pnformlabel for=ChooseCatholic cssClass="Checkbox" text="Catholic School"]-->
+            </li>
+            <li>
+	        <!--[pnformcheckbox id="ChooseOtherKids" ]-->
+                <!--[pnformlabel for=ChooseOtherKids cssClass="Checkbox" text="Other Children in Resurrection"]-->
+            </li>
+	    </ul></li>
+		
+	    <li>
+		<ul>
+		    <li>
+			<!--[pnformlabel for=ChoseRecommend text="Recommeneded by"]-->
+			<!--[pnformtextinput id=ChooseRecommend maxLength=80 width=28em ]-->
+		    </li>
+		    <li>
+			<!--[pnformlabel for=ChoseOther text="Other"]-->
+			<!--[pnformtextinput id=ChooseOther maxLength=80 width=28em ]-->
+		    </li>
+		</ul>
+	    </li>
+        <!--[/if]-->   
+            <li>
+<!--[pnformlabel for=OtherPertinent text="Is there any other pertinent information that would help us facilitate your child's adjustment to school ?"]-->
+<!--[pnformlabel for=OtherPertinent text="(Health problems, speech services, family situation, etc.)"]-->
+<!--[pnformlabel for=OtherPertinent text="Does this child have any life-threatening medical condition that would necessitate a school staff member administering medication, injection, or other treatment to prevent death? If the answer is yes please name and give details of the condition."]-->
+<!--[pnformtextinput textMode=Multiline id=OtherPertinent maxLength=800 width=60em rows=6]-->
+                
+            </li>
+            <!--[if $Grade < 1]-->
+            <li>
+<!--[pnformlabel for=OtherInfo text="Is there any information you would like us to know, referred by, etc ?"]-->
+<!--[pnformtextinput textMode=Multiline id=OtherInfo maxLength=800 width=60em rows=6]-->
+                
+            </li>
+	    <!--[/if]-->
+		    
+        </ul>
+
+<div class="z-buttons z-formbuttons"">
+<!--[pnformbutton commandName="submit" text="Submit" ]-->
+<input type="submit" name="cancel" title="Cancel" value="Cancel" id="Cancel">
+</div>
+
+</fieldset>
+
+<!--[/pnform]-->

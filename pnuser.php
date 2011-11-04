@@ -16,6 +16,7 @@ require_once('pnclass/emergencyformhandler.php');
 require_once('pnclass/directoryformhandler.php');
 require_once('pnclass/familyhandler.php');
 require_once('pnclass/studenthandler.php');
+require_once('pnclass/newstudenthandler.php');
 require_once('pnclass/tuitionhandler.php');
 
 function School_user_main()
@@ -161,6 +162,18 @@ function School_user_addstudent()
     $formobj = new School_user_studentHandler();
     $formobj->familyid = $familyid;
     return $render->pnFormExecute('School_user_editstudent.htm', $formobj);
+}
+
+function School_user_newstudent()
+{
+    $ret = School_checkuser($user, $familyid);
+    if ($ret) return $ret;
+
+    $render = FormUtil::newpnForm('School');
+    $formobj = new School_user_newstudentHandler();
+    $formobj->familyid = $familyid;
+    $formobj->studentid = FormUtil::getPassedValue('id');
+    return $render->pnFormExecute('School_user_newstudent.html', $formobj);
 }
 
 /*
