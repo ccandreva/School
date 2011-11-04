@@ -149,7 +149,6 @@ function School_user_editstudent()
     $formobj = new School_user_studentHandler();
     $formobj->familyid = $familyid;
     $formobj->studentid = $studentid;
-    // $formobj->showId = true;
     return $render->pnFormExecute('School_user_editstudent.htm', $formobj);
 }
 
@@ -161,7 +160,6 @@ function School_user_addstudent()
     $render = FormUtil::newpnForm('School');
     $formobj = new School_user_studentHandler();
     $formobj->familyid = $familyid;
-    // $formobj->showId = true;
     return $render->pnFormExecute('School_user_editstudent.htm', $formobj);
 }
 
