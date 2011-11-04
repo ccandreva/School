@@ -433,6 +433,77 @@ function School_pntables()
             $table['School_tuition_column_def']
             );
 
+    $table['School_register'] = DBUtil::getLimitedTablename('School_register');
+
+    $table['School_register_column'] = array(
+        'id'            =>      'School_register_id',
+        'TransferReason' =>     'School_register_TransferReason',
+        'SibName1'      =>      'School_register_SibName1',
+        'SibAge1'       =>      'School_register_Sib1Age1',
+        'SibSchool1'    =>      'School_register_SibSchool1',
+        'SibGrade1'     =>      'School_register_SibGrade1',
+        'SibName2'      =>      'School_register_SibName2',
+        'SibAge2'       =>      'School_register_Sib1Age2',
+        'SibSchool2'    =>      'School_register_SibSchool2',
+        'SibGrade2'     =>      'School_register_SibGrade2',
+        'SibName3'      =>      'School_register_SibName3',
+        'SibAge3'       =>      'School_register_Sib1Age3',
+        'SibSchool3'    =>      'School_register_SibSchool3',
+        'SibGrade3'     =>      'School_register_SibGrade3',
+        'SibName4'      =>      'School_register_SibName4',
+        'SibAge4'       =>      'School_register_Sib1Age4',
+        'SibSchool4'    =>      'School_register_SibSchool4',
+        'SibGrade4'     =>      'School_register_SibGrade4',
+        'Parishioner'   =>      'School_register_Parishioner',
+        'EnvelopeNumber'   =>      'School_register_EnvelopeNumber',
+        'ChooseMont'    =>  'School_register_ChooseMont',
+        'ChooseCatholic'    =>  'School_register_ChooseCatholic',
+        'ChooseOtherKids'    =>  'School_register_ChooseOtherKids',
+        'ChoseRecommend'    =>  'School_register_ChoseRecommend',
+        'ChoseOther'    =>  'School_register_ChoseOther',
+        'OtherPertinent'    =>  'School_register_OtherPertinent',
+        'OtherInfo'    =>  'School_register_OtherInfo',
+        );
+        
+    $table['School_register_column_def'] = array(
+        'id'            =>      'I NOTNULL PRIMARY AUTOINCREMENT',
+        'TransferReason' =>     'X(4000)',
+        'SibName1'      =>      'C(255)',
+        'SibAge1'       =>      'C(255)',
+        'SibSchool1'    =>      'C(255)',
+        'SibGrade1'     =>      'C(255)',
+        'SibName2'      =>      'C(255)',
+        'SibAge2'       =>      'C(255)',
+        'SibSchool2'    =>      'C(255)',
+        'SibGrade2'     =>      'C(255)',
+        'SibName3'      =>      'C(255)',
+        'SibAge3'       =>      'C(255)',
+        'SibSchool3'    =>      'C(255)',
+        'SibGrade3'     =>      'C(255)',
+        'SibName4'      =>      'C(255)',
+        'SibAge4'       =>      'C(255)',
+        'SibSchool4'    =>      'C(255)',
+        'SibGrade4'     =>      'C(255)',
+        'Parishioner'   =>      'L',
+        'EnvelopeNumber'   =>   'I',
+        'ChooseMont'    =>  'L',
+        'ChooseCatholic'    =>  'L',
+        'ChooseOtherKids'    => 'L',
+        'ChoseRecommend'    =>  'C(255)',
+        'ChoseOther'    =>  'C(255)',
+        'OtherPertinent'    =>  'X(4000)',
+        'OtherInfo'    =>  'X(4000)',
+        );
+    ObjectUtil::addStandardFieldsToTableDefinition(
+            $table['School_register_column'],
+            'School_tuition_'
+            );
+    ObjectUtil::addStandardFieldsToTableDataDefinition(
+            $table['School_register_column_def']
+            );
+        
+        
+
     $table['School_districts'] = DBUtil::getLimitedTablename('School_districts');
 
     $table['School_districts_column'] = array(
