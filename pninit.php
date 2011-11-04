@@ -27,6 +27,7 @@ function School_init()
     if ( !DBUtil::createTable('School_tuition')) return false;
     if ( !DBUtil::createTable('School_districts')) return false;
     if ( !DBUtil::createTable('School_teachers')) return false;
+    if ( !DBUtil::createTable('School_register')) return false;
 
     return true;
 }
@@ -51,6 +52,7 @@ function School_upgrade($oldversion)
       case '0.4.6';
         if ( !DBUtil::changeTable('School_family') ) return false;
         if ( !DBUtil::changeTable('School_student') ) return false;
+        if ( !DBUtil::createTable('School_register')) return false;
     }
 
     return true;
