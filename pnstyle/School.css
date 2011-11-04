@@ -34,9 +34,13 @@ form.application legend
         font-weight: bold;
 }
 
-form.application fieldset ul, form.application fieldset ul ul{
+form.application fieldset ul {
     padding: 0;
-    margin: 0 10px;
+    margin: 0; /* 10px; */
+}
+form.application fieldset ul ul{
+    padding: 0;
+    margin: 0; /* 10px; */
 }
 
 #middle-column1  form.application fieldset li,
