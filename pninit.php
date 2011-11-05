@@ -53,6 +53,13 @@ function School_upgrade($oldversion)
         if ( !DBUtil::changeTable('School_family') ) return false;
         if ( !DBUtil::changeTable('School_student') ) return false;
         if ( !DBUtil::createTable('School_register')) return false;
+        $obj = array('Accepted' => 1);
+        $tables = pnDBGetTables();
+        $FamCrDate = $tables['School_family_column']['cr_date'];
+        $StuCrDate = $tables['School_student_column']['cr_date'];
+        $where = " < '2011-10-01'";
+        DBUtil::updateObject($obj, 'School_family', $FamCrDate . $where);
+        DBUtil::updateObject($obj, 'School_student', $StuCrDate . $where);
     }
 
     return true;
