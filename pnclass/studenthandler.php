@@ -107,6 +107,7 @@ class School_user_studentHandler extends pnFormHandler
         $formData[ClassYear] = Grade2Year($formData[Grade]);
         LogUtil::registerStatus("Added Student");
         DBUtil::insertObject ($formData, 'School_student');
+	$this->redirect=pnModURL('School', 'user', 'newstudent', array('id' => $formData['id']));
     }
 
     if ($this->redirect) return pnRedirect($this->redirect);
