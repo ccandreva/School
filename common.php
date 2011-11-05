@@ -90,7 +90,7 @@ function School_checkuser(&$user, &$familyid, $application)
     $user = pnUserGetVar('uid');
     if ($user <= 1) {
         $url = pnModUrl('users', 'user', 'loginscreen',
-                array( 'returnpage' => pnGetCurrentURI(),
+                array( 'returnpage' => urlencode(pnGetCurrentURI()),
                      )
         );
         return pnRedirect($url);
