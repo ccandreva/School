@@ -11,6 +11,7 @@ require_once('common.php');
 // Loader::requireOnce('includes/tcpdf/config/lang/eng.php');
 // Loader::requireOnce('includes/tcpdf/tcpdf.php');
 
+/*
 function School_print_student()
 {
     $ret = School_checkuser($user, $familyid);
@@ -28,13 +29,13 @@ function School_print_student()
     $Render->assign($formData);
     $Render->assign($familyData);
     School_initStudent($Render);
-//    RenderSchoolYear($Render);
 
     return $Render->fetch('School_print_student.htm');
 
 }
+*/
 
-function School_print_newstudent()
+function School_print_student()
 {
     $ret = School_checkuser($user, $familyid);
     if ($ret) return $ret;
@@ -48,19 +49,21 @@ function School_print_newstudent()
     // Rename 'Accepted' field for families so it is unique.
     $familyData['FamilyAccepted'] = $familyData['Accepted'];
     unset($familyData['Accepted']);
-    $registerData = DBUtil::selectObjectByID('School_register', $studentid);
-
+    
     $Render = pnRender::getInstance('School');
     $Render->caching=0;
     $Render->assign($studentData);
-    $Render->assign($registerData);
-
     $Render->assign($studentData);
     $Render->assign($familyData);
-    School_initStudent($Render);
-//    RenderSchoolYear($Render);
 
-    return $Render->fetch('School_print_newstudent.htm');
+    if (!$studentData['Accepted']) {
+        $registerData = DBUtil::selectObjectByID('School_register', $studentid);
+        $Render->assign($registerData);
+    }
+
+    School_initStudent($Render);
+
+    return $Render->fetch('School_print_student.htm');
 
 }
 

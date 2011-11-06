@@ -8,7 +8,7 @@
         Resurrection Grammar School Application
     </h1>
         <br clear="both" />
-<!--[* h3>Studentid: <!--[$id]--> <!--[$Mes]--></h3 *]-->
+
 <fieldset id="General">
 <legend>Student Registration</legend>
   <ul>
@@ -578,8 +578,6 @@
 
 </fieldset>
 
-    </div>
-
     <p>
         I affirm that the above information is true to the best of my knowledge. I understand that failure to provide the required documentation
         stops the application process. Furthermore, should my child be accepted/admitted under false, incomplete or negligent information, my child
@@ -593,3 +591,8 @@
         Signature of Parent of Guardian: ____________________________________________________ &nbsp; &nbsp; &nbsp; &nbsp;
         Date: _______________
     </div>
+</div>
+
+<!--[if !$Accepted]-->
+    <!--[include file="School_print_newstudent.htm]-->
+<!--[/if]-->
