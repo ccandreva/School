@@ -21,6 +21,12 @@ class School_user_studentHandler extends pnFormHandler
           $formData['Grade'] = Year2Grade($formData['ClassYear'], $rereg);
       } else {
           $formData = array();
+          if ($this->familyid > 0) {
+              $familyData = DBUtil::selectObjectByID('School_family', $this->familyid);
+              $formData['Religion'] = $familyData['Religion'];
+              $formData['Parish'] = $familyData['Parish'];
+              $formData['LastName'] = $familyData['LastName'];
+          }
       }
       $formData['AppDate'] = date('Y-m-d');
       $render->assign($formData);
@@ -51,9 +57,6 @@ class School_user_studentHandler extends pnFormHandler
             $ClassYearItems[] = array(text => $text, value => $y);
         }
         $render->assign( array(
-            'Lang' => 'English',
-            'Religion' => 'Catholic',
-            'Parish' => 'Resurrection',
             'GenderItems' => $gender,
             'GradeItems'  => $GradeItems,
 	    'TeacherItems' => $TeacherItems,
