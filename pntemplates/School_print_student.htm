@@ -1,5 +1,8 @@
 <!--[pnajaxheader nobehaviour=true noscriptaculous=true
         modname=School filename=school_print_auto.js]-->
+
+<!--[include file="School_print_signature.html"]-->
+
     <div class="print">
         <div id="reslogo">
             <img src="images/formlogo.gif"/>
@@ -139,10 +142,10 @@
   </ul>
 </fieldset>
 
-<fieldset id="Sacraments">
-    <legend>Sacraments</legend>
+<!-- fieldset id="Sacraments">
+    <legend>Sacraments</legend -->
 
-    <table>
+    <table width="99%">
         <tr>
             <th>Sacrament</th>
             <th>Date</th>
@@ -450,6 +453,12 @@
         <legend>Previous Schools Attended</legend>
         <table>
             <tr>
+                    <tr>
+                        <td>
+                            <!--[$prevschool]-->
+                        </td>
+                        <td>
+                            <!--[getval var="PrevSchoolAddress`$i`" ]-->
                 <th>Name of School</th>
                 <th>Address</th>
                 <th>Grades<br />Completed</th>
@@ -459,12 +468,6 @@
                 <!--[assign var='i' value=`$smarty.section.loop.index`]-->
                 <!--[getval var="PrevSchool`$i`" assign=prevschool]-->
                 <!--[if $prevschool != '&nbsp;']-->
-                    <tr>
-                        <td>
-                            <!--[$prevschool]-->
-                        </td>
-                        <td>
-                            <!--[getval var="PrevSchoolAddress`$i`" ]-->
                         </td>
                         <td>
                             <!--[getval var="PrevSchoolGrades`$i`" ]-->
@@ -586,11 +589,13 @@
         on all fees being paid in full to previous school. Acceptance notices will be mailed.
     </p>
 
-    <div class="signature">
+   <!--[$smarty.capture.signature]-->
+
+    <!--[*div class="signature">
         <p>
         Signature of Parent of Guardian: ____________________________________________________ &nbsp; &nbsp; &nbsp; &nbsp;
         Date: _______________
-    </div>
+    </div *]-->
 </div>
 
 <!--[if !$Accepted]-->

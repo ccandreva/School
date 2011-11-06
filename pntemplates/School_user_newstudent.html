@@ -27,8 +27,16 @@
     <legend>Transfer</legend>
     <ul>
         <li>
+            <!--[pnformlabel for=PreviousSchool text="School Previously Attended: Name"]-->
+            <!--[pnformtextinput id=PreviousSchool maxLength=80 width=45em ]-->
+        </li>
+        <li>
+            <!--[pnformlabel for=PreviousSchoolAddress text="Address"]-->
+            <!--[pnformtextinput id=PreviousSchoolAddress maxLength=80 width=45em ]-->
+        </li>
+        <li>
             <!--[pnformlabel for=TransferReason text="Reason For Transfer"]-->
-            <!--[pnformtextinput textMode=Multiline id=TransferReason maxLength=800 width=60em rows=6]-->
+            <!--[pnformtextinput textMode=Multiline id=TransferReason maxLength=800 width=50em rows=6]-->
         </li>
     </ul>
 </fieldset>
@@ -91,34 +99,31 @@
     </li>
 </ul>
 
-        <ul>
-            <li>
-            <!--[if $Grade < 1]-->
-                <!--[pnformlabel for=PreviousSchool text="If your child has attended a previous Pre-School Program, where and for how long ?"]-->
-            <!--[else]-->
-                <!--[pnformlabel for=PreviousSchool text="School Previously Attended (Name and Address)"]-->
-             <!--[/if]-->
-                <!--[pnformtextinput id=PreviousSchool maxLength=80 width=55em ]-->
-            </li>
-	</ul>
-
         <!--[if $Grade < 1]-->
         <ul>
-                    <li><strong>Why have you chosen Resurrection ? Please check:</strong></li>
-	    <li><ul>
             <li>
-	        <!--[pnformcheckbox id="ChooseMont" ]-->
-                <!--[pnformlabel for=ChooseMont cssClass="Checkbox" text="Montessori Program"]-->
+                <!--[pnformlabel for=PreviousSchool text="If your child has attended a previous Pre-School Program, where and for how long ?"]-->
+                <!--[pnformtextinput id=PreviousSchool maxLength=80 width=55em ]-->
             </li>
             <li>
-	        <!--[pnformcheckbox id="ChooseCatholic" ]-->
-                <!--[pnformlabel for=ChooseCatholic cssClass="Checkbox" text="Catholic School"]-->
+                <strong>Why have you chosen Resurrection ? Please check:</strong>
             </li>
-            <li>
-	        <!--[pnformcheckbox id="ChooseOtherKids" ]-->
-                <!--[pnformlabel for=ChooseOtherKids cssClass="Checkbox" text="Other Children in Resurrection"]-->
+	    <li>
+                <ul>
+                    <li>
+                        <!--[pnformcheckbox id="ChooseMont" ]-->
+                        <!--[pnformlabel for=ChooseMont cssClass="Checkbox" text="Montessori Program"]-->
+                    </li>
+                    <li>
+                        <!--[pnformcheckbox id="ChooseCatholic" ]-->
+                        <!--[pnformlabel for=ChooseCatholic cssClass="Checkbox" text="Catholic School"]-->
+                    </li>
+                    <li>
+                        <!--[pnformcheckbox id="ChooseOtherKids" ]-->
+                        <!--[pnformlabel for=ChooseOtherKids cssClass="Checkbox" text="Other Children in Resurrection"]-->
+                    </li>
+                </ul>
             </li>
-	    </ul></li>
 		
 	    <li>
 		<ul>

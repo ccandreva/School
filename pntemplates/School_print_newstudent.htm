@@ -1,16 +1,19 @@
-<!--[* pnajaxheader nobehaviour=true noscriptaculous=true
-        modname=School filename=school_print_auto.js *]-->
+
 <!--[if $Grade|strlen==3]-->
     <!--[assign var=PreK value=$Grade|substr:2:1]-->
 <!--[/if]-->
+
 <div class="print">
+
     <div id="reslogo">
             <img src="images/formlogo.gif"/>
     </div>
+
     <h1>
-        Resurrection Grammar School New Student Application
+        Resurrection Grammar School
     </h1>
-        <br clear="both" />
+    <h2>New Student Application</h2>
+    <br clear="both" />
 
 <fieldset id="General">
     <legend>Student Application</legend>
@@ -35,6 +38,9 @@
         <strong>Previous School:</strong> <!--[$PreviousSchool|default:'(None)']-->
     </li>
     <!--[if $Grade>=1]-->
+    <li>
+        <strong>Address:</strong> <!--[$PreviousSchoolAddress]-->
+    </li>
     <li>
         <strong>Reason For Transfer:<br /></strong>
         <!--[$TransferReason]-->
@@ -193,11 +199,64 @@
     </strong>
 </p>
 
-    <div class="signature">
-        <p>
-        Signature: ____________________________________________________ &nbsp; &nbsp; &nbsp; &nbsp;
-        Date: ___________________
-        </p>
+    <!--[$smarty.capture.signature]-->
+
+</div>
+
+
+<div class="print">
+    <div id="reslogo">
+            <img src="images/formlogo.gif"/>
     </div>
+    <h1>
+        Resurrection Grammar School
+    </h1>
+    <h2>
+        Records Request Form
+    </h2>
+        <br clear="both" />
+
+        <p>
+            <strong>Date:</strong> <!--[$smarty.now|date_format]-->
+        </p>
+        <p>
+            <strong>To:</strong> <!--[$PreviousSchool]-->
+        </p>
+        <p>
+            <strong>Address:</strong> <!--[$PreviousSchoolAddress]-->
+        </p>
+        <p>
+            <strong>
+                Request to release the records of:
+            </strong>
+            <!--[$LastName]-->, <!--[$FirstName]--> <!--[$MiddleName]-->
+        </p>
+        
+        <p>
+            The above named pupil is enrolled in our school.  To aid in 
+            assigning the pupil, providing classroom instruction and meeting the
+            pupil's needs, it is important to have as much information as 
+            possible about him/her.
+        </p>
+        <p>
+            Send copies of those records or reports that contain the following
+            types of information:  subjects and credit, attendance, health, 
+            psychological and special placements or services.  These records 
+            will be handled in accordance with the Privacy Rights of Parents 
+            and Students Act of 1974.
+        </p>
+        <p>
+            Send records to:
+            <blockquote>
+                Resurrection School<br />
+                116 Milton Road<br />
+                Rye, New York  10580<br />
+            </blockquote>
+        </p>
+        <p>
+            I hereby authorize this transfer of records.
+        </p>
+        
+        <!--[$smarty.capture.signature]-->
 
 </div>
