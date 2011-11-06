@@ -1,4 +1,4 @@
-q<!--[pnajaxheader nobehaviour=true noscriptaculous=true
+<!--[pnajaxheader nobehaviour=true noscriptaculous=true
         modname=School filename=school_print_auto.js]-->
 <!--[capture name=studenttable]-->
 <table>
@@ -14,7 +14,7 @@ q<!--[pnajaxheader nobehaviour=true noscriptaculous=true
     </tr>
     <!--[/foreach]-->
 </table>
-<!--[/capture
+<!--[/capture]-->
 
 <!--[include file="School_print_signature.html"]-->
 
@@ -194,13 +194,15 @@ donation to the Resurrection School Foundation at the School Office.
         <li>
             <strong>Routing Number:</strong> <!--[$RoutingNum]-->
         </li>
-        <li><strong>Name of Account Holder:</strong> <!--[$AcctHolderName]--></li>
-        <li><!--[$smarty.capture.signature]--></li>
-        <!--[if $AcctHolderName2]-->
-            <li><strong>Name of Secondary Account Holder:</strong> <!--[$AcctHolderName2]--></li>
-            <li><!--[$smarty.capture.signature]--></li>
-        <!--[/if]-->
     </ul>
+    <strong>Name of Account Holder:</strong> <!--[$AcctHolderName]--><br />
+    <!--[$smarty.capture.signature]-->
+    <!--[if $AcctHolderName2]-->
+        <div style="margin-top: 10px;">
+            <strong>Name of Secondary Account Holder:</strong> <!--[$AcctHolderName2]--><br />
+            <!--[$smarty.capture.signature]-->
+        </div>
+    <!--[/if]-->
     <hr style="margin-top: 100px"/>
     <h2 style="text-align: center; padding-top: 100px;">*** Attach Voided Check Here ***</h2>
 
