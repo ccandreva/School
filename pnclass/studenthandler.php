@@ -18,8 +18,10 @@ class School_user_studentHandler extends pnFormHandler
           if ( ($this->familyid > 0) && ($formData['Familyid'] != $this->familyid) ){
                return false;
           }
-	  $rereg = pnModGetVar('School', 'ReregOpen');
+
+          // If reregistration is open, auto-promote existing students.
           if ($formData['Accepted']) {
+            $rereg = pnModGetVar('School', 'ReregOpen');
             $formData['Grade'] = Year2Grade($formData['ClassYear'], $rereg);
             $this->accepted = true;
           }
