@@ -6,7 +6,8 @@ class School_user_studentHandler extends pnFormHandler
   var $showId;
   var $studentid, $familyid;
   var $redirect;
-
+  var $accepted;
+  
   function initialize(&$render)
   {
 
@@ -18,7 +19,13 @@ class School_user_studentHandler extends pnFormHandler
                return false;
           }
 	  $rereg = pnModGetVar('School', 'ReregOpen');
-          $formData['Grade'] = Year2Grade($formData['ClassYear'], $rereg);
+          if ($formData['Accepted']) {
+            $formData['Grade'] = Year2Grade($formData['ClassYear'], $rereg);
+            $this->accepted = true;
+          }
+          $Grade = $formData['Grade'];
+          if (strlen($Grade) == 3)
+              $formData["Session$Grade"] = $formData['Session'];
       } else {
           $formData = array();
           if ($this->familyid > 0) {
@@ -94,7 +101,7 @@ class School_user_studentHandler extends pnFormHandler
     if (strlen($Grade) == 3) {
 	    $sesKey = "Session$Grade";
 	    if ($formData[$sesKey]) {
-		$formData['Sesson'] = $formData[$sesKey];
+		$formData['Session'] = $formData[$sesKey];
 	    } else {
 		$render->assign('errormsg', "Please select a session.");
 		return false;
@@ -110,6 +117,8 @@ class School_user_studentHandler extends pnFormHandler
         $formData[ClassYear] = Grade2Year($formData[Grade]);
         LogUtil::registerStatus("Added Student");
         DBUtil::insertObject ($formData, 'School_student');
+    }
+    if (!$this->accepted){
 	$this->redirect=pnModURL('School', 'user', 'newstudent', array('id' => $formData['id']));
     }
 
