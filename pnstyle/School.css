@@ -108,6 +108,11 @@ form.application ul ul
     text-align: center;
 }
 
+.print h4{
+    font-size: 14px;
+    text-decoration: underline;
+    font-style: italic;
+}
 #reslogo
 {
     float: left;
@@ -115,13 +120,17 @@ form.application ul ul
 }
 
 .print ul, .print li{
+    list-style-type: disc;
+    margin: 5px;
+}
+.print fieldset ul, .print fieldset li{
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
 form.application u li,
-.print ul li
+.print fieldset ul li
 {
         background: none;
         background-position: 0 0;
@@ -131,14 +140,14 @@ form.application u li,
 
 #middle-column1 form.application ul ul li,
 #middle-column2 form.application ul ul li,
-.print ul ul li
+.print fieldset ul ul li
 {
         float: left;
         padding: 0 0 10px 0;
         width: auto;
         height: auto;
 }
-.print ul ul li {
+.print fieldset ul ul li {
     padding-right: 20px;
 }
 #middle-column1 form.application label, form.application table,
@@ -192,13 +201,13 @@ form.application ul li.title,
 
 #middle-column1 form.application ul li ul li,
 #middle-column2 form.application ul li ul li,
-.print ul li ul li
+.print fieldset ul li ul li
 {
         float: left;
         clear: none;
         margin: 0 10px 0 0;
 }
-.print ul>li+li{
+.print fieldset ul>li+li{
     clear: left;
 }
 #middle-column1 form.application ul label.Checkbox,

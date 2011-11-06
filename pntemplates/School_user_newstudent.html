@@ -22,7 +22,7 @@
 
 <h3>Grade Entering: <!--[$Grade]--></h3>
 
-<!--[if $Grade>1]-->
+<!--[if $Grade>=1]-->
 <fieldset id="Transfer">
     <legend>Transfer</legend>
     <ul>
@@ -94,7 +94,7 @@
         <ul>
             <li>
             <!--[if $Grade < 1]-->
-                <!--[pnformlabel for=PreviousSchool text="If your child has attented a previous Pre-School Program, where and for how long ?"]-->
+                <!--[pnformlabel for=PreviousSchool text="If your child has attended a previous Pre-School Program, where and for how long ?"]-->
             <!--[else]-->
                 <!--[pnformlabel for=PreviousSchool text="School Previously Attended (Name and Address)"]-->
              <!--[/if]-->

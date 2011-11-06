@@ -34,6 +34,36 @@ function School_print_student()
 
 }
 
+function School_print_newstudent()
+{
+    $ret = School_checkuser($user, $familyid);
+    if ($ret) return $ret;
+
+    $studentid = FormUtil::getPassedValue('id');
+    $studentData = DBUtil::selectObjectByID('School_student', $studentid);
+    if ($studentData['Familyid'] != $familyid) {
+        return "Invalid student.";
+    }
+    $familyData = DBUtil::selectObjectByID('School_family', $familyid);
+    // Rename 'Accepted' field for families so it is unique.
+    $familyData['FamilyAccepted'] = $familyData['Accepted'];
+    unset($familyData['Accepted']);
+    $registerData = DBUtil::selectObjectByID('School_register', $studentid);
+
+    $Render = pnRender::getInstance('School');
+    $Render->caching=0;
+    $Render->assign($studentData);
+    $Render->assign($registerData);
+
+    $Render->assign($studentData);
+    $Render->assign($familyData);
+    School_initStudent($Render);
+//    RenderSchoolYear($Render);
+
+    return $Render->fetch('School_print_newstudent.htm');
+
+}
+
 function School_print_textbook()
 {
     $ret = School_checkuser($user, $familyid);
@@ -47,7 +77,8 @@ function School_print_textbook()
     foreach ($students as $student) {
         if ($student[ClassYear] != $EnrollYear) {
 
-            if ($student[Returning] == '') return "Please fill out information for all students.";
+            if ($student['Accepted'] && $student[Returning] == '') 
+                return "Please fill out information for all students.";
 
             $name = $student[FirstName]; // . ' ' . $student[LastName];
             if ($student[Returning] == '1') {
