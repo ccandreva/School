@@ -227,7 +227,7 @@ function School_pntables()
 	'Grade'         =>	'School_student_Grade',
 	'ClassYear'         =>	'School_student_ClassYear',
 	'Teacher'	=>	'School_student_Teacher',
-        'Session'       =>      'School_register_Session',
+        'Session'       =>      'School_student_Session',
 	'LastName'	=>	'School_student_LastName',
 	'FirstName'	=>	'School_student_FirstName',
 	'MiddleName'	=>	'School_student_MiddleName',
