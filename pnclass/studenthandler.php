@@ -108,6 +108,9 @@ class School_user_studentHandler extends pnFormHandler
 	    }
     }
     
+    if (!$this->accepted){
+        $formData['Returning'] = true;
+    }
     if ($this->studentid > 0) {
         $formData[id] = $this->studentid;
         LogUtil::registerStatus("Updated Student $this->studentid");
