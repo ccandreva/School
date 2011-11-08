@@ -33,6 +33,7 @@ class School_user_familyHandler extends pnFormHandler
 		    'value' => $obj['Code'],
 		    );
     }
+    $districtsItems[] = array('text' => 'Other', 'value' => 'Other');
     
     $gender = array ( array(),
         array('text' => 'Male', value => 'Male'),
