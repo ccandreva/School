@@ -38,6 +38,13 @@ function user_editstudent_onGrade()
     else {
 	$('sessionsPK4').hide();
     }
+    if ( $('Grade').value=='K')
+    {
+	$('sessionsK').show();
+    }
+    else {
+	$('sessionsK').hide();
+    }
 }
 
 function  user_application_onchange()
