@@ -1,0 +1,52 @@
+
+<!--[ include file="School_admin_menu.htm"]-->
+
+<div class="z-admincontainer">
+    <div class="z-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='Settings' ]--></div>
+    <h2>Districts</h2>
+  
+    <!--[if $errormsg != '']-->
+        <div class="validationSummary pn-errormsg">
+        <!--[$errormsg]-->
+        </div>
+    <!--[/if]-->
+
+    <table>
+	<tr>
+	    <th>District</th>
+	    <th>Code</th>
+	</tr>
+	<!--[foreach from=$Districts item=district]-->
+	<tr>
+	    <td><!--[$district.Name]--></td>
+	    <td><!--[$district.Code]--></td>
+	</tr>
+	<!--[/foreach]-->
+    </table>
+    
+    
+    <form class="application" method="post">
+	<fieldset>
+	    <legend>Add District</legend>
+	    <ul>
+		<li>
+		    <ul>
+			<li>
+			    <label for="DisName">District Name</label>
+			    <input type="text" name="DisName" value="<!--[$DisName]-->">
+			</li>
+			<li>
+			    <label for="DisCode">Code </label>
+			    <input type="text" name="DisCode" value="<!--[$DisCode]-->">
+			</li>
+			<li>
+			    <label for="submit">&nbsp;</label>
+			    <input type="submit" name="Add" value="Add"/>
+			</li>
+		    </ul>
+		</li>
+	    </ul>
+	</fieldset>
+	
+    </form>
+</div>

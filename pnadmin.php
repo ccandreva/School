@@ -548,6 +548,7 @@ function School_admin_emergencysearch()
     return  $Render->fetch('School_admin_emergencysearch.htm');
    
 }
+
 function School_admin_modifyconfig()
 {
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
@@ -555,5 +556,36 @@ function School_admin_modifyconfig()
     }
     $render = FormUtil::newpnForm('School');
     $formobj = new School_user_configHandler();
-    return $render->pnFormExecute('School_admin_modifyconfig.htm', $formobj);
+    return $render->pnFormExecute('School_admin_modifyconfig.html', $formobj);
 }
+
+function School_admin_districts()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $Render = pnRender::getInstance('School');
+
+    $Add = FormUtil::getPassedValue('Add');
+    if ($Add) {
+	$DisName = FormUtil::getPassedValue('DisName');
+	$DisCode = FormUtil::getPassedValue('DisCode');
+	if (!$DisName || !$DisCode) {
+	    LogUtil::registerError("Both Name and Code must be provided.");
+	    $Render->assign('DisName', $DisName);
+	    $Render->assign('DisCode', $DisCode);
+	} else {
+	    $district = array('Name' => $DisName, 'Code' => $DisCode);
+	    DBUtil::insertObject($district, 'School_districts');
+	    LogUtil::registerStatus("District '$DisName' added");
+	}
+    }
+
+    
+    $districts = DBUtil::selectObjectArray ('School_districts', '', 'Name');
+    
+    $Render->assign('Districts', $districts);
+    return $Render->fetch('School_admin_districts.html');
+}
+
