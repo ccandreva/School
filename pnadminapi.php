@@ -18,6 +18,7 @@ function School_adminapi_getlinks()
 	array('url' => pnModUrl("School", "admin", "emergencysearch"), 'text' => 'Emergency Contacts'),
 	array('url' => pnModUrl("School", "admin", "modifyconfig"), 'text' => 'Settings'),
 	array('url' => pnModUrl("School", "admin", "districts"), 'text' => 'Districts'),
+	array('url' => pnModUrl("School", "admin", "teachers"), 'text' => 'Teachers'),
     );
 }
 

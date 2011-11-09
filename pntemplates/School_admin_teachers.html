@@ -1,0 +1,52 @@
+
+<!--[ include file="School_admin_menu.htm"]-->
+
+<div class="z-admincontainer">
+    <div class="z-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='Settings' ]--></div>
+    <h2>Teachers</h2>
+  
+    <!--[if $errormsg != '']-->
+        <div class="validationSummary pn-errormsg">
+        <!--[$errormsg]-->
+        </div>
+    <!--[/if]-->
+
+    <table>
+	<tr>
+	    <th>Teacher</th>
+	    <th>Grade</th>
+	</tr>
+	<!--[foreach from=$Teachers item=teacher]-->
+	<tr>
+	    <td><!--[$teacher.Grade]--></td>
+	    <td><!--[$teacher.Name]--></td>
+	</tr>
+	<!--[/foreach]-->
+    </table>
+    
+    
+    <form class="application" method="post">
+	<fieldset>
+	    <legend>Add Teacher</legend>
+	    <ul>
+		<li>
+		    <ul>
+			<li>
+			    <label for="TeacherName">Teacher Name</label>
+			    <input type="text" name="TeacherName" value="<!--[$TeacherName]-->">
+			</li>
+			<li>
+			    <label for="TeacherGrade">Grade</label>
+			    <input type="text" name="TeacherGrade" value="<!--[$TeacherGrade]-->"  size="3" maxlength="3">
+			</li>
+			<li>
+			    <label for="submit">&nbsp;</label>
+			    <input type="submit" name="Add" value="Add"/>
+			</li>
+		    </ul>
+		</li>
+	    </ul>
+	</fieldset>
+	
+    </form>
+</div>

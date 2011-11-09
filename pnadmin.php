@@ -589,3 +589,32 @@ function School_admin_districts()
     return $Render->fetch('School_admin_districts.html');
 }
 
+function School_admin_teachers()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $Render = pnRender::getInstance('School');
+
+    $Add = FormUtil::getPassedValue('Add');
+    if ($Add) {
+	$Name = FormUtil::getPassedValue('TeacherName');
+	$Grade = FormUtil::getPassedValue('TeacherGrade');
+	if (!$Name || !$Grade) {
+	    LogUtil::registerError("Both Name and Grade must be provided.");
+	    $Render->assign('TeacherName', $Name);
+	    $Render->assign('TeacherGrade', $Grade);
+	} else {
+	    $teacher = array('Name' => $Name, 'Grade' => $Grade);
+	    DBUtil::insertObject($teacher, 'School_teachers');
+	    LogUtil::registerStatus("Teacher '$Name' added");
+	}
+    }
+
+    
+    $teachers = DBUtil::selectObjectArray ('School_teachers', '', 'Grade, Name');
+    
+    $Render->assign('Teachers', $teachers);
+    return $Render->fetch('School_admin_teachers.html');
+}
