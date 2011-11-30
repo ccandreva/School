@@ -67,7 +67,7 @@ function School_user_apply()
 
     $Render = pnRender::getInstance('School');
     if ($familyid == 0) {
-        LogUtil::registerStatus("To being the applicaiton process, please enter the following general family information.");
+        LogUtil::registerStatus("To begin the applicaiton process, please enter the following general family information.");
         return pnRedirect(pnModURL('School', 'user', 'addfamily' ));
     }
 
