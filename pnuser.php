@@ -26,6 +26,11 @@ function School_user_main()
 
     $Render = pnRender::getInstance('School');
     $familyData = DBUtil::selectObjectByID('School_family', $familyid);
+    // If they are not already accepted, redirect to application portal;
+    if ($familyData{'Accepted'} != 1) {
+        return pnredirect(pnModUrl('School', 'user', 'apply'));
+    }
+
     $students = pnModAPIFunc('School', 'user', 'GetStudents', array('familyid' => $familyid));
     //$Render->assign('familyid', $familyid);
     $Render->assign($familyData);
@@ -61,6 +66,11 @@ function School_user_apply()
     if ($ret) return $ret;
 
     $Render = pnRender::getInstance('School');
+    if ($familyid == 0) {
+        LogUtil::registerStatus("To being the applicaiton process, please enter the following general family information.");
+        return pnRedirect(pnModURL('School', 'user', 'addfamily' ));
+    }
+
     if ($familyid > 0) {
         $familyData = DBUtil::selectObjectByID('School_family', $familyid);
 	
@@ -74,9 +84,6 @@ function School_user_apply()
 	if (is_array($students)) $Render->assign('Students', $students);
     }
     
-    
-    // $tuitionData = DBUtil::selectObjectByID('School_tuition', $familyid);
-    // $Render->assign('Tuition', $tuitionData);
     $Render->assign('EnrollStart', EnrollStart());
     RenderSchoolYear($Render);
     return $Render->fetch('School_user_apply.htm');

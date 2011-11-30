@@ -25,24 +25,41 @@
         enter your family information</a>.
     </p>
 <!--[else]-->
-    <p><img src="images/icons/small/button_ok.gif"/> If anything has changed, please
+    <p><img src="images/icons/small/button_ok.gif"/>If necessary you may still 
     <a href="<!--[pnmodurl modname="School" type="user" func="addfamily"]-->">
        Edit Your Family Information</a>.
     </p>
+<!--[/if]-->
 </div>
 
 <h2>Step 2: Submit Student Application</h2>
 <div class="EnrollStep">
-    <!--[if isset($students)]-->
+    <!--[if isset($Students)]-->
     <table class="School">
         <tr>
             <th>Name</th>
             <th>Grade Last<br />Applied For</th>
         </tr>
     <!--[foreach item=Student from=$Students]-->
+        <!--[assign var=students value=`$students+1`]-->
+        <!--[if $Student.LastSaveValid]-->
+            <!--[assign var=valid value=1]-->
+            <!--[assign var=OKstudents value=`$OKstudents+1`]-->
+        <!--[else]-->
+            <!--[assign var=valid value=0]-->
+        <!--[/if]-->
         <tr>
             <td><!--[$Student.FirstName]--></td>
             <td><!--[$Student.Grade]--></td>
+            <td>
+                <!--[if $valid==1 ]--><img src="images/icons/small/button_ok.gif" />
+                <!--[elseif $valid==2 ]--><img src="modules/School/pnimages/Grad-22.jpg" />
+                <!--[else]--><img src="images/icons/small/button_cancel.gif" /><!--[/if]-->
+                <td><a href="<!--[$editurl]-->">Edit</a></td>
+            <!--[if $valid == 1]-->
+            <td><a href="<!--[$applicationurl]-->" target="_res_print">Print Application</a></td>
+            <!--[/if]-->
+
         </tr>
     <!--[/foreach]-->
     </table>
@@ -51,53 +68,21 @@
     <p>
     <a href="<!--[pnmodurl modname="School" type="user" func="addstudent"]-->">Enroll New Student</a>
     </p>
-
-        <!--[if $OKstudents < $students]-->
-        <p>
-        <strong>Please update all students' information.</strong>  Once all students have been
-        edited you can procede to the next step.
-        </p>
-        <!--[else]-->
-
-        <p><img src="images/icons/small/button_ok.gif" />
-            <strong>All student forms have been updated</strong>. You can now print an Enrollment Application
-            for each student, using the "Print Application" links in list of <strong>Currently Enrolled Students</strong> above,
-            before proceeding to Step 3.
-        </p>
-        <p>
-            <strong>Forms need to be printed out, signed, and sent in to the office along with
-            the Re-Registration fees of $200.00 per child.</strong> If you are already set up for direct deposit,
-            you may also pay through the <a href="<!--[pnmodurl modname="FormExpress" func="display_form" form_id=3]-->">online payment form</a>.
-        </p>
-</div>
-            <h2>Step 3: Tuition Payment</h2>
-<div class="EnrollStep">
-            <!--[if $Tuition.lu_date < $EnrollStart]-->
-                <p><img src="images/icons/small/button_cancel.gif" />
-                Next, update your <a href="<!--[pnmodurl modname="School" type="user" func="tuition"]-->">Tuition
-                Payment Preferences</a>.
-                </p>
-            <!--[else]-->
-                <p><img src="images/icons/small/button_ok.gif" />
-                    <strong>Tuition information is up to date.</strong> You may still
-                    <a href="<!--[pnmodurl modname="School" type="user" func="tuition"]-->">Review and Update
-                       Payment Options</a> before  proceeding to Step 4.
-                </p>
-</div>
-                <h2>Step 4: Print Family Forms</h2>
-<div class="EnrollStep">
-                <!--[pnmodurl modname="School" type="print" func="textbook" assign=printfam]-->
-                <p><a href="<!--[$printfam]-->" target="_res_print"><img src="images/icons/small/folder_print.gif" /></a>
-                    <strong>All necessary forms have been filled out.</strong> You may now
-                    <a href="<!--[$printfam]-->" target="_res_print">print the Textbook and Tuition Forms</a>.
-                    Sign and return these to the office.
-                </p>
-            <!--[/if]-->
-
-        <!--[/if]-->
+    <p><img src="images/icons/small/button_ok.gif" />
+        <strong>Add each student you with to enroll with the link above.</strong>. Once each 
+        student is added, you should print an Enrollment Application
+        for each student, using the "Print Application" links in list above.
     </p>
+    <p>
+       <strong>For new students, Print Health Forms:</strong> Every child must have a physical examination upon entrance to 
+        kindergarten, 2nd, 4th, and 7th grades or entrance to a new school.
+        The physical must be completed prior to entry. Please print the appropriate form:
+    </p>
+    <ul>
+        <li><a href="/images/Pre-K_Health_History.pdf">Pre-K</a></li>
+        <li><a href="/images/K-8_Health_History.pdf">K through 8</a></li>
+    </ul>
 
-<!--[/if]--><!--[* Step 1 *]-->
 </div>
 
 
