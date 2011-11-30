@@ -48,6 +48,10 @@
         <!--[else]-->
             <!--[assign var=valid value=0]-->
         <!--[/if]-->
+
+        <!--[pnmodurl modname="School" type="user" func="editstudent" id=$Student.id assign=editurl ]-->
+        <!--[pnmodurl modname="School" type="print" func="student" id=$Student.id assign=applicationurl]-->
+        
         <tr>
             <td><!--[$Student.FirstName]--></td>
             <td><!--[$Student.Grade]--></td>
