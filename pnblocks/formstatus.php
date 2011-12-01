@@ -50,8 +50,10 @@ function school_formstatusblock_display($blockinfo)
     }
     $ret = School_checkuser($user, $familyid);
     if ($ret) return;
+    
     $args = array('familyid' => $familyid);
     $emergencyObj =  pnModAPIFunc('School', 'user', 'LoadEmergencyForm', $args);
+    if (!$emergencyObj['Accepted']) { return; }
     if ( count($emergencyObj['StudentData']) == 0) { return; }
     
     $directoryObj =  pnModAPIFunc('School', 'user', 'LoadDirectory', $args);
