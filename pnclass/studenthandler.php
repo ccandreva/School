@@ -26,7 +26,7 @@ class School_user_studentHandler extends pnFormHandler
             $this->accepted = true;
           }
           $Grade = $formData['Grade'];
-          if (strlen($Grade) == 3)
+          if ($Grade < 1)
               $formData["Session$Grade"] = $formData['Session'];
       } else {
           $formData = array();
