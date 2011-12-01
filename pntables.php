@@ -302,9 +302,10 @@ function School_pntables()
 	'LastIEPDate'	=>	'School_student_LastIEPDate',
 	'LastPsychDate'	=>	'School_student_LastPsychDate',
 	'Placement'	=>	'School_student_Placement',
-        'Allergies'       => 'school_student_Allergies',
-        'Conditions'       => 'school_student_Conditions',
+        'Allergies'       => 'School_student_Allergies',
+        'Conditions'       => 'School_student_Conditions',
         'LastSaveValid' =>      'School_student_LastSaveValid',
+	'Session'	=>	'School_student_Session',
 	'Accepted'		=> 'School_student_Accepted'
         );
 
@@ -394,6 +395,7 @@ function School_pntables()
         'Allergies'          => 'C(255)',
         'Conditions'          => 'C(255)',
         'LastSaveValid' =>      'L',
+	'Session'	=>	'C(255)',
 	'Accepted'		=> 'L'
     );
     ObjectUtil::addStandardFieldsToTableDefinition(
