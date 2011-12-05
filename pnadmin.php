@@ -187,7 +187,14 @@ function School_admin_showregistration()
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
+    $table = pnDBGetTables();
+    $familycolumn = $table['School_family_column'];
 
+    $status = FormUtil::getPassedValue('status');
+    $where='';
+    if ($status == '0' || $status == '1') {
+	$where = "$familycolumn[Accepted]=$status";
+    }
     $render = pnRender::getInstance('School', false);
 
     $joinInfo = array ( array(
@@ -200,7 +207,7 @@ function School_admin_showregistration()
         ) );
 
     //$familyData = DBUtil::selectObjectArray ('School_family', '', 'LastName');
-    $familyData = DBUtil::selectExpandedObjectArray ('School_family', $joinInfo, '', 'LastName');
+    $familyData = DBUtil::selectExpandedObjectArray ('School_family', $joinInfo, $where, 'LastName');
     $EnrollYear = EnrollYear();
     foreach ($familyData as &$family)
     {

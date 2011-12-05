@@ -11,6 +11,15 @@
   <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
   <h2><!--[pnml name="Registration Forms for $NextYear"]--></h2>
 
+  <form method="post" action="index.php?module=School&amp;type=admin&amp;func=showregistration">
+      <label for="status">Family Status:</label>
+      <select id="status" name="status">
+	  <option value="">Any</option>
+	  <option value="1">Current</option>
+	  <option value="0">Pending</option>
+      </select>
+      <input  type="submit" name="submit" value="Submit" />
+  </form>
   <p>
   <a href="<!--[pnmodurl modname="School" type="admin" func="export"]-->">Download as CSV</a>
   </p>
