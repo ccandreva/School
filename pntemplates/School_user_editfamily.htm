@@ -22,6 +22,12 @@
                   <!--[pnformlabel for=LastName text="Last Name (Family Name)" ]-->
                   <!--[pnformtextinput id=LastName width=30em maxLength=50 mandatory=1]-->
                 </li>
+		<!--[ if $admin]-->
+		<li>
+		    <!--[pnformlabel for=Accepted cssClass="Checkbox" text="Accepted: "]-->
+		    <!--[pnformcheckbox id="Accepted" ]-->
+		</li>
+		<!--[/if]-->
           </ul>
       </li>
       

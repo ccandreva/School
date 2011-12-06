@@ -240,6 +240,7 @@ function School_admin_editfamily()
     $render = FormUtil::newpnForm('School');
     $formobj = new School_user_familyHandler();
     $formobj->familyid = $familyid;
+    $render->assign('admin', 1);
     $formobj->redirect = pnModURL('School', 'admin', 'showregistration' );
     return $render->pnFormExecute('School_user_editfamily.htm', $formobj);
 }
