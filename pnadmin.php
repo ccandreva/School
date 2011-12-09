@@ -376,8 +376,14 @@ function School_admin_classlist()
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
+    
+    // Build where clause to show only registered students
+    $table = pnDBGetTables();
+    $familycolumn = $table['School_student_column'];
+    $where = "$familycolumn[Accepted]=1";
+
     $students = DBUtil::selectObjectArray ("School_student", 
-            '', 'ClassYear DESC, Teacher, LastName, FirstName', -1, -1, '',null, null,
+            $where, 'ClassYear DESC, Teacher, LastName, FirstName', -1, -1, '',null, null,
             array('id', 'FirstName', 'LastName', 'ClassYear', 'Teacher', 'Returning', 'LastSaveValid', 'lu_date')
             );
             //array('id', 'AppDate', 'Returning'. 'FirstName') );
