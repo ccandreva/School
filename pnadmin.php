@@ -62,7 +62,7 @@ function School_admin_exportemergencyforms()
 
     //Read in field list
     $csvNames = array();
-    $h = fopen("/home/vwww/resurrectionschool/modules/School/Export.txt", 'r');
+    $h = fopen("/home/vwww/resurrectionschool/modules/School/ExportEmergency.txt", 'r');
     if ($h) {
         $HeaderLine = fgets($h, 4096);
         while (!feof($h)) {
