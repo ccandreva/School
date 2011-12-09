@@ -61,18 +61,7 @@ function School_admin_exportemergencyforms()
 
 
     //Read in field list
-    $csvNames = array();
-    $h = fopen("/home/vwww/resurrectionschool/modules/School/ExportEmergency.txt", 'r');
-    if ($h) {
-        $HeaderLine = fgets($h, 4096);
-        while (!feof($h)) {
-            $l = chop(fgets($h, 4096));
-            if ($l) {
-                $csvNames[] = $l;
-            }
-        }
-        fclose($h);
-    }
+    $csvNames = School_ReadCsvNames("/home/vwww/resurrectionschool/modules/School/ExportEmergency.txt");
 
     echo $HeaderLine;
     // Loop through all Families and export
@@ -457,9 +446,11 @@ function School_admin_export()
     $filename = $table . '-' . date('Y-m-d') . '.csv';
     header('Content-Type: text/csv');
     header("Content-Disposition: attachment; filename=\"$filename\"");
+    //Read in field list
+    $csvNames = School_ReadCsvNames("/home/vwww/resurrectionschool/modules/School/ExportStudents.txt");
 
     /* Output CSV header line */
-    foreach ( $tableDef as $col => $def) {
+    foreach ( $csvNames as $col) {
         print '"' . $col . '",';
     }
     print "\n";
@@ -477,7 +468,9 @@ function School_admin_export()
         }
         $rec['School_family_MotherStatus'] = $MarStatus[$rec['School_family_MotherStatus']];
         $rec['School_family_FatherStatus'] = $MarStatus[$rec['School_family_FatherStatus']];
-        foreach ( $tableDef as $col => $def) {
+//        foreach ( $tableDef as $col => $def) {
+	foreach ( $csvNames as $col) {
+	    $def = $tableDef[$col];
             if (substr($def,0,1) == 'C') {
                 print '"' . preg_replace($pattern, $replace, $rec[$col]) . '",';
             } else {
@@ -631,4 +624,24 @@ function School_admin_teachers()
     
     $Render->assign('Teachers', $teachers);
     return $Render->fetch('School_admin_teachers.html');
+}
+
+function School_ReadCsvNames($filename)
+{
+    $csvNames = array();
+    $h = fopen($filename, 'r') ;
+    if ($h) {
+        // $HeaderLine = fgets($h, 4096);
+        while (!feof($h)) {
+            $l = chop(fgets($h, 4096));
+            // if ($l && ( substr($l,0,1) != '#' ) ) {
+            if ($l ) {
+                $csvNames[] = $l;
+            }
+        }
+        fclose($h);
+    } else {
+	LogUtil::registerError("Unable to open file '$filename'.");
+    }
+    return $csvNames;
 }
