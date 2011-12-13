@@ -11,17 +11,21 @@
         </div>
     <!--[/if]-->
 
-    <table>
-	<tr>
-	    <th>Teacher</th>
-	    <th>Grade</th>
-	</tr>
-	<!--[foreach from=$Teachers item=teacher]-->
-	<tr>
-	    <td><!--[$teacher.Grade]--></td>
-	    <td><!--[$teacher.Name]--></td>
-	</tr>
-	<!--[/foreach]-->
+    <table class="z-datatable">
+	<thead>
+	    <tr>
+		<th>Grade</th>
+		<th>Teacher</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <!--[foreach from=$Teachers item=teacher]-->
+	    <tr class="<!--[cycle values="z-odd,z-even"]-->" >
+		<td><!--[$teacher.Grade]--></td>
+		<td><!--[$teacher.Name]--></td>
+	    </tr>
+	    <!--[/foreach]-->
+	</tbody>
     </table>
     
     
