@@ -25,20 +25,23 @@
   </p>
 
   <!--[assign var=notup value=0]-->
-  <table class="School">
-      <tr>
-          <th>Show<br />Students</th>
-          <th>Edit</th>
-          <th>Family<br />Updated</th>
-          <th>Tuition<br />Submitted</th>
-          <th>LastName</th>
-          <th>Address</th>
-          <th>Form<br /> Updated</th>
-          <th>Number of <br />Non 8th Graders</th>
-      </tr>
+  <table class="z-datatable">
+      <thead>
+	  <tr>
+	      <th>Show<br />Students</th>
+	      <th>Edit</th>
+	      <th>Family<br />Updated</th>
+	      <th>Tuition<br />Submitted</th>
+	      <th>LastName</th>
+	      <th>Address</th>
+	      <th>Form<br /> Updated</th>
+	      <th>Number of <br />Non 8th Graders</th>
+	  </tr>
+      </thead>
+      <tbody>
       <!--[foreach item=family from=$familyData]-->
-      <tr>
-          <td>
+      <tr class="<!--[cycle values="z-odd,z-even"]-->">
+          <td class="z-center">
             <a href="<!--[pnmodurl modname="school" type="admin" func="showstudents" familyid=$family.id ]-->"
                title="Show this family's students"><!--[$studentIcon.imgtag]--></a>
 
@@ -50,42 +53,43 @@
             <a href="<!--[pnmodurl modname="school" type="admin" func="deletefamily" familyid=$family.id ]-->"
                title="Delete this family's form data." ><!--[$delIcon.imgtag]--></a>
 
-        </td>
-        <!--[if $family.numReturn > 0]-->
-            <!--[if $family.lu_date|truncate:10:'' lt $EnrollStart]-->
-                <td><!--[$Notdone.imgtag]--></td>
-                <!--[assign var=notup value=`$notup+1`]-->
-            <!--[else]-->
-                <td><!--[$Done.imgtag]--></td>
-                <!--[assign var=up value=`$up+1`]-->
-            <!--[/if]-->
-        <!--[else]-->
-            <td>
-                <!--[* Don't show cap if they have no students in the first place *]-->
-                <!--[if $family.numStudents>0]--><img src="modules/School/pnimages/Grad-22.jpg" /><!--[/if]-->
 	    </td>
-            <!--[assign var=noreturn value=`$noreturn+1`]-->
-        <!--[/if]-->
-        <!--[if $family.numReturn > 0 || $family.numStudents == 0]-->
-            <td>
-                <!--[if $family.tuition_lu_date|truncate:10:'' lt $EnrollStart]-->
-                    <!--[$Notdone.imgtag]-->
-                <!--[else]-->
-                   <!--[$Done.imgtag]-->
-                <!--[/if]-->
-            </td>
-        <!--[else]-->
-            <td>N/A</td>
-        <!--[/if]-->
+	    <!--[if $family.numReturn > 0]-->
+		<!--[if $family.lu_date|truncate:10:'' lt $EnrollStart]-->
+		    <td class="z-center"><!--[$Notdone.imgtag]--></td>
+		    <!--[assign var=notup value=`$notup+1`]-->
+		<!--[else]-->
+		    <td class="z-center"><!--[$Done.imgtag]--></td>
+		    <!--[assign var=up value=`$up+1`]-->
+		<!--[/if]-->
+	    <!--[else]-->
+		<td class="z-center">
+		    <!--[* Don't show cap if they have no students in the first place *]-->
+		    <!--[if $family.numStudents>0]--><img src="modules/School/pnimages/Grad-22.jpg" /><!--[/if]-->
+		</td>
+		<!--[assign var=noreturn value=`$noreturn+1`]-->
+	    <!--[/if]-->
+	    <!--[if $family.numReturn > 0 || $family.numStudents == 0]-->
+		<td class="z-center">
+		    <!--[if $family.tuition_lu_date|truncate:10:'' lt $EnrollStart]-->
+			<!--[$Notdone.imgtag]-->
+		    <!--[else]-->
+		       <!--[$Done.imgtag]-->
+		    <!--[/if]-->
+		</td>
+	    <!--[else]-->
+		<td class="z-center">N/A</td>
+	    <!--[/if]-->
 	
-        <td><!--[$family.LastName]--></td>
-        <td><!--[$family.Address]--></td>
-        <td><!--[$family.lu_date|truncate:10:'']--></td>
-        <td><!--[$family.numReturn]--></td>
-        <td><!--[$family.ClassYears]--></td>
-      </tr>
+	    <td><!--[$family.LastName]--></td>
+	    <td><!--[$family.Address]--></td>
+	    <td><!--[$family.lu_date|truncate:10:'']--></td>
+	    <td><!--[$family.numReturn]--></td>
+	    <td><!--[$family.ClassYears]--></td>
+	  </tr>
 
       <!--[/foreach]-->
+      </tbody>
   </table>
 
   <p>Updated: <!--[$up]--></p>
