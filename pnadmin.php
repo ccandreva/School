@@ -61,7 +61,7 @@ function School_admin_exportemergencyforms()
 
 
     //Read in field list
-    $csvNames = School_ReadCsvNames("/home/vwww/resurrectionschool/modules/School/ExportEmergency.txt");
+    $csvNames = School_ReadCsvNames("ExportEmergency.txt");
 
     echo $HeaderLine;
     // Loop through all Families and export
@@ -367,8 +367,8 @@ function School_admin_classlist()
     }
     
     // Build where clause to show only registered students
-    $table = pnDBGetTables();
-    $familycolumn = $table['School_student_column'];
+    $tables = pnDBGetTables();
+    $familycolumn = $tables['School_student_column'];
     $where = "$familycolumn[Accepted]=1";
 
     $students = DBUtil::selectObjectArray ("School_student", 
@@ -439,19 +439,25 @@ function School_admin_export()
 
     }
 
+    $familycolumn = $tables['School_student_column'];
+    $where = "$familycolumn[Accepted]=1";
+
     $objArray = DBUtil::selectExpandedObjectArray ("School_student", $joinInfo,
-            '', '', -1, -1, '',null, null, null );
+            $where, '', -1, -1, '',null, null, null );
 
     /* Set up headers for CSV file output */
     $filename = $table . '-' . date('Y-m-d') . '.csv';
     header('Content-Type: text/csv');
     header("Content-Disposition: attachment; filename=\"$filename\"");
     //Read in field list
-    $csvNames = School_ReadCsvNames("/home/vwww/resurrectionschool/modules/School/ExportStudents.txt");
+    $csvNames = School_ReadCsvNames("ExportStudents.txt");
 
     /* Output CSV header line */
+    $FirstCol = true;
     foreach ( $csvNames as $col) {
-        print '"' . $col . '",';
+        // Print comma between fields (before all except first)
+	if ($FirstCol) $FirstCol = false; else print ',';
+        print '"' . $col . '"';
     }
     print "\n";
 
@@ -468,13 +474,17 @@ function School_admin_export()
         }
         $rec['School_family_MotherStatus'] = $MarStatus[$rec['School_family_MotherStatus']];
         $rec['School_family_FatherStatus'] = $MarStatus[$rec['School_family_FatherStatus']];
+        $FirstCol = true;
 //        foreach ( $tableDef as $col => $def) {
 	foreach ( $csvNames as $col) {
+	    // Print comma between fields (before all except first)
+	    if ($FirstCol) $FirstCol = false; else print ',';
+
 	    $def = $tableDef[$col];
             if (substr($def,0,1) == 'C') {
-                print '"' . preg_replace($pattern, $replace, $rec[$col]) . '",';
+                print '"' . preg_replace($pattern, $replace, $rec[$col]) . '"';
             } else {
-                print $rec[$col] . ',';
+                print $rec[$col];
             }
         }
         print "\n";
@@ -629,7 +639,8 @@ function School_admin_teachers()
 function School_ReadCsvNames($filename)
 {
     $csvNames = array();
-    $h = fopen($filename, 'r') ;
+    $fullname = "/home/vwww/resurrectionschool/modules/School/" . $filename;
+    $h = fopen($fullname, 'r') ;
     if ($h) {
         // $HeaderLine = fgets($h, 4096);
         while (!feof($h)) {
