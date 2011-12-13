@@ -1,5 +1,7 @@
 
 <!--[ include file="School_admin_menu.htm"]-->
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
 
 <div class="z-admincontainer">
     <div class="z-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='Settings' ]--></div>
@@ -11,46 +13,60 @@
         </div>
     <!--[/if]-->
 
-    <table class="z-datatable">
-	<thead>
-	    <tr>
-		<th>Grade</th>
-		<th>Teacher</th>
-	    </tr>
-	</thead>
-	<tbody>
-	    <!--[foreach from=$Teachers item=teacher]-->
-	    <tr class="<!--[cycle values="z-odd,z-even"]-->" >
-		<td><!--[$teacher.Grade]--></td>
-		<td><!--[$teacher.Name]--></td>
-	    </tr>
-	    <!--[/foreach]-->
-	</tbody>
-    </table>
-    
-    
-    <form class="application" method="post">
-	<fieldset>
-	    <legend>Add Teacher</legend>
+    <!--[pnform cssClass="application"]-->
+    <!--[pnformvalidationsummary]-->
+
+	<fieldset class="z-floatright">
+	<!--[if $id]-->
+	<legend>Edit Teacher</legend>
+	<!--[else]-->
+	<legend>Add Teacher</legend>
+	<!--[/if]-->
 	    <ul>
 		<li>
 		    <ul>
 			<li>
-			    <label for="TeacherName">Teacher Name</label>
-			    <input type="text" name="TeacherName" value="<!--[$TeacherName]-->">
+			    <!--[pnformlabel for=Name text="Teacher Name" ]-->
+	                    <!--[pnformtextinput id=Name width=20em maxLength=50 mandatory=1]-->
 			</li>
 			<li>
-			    <label for="TeacherGrade">Grade</label>
-			    <input type="text" name="TeacherGrade" value="<!--[$TeacherGrade]-->"  size="3" maxlength="3">
+			    <!--[pnformlabel for=Grade text="Grade" ]-->
+	                    <!--[pnformtextinput id=Grade width=3em maxLength=3 mandatory=1]-->
 			</li>
 			<li>
 			    <label for="submit">&nbsp;</label>
-			    <input type="submit" name="Add" value="Add"/>
+			    <!--[pnformbutton commandName="submit" text="Submit" ]-->
 			</li>
 		    </ul>
 		</li>
 	    </ul>
 	</fieldset>
 	
-    </form>
+    <!--[/pnform]-->
+
+    
+    <table class="z-datatable" style="width: 40em">
+	<thead>
+	    <tr>
+		<th>Grade</th>
+		<th>Teacher</th>
+		<th>&nbsp;</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <!--[foreach from=$Teachers item=teacher]-->
+	    <tr class="<!--[cycle values="z-odd,z-even"]-->" >
+		<td class="z-center"><!--[$teacher.Grade]--></td>
+		<td><!--[$teacher.Name]--></td>
+		<td class="z-center">
+		    <a href="<!--[pnmodurl modname="school" type="admin" func="teachers" editid=$teacher.id ]-->"
+		       title="Edit this teacher"><!--[$editIcon.imgtag]--></a>
+		</td>
+
+	    </tr>
+	    <!--[/foreach]-->
+	</tbody>
+    </table>
+    
+    
 </div>

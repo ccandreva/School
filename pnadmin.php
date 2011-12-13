@@ -14,6 +14,7 @@ require_once('pnclass/emergencyformhandler.php');
 require_once('pnclass/directoryformhandler.php');
 require_once('pnclass/familyhandler.php');
 require_once('pnclass/studenthandler.php');
+require_once('pnclass/teacherhandler.php');
 require_once('pnclass/confighandler.php');
 
 
@@ -612,28 +613,15 @@ function School_admin_teachers()
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
 
-    $Render = pnRender::getInstance('School');
-
-    $Add = FormUtil::getPassedValue('Add');
-    if ($Add) {
-	$Name = FormUtil::getPassedValue('TeacherName');
-	$Grade = FormUtil::getPassedValue('TeacherGrade');
-	if (!$Name || !$Grade) {
-	    LogUtil::registerError("Both Name and Grade must be provided.");
-	    $Render->assign('TeacherName', $Name);
-	    $Render->assign('TeacherGrade', $Grade);
-	} else {
-	    $teacher = array('Name' => $Name, 'Grade' => $Grade);
-	    DBUtil::insertObject($teacher, 'School_teachers');
-	    LogUtil::registerStatus("Teacher '$Name' added");
-	}
-    }
-
-    
     $teachers = DBUtil::selectObjectArray ('School_teachers', '', 'Grade, Name');
     
-    $Render->assign('Teachers', $teachers);
-    return $Render->fetch('School_admin_teachers.html');
+    $render = FormUtil::newpnForm('School');
+    $render->assign('Teachers', $teachers);
+    $editid = FormUtil::getPassedValue('editid');
+    $formobj = new School_admin_teacherHandler();
+    if ($editid) $formobj->id = $editid;
+    return $render->pnFormExecute('School_admin_teachers.html', $formobj);
+
 }
 
 function School_ReadCsvNames($filename)
