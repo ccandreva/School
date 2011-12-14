@@ -15,6 +15,7 @@ require_once('pnclass/directoryformhandler.php');
 require_once('pnclass/familyhandler.php');
 require_once('pnclass/studenthandler.php');
 require_once('pnclass/teacherhandler.php');
+require_once('pnclass/districthandler.php');
 require_once('pnclass/confighandler.php');
 
 
@@ -583,28 +584,14 @@ function School_admin_districts()
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
 
-    $Render = pnRender::getInstance('School');
-
-    $Add = FormUtil::getPassedValue('Add');
-    if ($Add) {
-	$DisName = FormUtil::getPassedValue('DisName');
-	$DisCode = FormUtil::getPassedValue('DisCode');
-	if (!$DisName || !$DisCode) {
-	    LogUtil::registerError("Both Name and Code must be provided.");
-	    $Render->assign('DisName', $DisName);
-	    $Render->assign('DisCode', $DisCode);
-	} else {
-	    $district = array('Name' => $DisName, 'Code' => $DisCode);
-	    DBUtil::insertObject($district, 'School_districts');
-	    LogUtil::registerStatus("District '$DisName' added");
-	}
-    }
-
-    
     $districts = DBUtil::selectObjectArray ('School_districts', '', 'Name');
     
-    $Render->assign('Districts', $districts);
-    return $Render->fetch('School_admin_districts.html');
+    $render = FormUtil::newpnForm('School');
+    $render->assign('Districts', $districts);
+    $editid = FormUtil::getPassedValue('editid');
+    $formobj = new School_admin_districtHandler();
+    if ($editid) $formobj->id = $editid;
+    return $render->pnFormExecute('School_admin_districts.html', $formobj);
 }
 
 function School_admin_teachers()
