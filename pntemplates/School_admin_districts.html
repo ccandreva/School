@@ -1,5 +1,6 @@
-
 <!--[ include file="School_admin_menu.htm"]-->
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
 
 <div class="z-admincontainer">
     <div class="z-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='Settings' ]--></div>
@@ -40,6 +41,7 @@
 	    <tr>
 		<th>District</th>
 		<th>Code</th>
+		<th>&nbsp;</th>
 	    </tr>
 	</thead>
 	<tbody>
@@ -47,6 +49,10 @@
 	    <tr>
 		<td><!--[$district.Name]--></td>
 		<td><!--[$district.Code]--></td>
+		<td class="z-center">
+		    <a href="<!--[pnmodurl modname="school" type="admin" func="districts" editid=$district.id ]-->"
+		       title="Edit this district"><!--[$editIcon.imgtag]--></a>
+		</td>
 	    </tr>
 	    <!--[/foreach]-->
 	</tbody>
