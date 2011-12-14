@@ -2,9 +2,7 @@
 /**
  * Zikula - Resurrection Custom Module
  *
- * @copyright (c) 2010 Chris Candreva
- * @link http://www.postnuke.com
- * @version  Id:                                              $
+ * @copyright (c) 2011 Chris Candreva
  */
 
 // Include pnForm in order to be able to inherit from pnFormHandler

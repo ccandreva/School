@@ -1,11 +1,8 @@
 <?php
 /**
- * PostNuke Application Framework
+ * Zikula - Resurrection Custom Module
  *
- * @copyright (c) 2001, PostNuke Development Team
- * @link http://www.postnuke.com
- * @version $Id: pnadmin.php 22371 2007-07-10 12:47:15Z rgasch $
- * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @copyright (c) 2011 Chris Candreva
  */
 
 Loader::requireOnce('includes/pnForm.php');
