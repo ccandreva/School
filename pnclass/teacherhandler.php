@@ -30,6 +30,9 @@ class School_admin_teacherHandler extends pnFormHandler
 	DBUtil::insertObject($formData, 'School_teachers');
 	LogUtil::registerStatus("The new teacher has been added.");
     }
+    $teachers = DBUtil::selectObjectArray ('School_teachers', '', 'Grade, Name');
+    $render->assign('Teachers', $teachers);
+
     return;
   }
 
