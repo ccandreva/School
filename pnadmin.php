@@ -45,6 +45,10 @@ function School_admin_exportemergencyforms()
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
 
+    //Read in field list
+    $csvNames = School_ReadCsvNames("ExportEmergency.txt");
+    if (!$csvNames) return false;
+    
     $tables = pnDBGetTables();
     $ContactCol = $tables['School_emergencyContact_column'][familyid];
     $StudentCol = $tables['School_student_column'][Familyid];
@@ -57,10 +61,6 @@ function School_admin_exportemergencyforms()
 
     $objArray = DBUtil::selectObjectArray ('School_family', '', 'LastName');
     $data = array();
-
-
-    //Read in field list
-    $csvNames = School_ReadCsvNames("ExportEmergency.txt");
 
     echo $HeaderLine;
     // Loop through all Families and export
@@ -402,6 +402,11 @@ function School_admin_export()
     $tableDef = $tables[$tmp];
 
     if (!is_array($tableDef)) return "Error -- table '$table' does not exist";
+    /* Set up headers for CSV file output */
+    $filename = $table . '-' . date('Y-m-d') . '.csv';
+    //Read in field list
+    $csvNames = School_ReadCsvNames("ExportStudents.txt");
+    if (!$csvNames) return false;
 
     // Array to translage married status to number, hack for now
     $MarStatus = array (
@@ -444,12 +449,8 @@ function School_admin_export()
     $objArray = DBUtil::selectExpandedObjectArray ("School_student", $joinInfo,
             $where, '', -1, -1, '',null, null, null );
 
-    /* Set up headers for CSV file output */
-    $filename = $table . '-' . date('Y-m-d') . '.csv';
     header('Content-Type: text/csv');
     header("Content-Disposition: attachment; filename=\"$filename\"");
-    //Read in field list
-    $csvNames = School_ReadCsvNames("ExportStudents.txt");
 
     /* Output CSV header line */
     $FirstCol = true;
@@ -613,18 +614,19 @@ function School_ReadCsvNames($filename)
     $csvNames = array();
     $fullname = "/home/vwww/resurrectionschool/modules/School/" . $filename;
     $h = fopen($fullname, 'r') ;
-    if ($h) {
-        // $HeaderLine = fgets($h, 4096);
-        while (!feof($h)) {
-            $l = chop(fgets($h, 4096));
-            // if ($l && ( substr($l,0,1) != '#' ) ) {
-            if ($l ) {
-                $csvNames[] = $l;
-            }
-        }
-        fclose($h);
-    } else {
+
+    if (!$h) {
 	LogUtil::registerError("Unable to open file '$filename'.");
+	return false;
     }
+	
+    // $HeaderLine = fgets($h, 4096);
+    while (!feof($h)) {
+	$l = chop(fgets($h, 4096));
+	if ($l && ( substr($l,0,1) != '#' ) ) {
+	    $csvNames[] = $l;
+	}
+    }
+    fclose($h);
     return $csvNames;
 }
