@@ -6,6 +6,8 @@
 <!--[pnimg modname=core src=agt_family.gif set=icons/extrasmall alt='Students' assign=studentIcon]-->
 <!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
 <!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
+      <!--[assign var=ClassRet value=0]-->
+      <!--[assign var=ClassNotRet value=0]-->
 
 <div class="pn-admincontainer">
   <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
@@ -16,9 +18,12 @@
   <table class="School"">
       <!--[foreach item=student from=$students]-->
       <!--[ if ($student.Teacher != $LastTeacher) || ($student.ClassYear != $LastYear) ]-->
+	  <!--[if $LastTeacher || $LastYear]-->
+          <tr><td colspan="3">Returning: <!--[$ClassRet]--></td>
+	  <td colspan="2">Not Returning:<!--[$ClassNotRet]--></td></tr>
+	  <!--[/if]-->
           <!--[assign var=LastTeacher value=$student.Teacher]-->
           <!--[assign var=LastYear value=$student.ClassYear]-->
-          <tr><td colspan="5">Total: <!--[$ret.Male]--> <!--[$ret.Female]--></td></tr>
           <tr><th colspan="5">
                 <h2><!--[$LastTeacher]--> (<!--[$LastYear|year2grade]-->)</h2>
           </td></tr>
@@ -29,6 +34,8 @@
           <th>Name</th>
           <th>Form<br /> Updated</th>
       </tr>
+      <!--[assign var=ClassRet value=0]-->
+      <!--[assign var=ClassNotRet value=0]-->
       <!--[/if]-->
       <tr>
           <td>
@@ -44,27 +51,31 @@
           </td>
         <!--[if $student.ClassYear == $NextYearStart]-->
             <td><img src="modules/School/pnimages/Grad-22.jpg" /></td>
+	    <td>&nbsp;</td>
             <!--[assign var=graduating value=`$graduating+1`]-->
         <!--[elseif $student.lu_date|truncate:10:'' < $EnrollStart or $student.LastSaveValid == 0 ]-->
             <td><!--[$Notdone.imgtag]--></td>
+	    <td>&nbsp;</td>
             <!--[assign var=notup value=`$notup+1`]-->
         <!--[else]-->
             <td><!--[$Done.imgtag]--></td>
             <!--[assign var=up value=`$up+1`]-->
+	    <td>
+		<!--[if $student.Returning == 1]-->
+		    <!--[$Done.imgtag]-->
+		    <!--[assign var=ClassRet value=`$ClassRet+1`]-->
+		<!--[else]-->
+		    <!--[$Notdone.imgtag]-->
+		    <!--[assign var=ClassNotRet value=`$ClassNotRet+1`]-->
+		<!--[/if]-->
+	    </td>
         <!--[/if]-->
-        <td>
-            <!--[if $student.Returning == 1]-->
-                <!--[$Done.imgtag]-->
-                <!--[assign var=`ret.$Gender` value=`$ret.$Gender+1`]-->
-            <!--[else]-->
-                <!--[$Notdone.imgtag]-->
-            <!--[/if]-->
-        </td>
         <td><!--[$student.LastName]-->, <!--[$student.FirstName]--></td>
         <td><!--[$student.lu_date|truncate:10:'']--></td>
       </tr>
 
       <!--[/foreach]-->
+      <tr><td colspan="5">Returning: <!--[$ClassRet]--> Not Returning:<!--[$ClassNotRet]--></td></tr>
   </table>
     <p>
     <a href="<!--[pnmodurl modname="School" type="admin" func="addstudent" familyid=$student.Familyid]-->">Enroll New Student</a>
