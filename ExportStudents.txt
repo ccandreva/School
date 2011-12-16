@@ -158,9 +158,9 @@ School_tuition_AcctHolderName2
 #------------------------------
 #Added Fall 2012
 #Accepted
-#Session
 #School_family_Accepted
 School_family_MotherWorkPhone
 School_family_Religion
 School_family_FatherWorkPhone
 School_family_Parish
+Session
