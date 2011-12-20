@@ -42,7 +42,7 @@ function School_print_student()
 
     $studentid = FormUtil::getPassedValue('id');
     $studentData = DBUtil::selectObjectByID('School_student', $studentid);
-    if ($studentData['Familyid'] != $familyid) {
+    if ( ($studentData['Familyid'] != $familyid) && (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) ) {
         return "Invalid student.";
     }
     $familyData = DBUtil::selectObjectByID('School_family', $familyid);

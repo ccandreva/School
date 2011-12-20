@@ -6,6 +6,7 @@
 <!--[pnimg modname=core src=agt_family.gif set=icons/extrasmall alt='Students' assign=studentIcon]-->
 <!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
 <!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
+<!--[pnimg modname=core src=fileprint.gif set=icons/extrasmall alt='Print' assign=printIcon]-->
       <!--[assign var=ClassRet value=0]-->
       <!--[assign var=ClassNotRet value=0]-->
 
@@ -39,6 +40,8 @@
       <!--[/if]-->
       <tr>
           <td>
+	      <a href="<!--[pnmodurl modname="School" type="print" func="student" 
+		 id=$student.id]-->" target="_res_print"><!--[$printIcon.imgtag]--></a>
             <a href="<!--[pnmodurl modname="school" type="admin" func="editstudent" 
                studentid=$student.id familyid=$student.Familyid redirect='classlist']-->"
                title="Edit student"><!--[$editIcon.imgtag]--></a>
