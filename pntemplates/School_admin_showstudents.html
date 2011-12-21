@@ -17,7 +17,8 @@
   </p> *]-->
 
   <!--[assign var=notup value=0]-->
-  <table class="School"">
+  <table  class="z-datatable" style="width:500px;">
+      <thead>
       <tr>
           <th>Action</th>
           <th>Current?</th>
@@ -26,9 +27,11 @@
           <th>Class Year</th>
           <th>Form<br /> Updated</th>
       </tr>
+      </thead>
+      <tbody>
       <!--[foreach item=student from=$students]-->
-      <tr>
-          <td>
+      <tr class="<!--[cycle values="z-odd,z-even"]-->">
+          <td class="z-center">
 	      <a href="<!--[pnmodurl modname="School" type="print" func="student" 
 		 id=$student.id]-->" target="_res_print"><!--[$printIcon.imgtag]--></a>
             <a href="<!--[pnmodurl modname="school" type="admin" func="editstudent" 
@@ -42,10 +45,10 @@
 
           </td>
         <!--[if $student.lu_date|truncate:10:'' < $EnrollStart or $student.LastSaveValid == 0 ]-->
-            <td><!--[$Notdone.imgtag]--></td>
+            <td class="z-center"><!--[$Notdone.imgtag]--></td>
             <!--[assign var=notup value=`$notup+1`]-->
         <!--[else]-->
-            <td><!--[$Done.imgtag]--></td>
+            <td class="z-center"><!--[$Done.imgtag]--></td>
             <!--[assign var=up value=`$up+1`]-->
         <!--[/if]-->
         <td><!--[$student.FirstName]--></td>
@@ -55,6 +58,7 @@
       </tr>
 
       <!--[/foreach]-->
+      </tbody>
   </table>
     <p>
     <a href="<!--[pnmodurl modname="School" type="admin" func="addstudent" familyid=$student.Familyid]-->">Enroll New Student</a>
