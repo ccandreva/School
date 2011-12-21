@@ -42,7 +42,10 @@ function School_print_student()
 
     $studentid = FormUtil::getPassedValue('id');
     $studentData = DBUtil::selectObjectByID('School_student', $studentid);
-    if ( ($studentData['Familyid'] != $familyid) && (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) ) {
+    if ( SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN) ) {
+	$familyid = $studentData['Familyid'];
+    }
+    elseif ($studentData['Familyid'] != $familyid) {
         return "Invalid student.";
     }
     $familyData = DBUtil::selectObjectByID('School_family', $familyid);
@@ -52,7 +55,6 @@ function School_print_student()
     
     $Render = pnRender::getInstance('School');
     $Render->caching=0;
-    $Render->assign($studentData);
     $Render->assign($studentData);
     $Render->assign($familyData);
 
