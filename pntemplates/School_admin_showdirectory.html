@@ -45,11 +45,10 @@
         <!--[/foreach]-->
       </div>
   <!--[elseif $view == 'table']-->
-      <table>
-
+      <table class="z-datatable">
+	  <thead>
           <tr>
-              <th>&nbsp;</th>
-              <th>&nbsp;</th>
+              <th>Action</th>
               <th>Family Name</th>
               <th>Address</th>
               <th>City</th>
@@ -58,15 +57,15 @@
               <th>Phone</th>
               <th>Students</th>
               <th>Email</th>
-              <th>Last Updated</th>
+              <th colspan="2">Last Updated</th>
           </tr>
+	  </thead>
+	  <tbody>
           <!--[foreach item=d from=$data]-->
-          <tr>
+          <tr class="<!--[cycle values="z-odd,z-even"]-->">
         <td>
 	    <a href="<!--[pnmodurl modname="school" type="admin" func="editdirectoryform" familyid=$d.id ]-->"
                title="Edit this family's directory entry."><!--[$editIcon.imgtag]--></a>
-	</td>
-	<td>
             <a href="<!--[pnmodurl modname="school" type="admin" func="deletedirectory" familyid=$d.id ]-->"
                title="Delete this family's directory data." ><!--[$delIcon.imgtag]--></a>
 	</td>
@@ -90,7 +89,8 @@
 
           </tr>
         <!--[/foreach]-->
-      </table
+	  </tbody>
+      </table>
   <!--[/if]-->
   <br clear="all"/>
   <p>
