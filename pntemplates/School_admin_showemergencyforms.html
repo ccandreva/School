@@ -15,12 +15,18 @@
   </p>
 
   <!--[assign var=notup value=0]-->
-  <table>
+  <table class="z-datatable">
+      <thead>
       <tr>
-          <th>Edit</th><th>LastName</th><th>Address</th><th>Form Updated</th>
+          <th>Edit</th>
+	  <th>LastName</th>
+	  <th>Address</th>
+	  <th colspan="2">Form Updated</th>
       </tr>
+      </thead>
+      <tbody>
       <!--[foreach item=datum from=$data]-->
-      <tr>
+      <tr class="<!--[cycle values="z-odd,z-even"]-->">
         <td>
             <a href="<!--[pnmodurl modname="school" type="admin" func="editemergencyform" familyid=$datum.id ]-->"
                title="Edit this family's form data."><!--[$editIcon.imgtag]--></a>
@@ -40,6 +46,7 @@
 	  <!--[/if]-->
 	  <!--[/foreach]-->
       </tr>
+      </tbody>
   </table>
 
   <p>Not Updated: <!--[$notup]--></p>
