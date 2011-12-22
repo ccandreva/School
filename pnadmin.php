@@ -177,13 +177,17 @@ function School_admin_showregistration()
     }
     $table = pnDBGetTables();
     $familycolumn = $table['School_family_column'];
+    $render = pnRender::getInstance('School', false);
 
-    $status = FormUtil::getPassedValue('status');
+    $status = FormUtil::getPassedValue('admin_reg_status');
+    if (strlen($status) > 0) pnSessionDelVar('admin_reg_status');
+    else $status = pnSessionGetVar('admin_reg_status');
     $where='';
     if ($status == '0' || $status == '1') {
 	$where = "$familycolumn[Accepted]=$status";
+	$render->assign('admin_reg_status', $status);
+	pnSessionSetVar('admin_reg_status', $status);
     }
-    $render = pnRender::getInstance('School', false);
 
     $joinInfo = array ( array(
         'join_table'  => 'School_tuition',
