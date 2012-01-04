@@ -185,7 +185,6 @@ function School_admin_showregistration()
     $where='';
     if ( ($status === '0') || ($status == '1') ){
 	$where = "$familycolumn[Accepted]=$status";
-	// LogUtil::registerError("Status: '$status'  Where: ~$where~");
 	$render->assign('admin_reg_status', $status);
 	pnSessionSetVar('admin_reg_status', $status);
     }
