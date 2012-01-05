@@ -453,12 +453,6 @@
         <legend>Previous Schools Attended</legend>
         <table>
             <tr>
-                    <tr>
-                        <td>
-                            <!--[$prevschool]-->
-                        </td>
-                        <td>
-                            <!--[getval var="PrevSchoolAddress`$i`" ]-->
                 <th>Name of School</th>
                 <th>Address</th>
                 <th>Grades<br />Completed</th>
@@ -468,6 +462,12 @@
                 <!--[assign var='i' value=`$smarty.section.loop.index`]-->
                 <!--[getval var="PrevSchool`$i`" assign=prevschool]-->
                 <!--[if $prevschool != '&nbsp;']-->
+                    <tr>
+                        <td>
+                            <!--[$prevschool]-->
+                        </td>
+                        <td>
+                            <!--[getval var="PrevSchoolAddress`$i`" ]-->
                         </td>
                         <td>
                             <!--[getval var="PrevSchoolGrades`$i`" ]-->
