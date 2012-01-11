@@ -35,7 +35,8 @@
 	      <th>LastName</th>
 	      <th>Address</th>
 	      <th>Form<br /> Updated</th>
-	      <th>Number of <br />Non 8th Graders</th>
+	      <th># PK-7<!--[*br />Students*]--></th>
+	      <th>New ?</th>
 	  </tr>
       </thead>
       <tbody>
@@ -84,8 +85,9 @@
 	    <td><!--[$family.LastName]--></td>
 	    <td><!--[$family.Address]--></td>
 	    <td><!--[$family.lu_date|truncate:10:'']--></td>
-	    <td><!--[$family.numReturn]--></td>
-	    <td><!--[$family.ClassYears]--></td>
+	    <td class="z-center"><!--[$family.numReturn]--></td>
+	    <!--[* <td><!--[$family.ClassYears]--></td> *]-->
+	    <td><!--[if $family.cr_date > $EnrollStart]-->* New *<!--[else]-->&nbsp;<!--[/if]--></td>
 	  </tr>
 
       <!--[/foreach]-->
