@@ -420,7 +420,7 @@ function School_admin_export()
         'Divorced'   => 4,
         'Deceased '  => 5,
     );
-
+    $EnrollStart = EnrollStart();
     // Now we set up any tables we are going to join
     $joinTables = array('School_family' => 'id', 'School_tuition' => 'id');
     $joinInfo = array();
@@ -428,7 +428,7 @@ function School_admin_export()
         $join_field = array();
         $object_field_name = array();
         foreach ($tables[$join_table . '_column_def'] as $name => $type ) {
-            if ($name == 'obj_status') break;
+            //if ($name == 'obj_status') break;
             if ($name != $compare_field_join) {
                 $name2 = $join_table . '_' . $name;
                 $tableDef[$name2] = $type;
@@ -478,6 +478,13 @@ function School_admin_export()
         }
         $rec['School_family_MotherStatus'] = $MarStatus[$rec['School_family_MotherStatus']];
         $rec['School_family_FatherStatus'] = $MarStatus[$rec['School_family_FatherStatus']];
+	if ($rec['School_family_cr_date'] > $EnrollStart) {
+	    $rec['NewFamily'] = 'New';
+	}
+	if ($rec['cr_date'] > $EnrollStart) {
+	    $rec['NewStudent'] = 'New';
+	}
+		
         $FirstCol = true;
 //        foreach ( $tableDef as $col => $def) {
 	foreach ( $csvNames as $col) {
