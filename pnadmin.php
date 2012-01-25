@@ -401,6 +401,7 @@ function School_admin_export()
     // This is the 'main' table we are going to export.
     $table='student';
     $tables = pnDBGetTables();
+    $ContactCol = $tables['School_emergencyContact_column'][familyid];
 
     $tmp = 'School_' . $table . '_column_def';
     $tableDef = $tables[$tmp];
@@ -484,9 +485,20 @@ function School_admin_export()
 	if ($rec['cr_date'] > $EnrollStart) {
 	    $rec['NewStudent'] = 'New';
 	}
-		
+
+	$familyid = $rec['Familyid'];
+	$where = "WHERE $ContactCol=$familyid";
+        $contactData = DBUtil::selectObjectArray ('School_emergencyContact', $where);
+	$i = 0;
+	foreach ($contactData as $crec) {
+	    $i++;
+	    foreach ($crec as $key => $value) {
+		$key = $key . $i;
+		$rec[$key] = $value;
+	    }
+	}
+
         $FirstCol = true;
-//        foreach ( $tableDef as $col => $def) {
 	foreach ( $csvNames as $col) {
 	    // Print comma between fields (before all except first)
 	    if ($FirstCol) $FirstCol = false; else print ',';
@@ -623,7 +635,7 @@ function School_admin_teachers()
 function School_ReadCsvNames($filename)
 {
     $csvNames = array();
-    $fullname = "/home/vwww/resurrectionschool/modules/School/" . $filename;
+    $fullname = "/home/vwww/test.resurrectionschool/modules/School/" . $filename;
     $h = fopen($fullname, 'r') ;
 
     if (!$h) {
