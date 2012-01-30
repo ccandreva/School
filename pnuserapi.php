@@ -138,13 +138,22 @@ function School_userapi_MailFormUpdated($args)
     $formname = $args['formname'];
     // $familyname = $args['familyname'];
     $familyid = $args['familyid'];
+    if (isset($args['extratext']))  $extratext = $args['extratext'];
+    if (isset($args['firstname'])) {
+	$firstname=$args['firstname'];
+    }
+    
     $obj = DBUtil::selectObjectByID('School_family', $familyid, 'id', array('LastName'));
     $familyname = $obj['LastName'];
-    $subject = "$formname form updated by $familyname";
+    $subject = "$formname form updated for $familyname";
+    if ($firstname) $subject .= ", $firstname";
     $toaddress= array('Doreenp@resurrectionschool.com'); //, 'chris@westnet.com');
     // $toaddress= array( 'chris@westnet.com');
     
-    $mail = "\nThe \"$familyname\" family ($familyid) has updated their $formname form.\n\n";
+    $mail = "\nThe \"$familyname\" family ($familyid) has updated their $formname form";
+    if ($firstname) $mail .= " for $firstname";
+    $mail .= ".\n";
+    if ($extratext) $mail .= $extratext;
     pnModAPIFunc('Mailer', 'user', 'sendmessage',
 	    array('toaddress' => $toaddress,
 		'subject' => $subject,

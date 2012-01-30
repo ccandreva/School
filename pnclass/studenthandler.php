@@ -126,6 +126,18 @@ class School_user_studentHandler extends pnFormHandler
         LogUtil::registerStatus("Added Student");
         DBUtil::insertObject ($formData, 'School_student');
     }
+
+    if ($formData['Returning'] == false) {
+	$extratext="Student is not returning\n\n";
+    }
+    
+    pnModAPIFunc('School', 'user', 'MailFormUpdated',
+	    array('formname'=>'Student Information',
+		'familyid'=>$this->familyid,
+		'firstname' => $formData['FirstName'],
+		'extratext' => $extratext)
+	    );
+    
     if (!$this->accepted){
 	$this->redirect=pnModURL('School', 'user', 'newstudent', array('id' => $formData['id']));
     }
