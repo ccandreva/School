@@ -206,7 +206,7 @@ function School_pntables()
 	'OrthodontistPhone'		=> 'C(255)',
 	'EmergencyLastUpdate'		=> 'T',
 	'EmergencyUpdatedBy'		=> 'I4',
-	'Accepted'		=> 'L'
+	'Accepted'		=> 'L NOTNULL DEFAULT 0'
     );
     ObjectUtil::addStandardFieldsToTableDefinition(
             $table['School_family_column'],
@@ -396,7 +396,7 @@ function School_pntables()
         'Conditions'          => 'C(255)',
         'LastSaveValid' =>      'L',
 	'Session'	=>	'C(255)',
-	'Accepted'		=> 'L'
+	'Accepted'		=> 'L NOTNULL DEFAULT 0'
     );
     ObjectUtil::addStandardFieldsToTableDefinition(
             $table['School_student_column'],
