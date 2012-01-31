@@ -222,6 +222,25 @@ function School_admin_showregistration()
     return $render->fetch('School_admin_showregistration.html');
 
 }
+
+function School_admin_showpendingstudents()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $render = pnRender::getInstance('School', false);
+
+    $table = pnDBGetTables();
+    $studentcolumn = $table['School_student_column'];
+    $where = "$studentcolumn[Accepted]=0";
+
+    $objArray = DBUtil::selectObjectArray ('School_student', $where, 'LastName');
+    $render->assign('data', $objArray);
+    return $render->fetch('School_admin_showpendingstudents.html');
+
+}
+
 function School_admin_editfamily()
 {
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {

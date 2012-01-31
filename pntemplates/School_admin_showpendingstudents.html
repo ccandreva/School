@@ -1,0 +1,39 @@
+<!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
+<!--[include file="School_admin_menu.htm"]-->
+
+<!--[pnimg modname=core src=button_ok.gif set=icons/extrasmall alt='Done' assign=Done]-->
+<!--[pnimg modname=core src=button_cancel.gif set=icons/extrasmall alt='Notdone' assign=Notdone]-->
+<!--[pnimg modname=core src=agt_family.gif set=icons/extrasmall alt='Students' assign=studentIcon]-->
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
+
+<div class="pn-admincontainer">
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
+  <h2><!--[pnml name="Registration Forms for $NextYear"]--></h2>
+
+  <table class="z-datatable">
+      <thead>
+	  <tr>
+	      <th style="width: 40px;">Edit</th>
+	      <th>Name</th>
+	      <th>Grade</th>
+	  </tr>
+      </thead>
+      <tbody>
+      <!--[foreach item=student from=$data]-->
+          <tr class="<!--[cycle values="z-odd,z-even"]-->">
+	      <td>
+	        <a href="<!--[pnmodurl modname="school" type="admin" func="editstudent" 
+		   familyid=$student.Familyid studentid=$student.id
+		   redirect='showpendingstudents']-->"
+               title="Edit this family's form data."><!--[$editIcon.imgtag]--></a>
+		</td>
+	    <td><!--[$student.FirstName]--> <!--[$student.LastName]--></td>
+	    <td><!--[$student.Grade]--></td>
+	  </tr>
+
+      <!--[/foreach]-->
+      </tbody>
+  </table>
+
+</div>

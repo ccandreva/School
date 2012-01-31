@@ -139,7 +139,11 @@ class School_user_studentHandler extends pnFormHandler
 	    );
     
     if (!$this->accepted){
-	$this->redirect=pnModURL('School', 'user', 'newstudent', array('id' => $formData['id']));
+	return pnRedirect(pnModURL('School', 'user', 'newstudent', 
+		array('id' => $formData['id'],
+		    'redirect' => $this->redirect
+		)
+	) );
     }
 
     if ($this->redirect) return pnRedirect($this->redirect);
