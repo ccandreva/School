@@ -15,6 +15,7 @@ function School_adminapi_getlinks()
 	array('url' => pnModUrl("School", "admin", "showdirectory"), 'text' => 'Directory'),
 	array('url' => pnModUrl("School", "admin", "showregistration"), 'text' => 'Registration'),
 	array('url' => pnModUrl("School", "admin", "showpendingstudents"), 'text' => 'Pending Students'),
+	array('url' => pnModUrl("School", "admin", "searchstudents"), 'text' => 'Search Students'),
 	array('url' => pnModUrl("School", "admin", "classlist"), 'text' => 'Class List'),
 	array('url' => pnModUrl("School", "admin", "emergencysearch"), 'text' => 'Emergency Contacts'),
 	array('url' => pnModUrl("School", "admin", "modifyconfig"), 'text' => 'Settings'),

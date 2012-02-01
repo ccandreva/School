@@ -14,6 +14,7 @@ require_once('pnclass/studenthandler.php');
 require_once('pnclass/teacherhandler.php');
 require_once('pnclass/districthandler.php');
 require_once('pnclass/confighandler.php');
+require_once('pnclass/searchstudenthandler.php');
 
 
 function School_admin_main()
@@ -239,6 +240,17 @@ function School_admin_showpendingstudents()
     $render->assign('data', $objArray);
     return $render->fetch('School_admin_showpendingstudents.html');
 
+}
+
+function School_admin_searchstudents()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $render = FormUtil::newpnForm('School');
+    $formobj = new School_admin_searchstudentHandler();
+    return $render->pnFormExecute('School_admin_searchstudents.html', $formobj);
 }
 
 function School_admin_editfamily()

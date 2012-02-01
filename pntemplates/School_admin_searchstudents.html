@@ -1,0 +1,82 @@
+<!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
+<!--[include file="School_admin_menu.htm"]-->
+
+<!--[pnimg modname=core src=button_ok.gif set=icons/extrasmall alt='Done' assign=Done]-->
+<!--[pnimg modname=core src=button_cancel.gif set=icons/extrasmall alt='Notdone' assign=Notdone]-->
+<!--[pnimg modname=core src=agt_family.gif set=icons/extrasmall alt='Students' assign=studentIcon]-->
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
+<!--[pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_user_searchstudents.js]-->
+
+<div class="pn-admincontainer">
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_BLANKMOD_ADMIN_TITLE' altml=true]--></div>
+  <h2><!--[pnml name="Search Students"]--></h2>
+
+<!--[insert name='getstatusmsg' module='School']-->
+<!--[pnform cssClass="application"]-->
+<!--[pnformvalidationsummary]-->
+<fieldset id="Search">
+<legend>Search</legend>
+      <ul>
+      <li>
+          <ul>
+	    <li>
+		<!--[pnformlabel for=Accepted text="Accepted: "]-->
+                <!--[pnformdropdownlist id=Accepted ]-->
+	    </li>
+	    <li>
+		<!--[pnformlabel for=Returning text="Returning: "]-->
+		<!--[pnformdropdownlist id=Returning ]-->
+
+	    </li>
+            <li>
+                <!--[pnformlabel for=Grade text="Grade" ]-->
+                <!--[pnformdropdownlist id=Grade]-->
+            </li>
+	    <li>
+		<!--[pnformlabel for=Gender text="Gender"]-->
+		<!--[pnformdropdownlist id=Gender ]-->
+	    </li>
+            <li>
+                <!--[pnformlabel for=Teacher text="Current Teacher" ]-->
+                <!--[pnformdropdownlist id=Teacher width=20em maxLength=50 ]-->
+            </li>
+	  </ul>
+      </li>
+      </ul>
+<div class="z-buttons z-formbuttons"">
+    <input type="button" value="Reset" id="Reset" name="Reset">
+    <!--[pnformbutton commandName="submit" text="Submit" ]-->
+</div>
+
+</fieldset>
+<!--[/pnform]-->
+
+  
+  <table class="z-datatable">
+      <thead>
+	  <tr>
+	      <th style="width: 40px;">Edit</th>
+	      <th>Name</th>
+	      <th>Grade</th>
+	  </tr>
+      </thead>
+      <tbody>
+      <!--[foreach item=student from=$data]-->
+          <tr class="<!--[cycle values="z-odd,z-even"]-->">
+	      <td>
+	        <a href="<!--[pnmodurl modname="school" type="admin" func="editstudent" 
+		   familyid=$student.Familyid studentid=$student.id
+		   redirect='showpendingstudents']-->"
+               title="Edit this family's form data."><!--[$editIcon.imgtag]--></a>
+		</td>
+	    <td><!--[$student.FirstName]--> <!--[$student.LastName]--></td>
+	    <td><!--[$student.Grade]--></td>
+	  </tr>
+
+      <!--[/foreach]-->
+      </tbody>
+  </table>
+
+</div>
