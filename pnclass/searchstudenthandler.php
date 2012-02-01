@@ -54,7 +54,7 @@ class School_admin_searchstudentHandler extends pnFormHandler
 	$val = $formData[$field];
 	if (strlen($val) > 0) {
 	    if (substr($def[$field],0,1) == 'C') {
-		$val = "'$val'";
+		$val = "'" . pnVarPrepForStore($val) . "'";
 	    }
 	    $where[] = $studentcolumn[$field] . '=' . $val;
 	}
@@ -63,6 +63,7 @@ class School_admin_searchstudentHandler extends pnFormHandler
     $w = implode(' and ', $where);
     $objArray = DBUtil::selectObjectArray ('School_student', $w, 'LastName');
     $render->assign('data', $objArray);
+    $render->assign('count', count($objArray));
     
     return;
   }
