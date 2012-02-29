@@ -4,7 +4,6 @@ class School_admin_searchstudentHandler extends pnFormHandler
 {
 
   var $id;
-
   function initialize(&$render)
   {
 
@@ -21,7 +20,7 @@ class School_admin_searchstudentHandler extends pnFormHandler
     $SessionPK3Items = initListValues(array('', 'AM (8:30-11:00)', 'PM (12:00-2:30)', 'Either'));
     $SessionPK4Items = initListValues(array('', 'AM (8:30-11:00)', 'Full Day'));
     $SessionKItems = initListValues(array('', 'Montessori', 'Traditional'));
-
+    $OrderItems = array( array('text' => 'Name', 'value' => 0), array('text' => 'Grade', 'value' => 1));
     
     $render->assign( array(
 	'GenderItems' => $gender,
@@ -32,6 +31,8 @@ class School_admin_searchstudentHandler extends pnFormHandler
 	'SessionPK3Items' => $SessionPK3Items,
 	'SessionPK4Items' => $SessionPK4Items,
 	'SessionKItems' => $SessionKItems,
+	'NewStudentItems' => $yesnoBool,
+	'OrderItems' => $OrderItems,
     ) );
 
 
@@ -59,9 +60,21 @@ class School_admin_searchstudentHandler extends pnFormHandler
 	    $where[] = $studentcolumn[$field] . '=' . $val;
 	}
     }
-
+    if (strlen($formData['NewStudent']) > 0) {
+	$EnrollStart = pnModGetVar('School', 'EnrollStart');
+	if ($formData['NewStudent'] === '1') {
+	    $where[] = $studentcolumn['cr_date'] . " >= '$EnrollStart'";
+	} else {
+	    $where[] = $studentcolumn['cr_date'] . " < '$EnrollStart'";
+	    
+	}
+    }
     $w = implode(' and ', $where);
-    $objArray = DBUtil::selectObjectArray ('School_student', $w, 'LastName');
+
+    if ($formData['Order'] == 1) $Order = 'ClassYear DESC, LastName';
+    else $Order = 'LastName';
+    
+    $objArray = DBUtil::selectObjectArray ('School_student', $w, $Order);
     $render->assign('data', $objArray);
     $render->assign('count', count($objArray));
     
