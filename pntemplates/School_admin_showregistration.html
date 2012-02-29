@@ -87,7 +87,7 @@
 	    <td><!--[$family.lu_date|truncate:10:'']--></td>
 	    <td class="z-center"><!--[$family.numReturn]--></td>
 	    <!--[* <td><!--[$family.ClassYears]--></td> *]-->
-	    <td><!--[if $family.cr_date > $EnrollStart]-->* New *<!--[else]-->&nbsp;<!--[/if]--></td>
+	    <td><!--[if $family.cr_date >= $EnrollStart]-->* New *<!--[else]-->&nbsp;<!--[/if]--></td>
 	  </tr>
 
       <!--[/foreach]-->
