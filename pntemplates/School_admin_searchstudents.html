@@ -70,7 +70,8 @@
 	  <tr>
 	      <th style="width: 40px;">Edit</th>
 	      <th>Name</th>
-	      <th>Grade</th>
+	      <th>Class Year</th>
+	      <th>Grade Last<br />Applied For</th>
 	  </tr>
       </thead>
       <tbody>
@@ -83,6 +84,7 @@
                title="Edit this family's form data."><!--[$editIcon.imgtag]--></a>
 		</td>
 	    <td><!--[$student.FirstName]--> <!--[$student.LastName]--></td>
+	    <td>(<!--[$student.ClassYear|year2grade]-->) <!--[$student.ClassYear]--></td>
 	    <td><!--[$student.Grade]--></td>
 	  </tr>
 
