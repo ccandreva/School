@@ -15,8 +15,8 @@ BirthCertificate
 Gender
 Religion
 Parish
-Resides
-Relationship
+School_tuition_AcctNum
+School_tuition_RoutingNum
 BaptismDate
 BaptismChurch
 BaptismLoc
@@ -151,8 +151,8 @@ School_tuition_EnvelopeNumber
 School_tuition_Contribution
 School_tuition_PaymentPref
 School_tuition_BankName
-School_tuition_AcctNum
-School_tuition_RoutingNum
+Resides
+Relationship
 School_tuition_AcctHolderName
 School_tuition_AcctHolderName2
 #------------------------------
