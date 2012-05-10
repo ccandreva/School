@@ -186,13 +186,10 @@ function School_user_tuition()
     $ret = School_checkuser($user, $familyid);
     if ($ret) return $ret;
 
-    $studentid = FormUtil::getPassedValue('id');
 
     $Render = FormUtil::newpnForm('School');
     $formobj = new School_user_tuitionHandler();
     $formobj->familyid = $familyid;
-    $formobj->studentid = $studentid;
     RenderSchoolYear($Render);
-    // $formobj->showId = true;
     return $Render->pnFormExecute('School_user_tuition.html', $formobj);
 }
