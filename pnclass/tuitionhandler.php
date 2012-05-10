@@ -21,6 +21,9 @@ class School_user_tuitionHandler extends pnFormHandler
             array('text' => 'No', 'value' => 0) );
       $render->assign('ParishionerItems', $yesnoBool);
       $render->assign($formData);
+      if ($this->showId == true) {
+	  $render->assign('showId', 1);
+      }
 
     return true;
   }

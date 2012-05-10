@@ -15,7 +15,7 @@ require_once('pnclass/teacherhandler.php');
 require_once('pnclass/districthandler.php');
 require_once('pnclass/confighandler.php');
 require_once('pnclass/searchstudenthandler.php');
-
+require_once('pnclass/tuitionhandler.php');
 
 function School_admin_main()
 {
@@ -377,6 +377,21 @@ function School_admin_addstudent()
     $formobj->redirect = pnModURL('School', 'admin', 'showstudents',
                 array('familyid' => $familyid));
     return $render->pnFormExecute('School_user_editstudent.htm', $formobj);
+}
+
+function School_admin_tuition()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+    $familyid = FormUtil::getPassedValue('familyid');
+
+    $Render = FormUtil::newpnForm('School');
+    $formobj = new School_user_tuitionHandler();
+    $formobj->familyid = $familyid;
+    RenderSchoolYear($Render);
+    $formobj->showId = true;
+    return $Render->pnFormExecute('School_user_tuition.html', $formobj);
 }
 
 function School_admin_deletestudent()
