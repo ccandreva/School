@@ -181,23 +181,6 @@ function School_user_newstudent()
     return $render->pnFormExecute('School_user_newstudent.html', $formobj);
 }
 
-/*
-function School_user_familyforms()
-{
-    $ret = School_checkuser($user, $familyid);
-    if ($ret) return $ret;
-
-    $studentid = FormUtil::getPassedValue('id');
-
-    $render = FormUtil::newpnForm('School');
-    $formobj = new School_user_studentHandler();
-    $formobj->familyid = $familyid;
-    $formobj->studentid = $studentid;
-    // $formobj->showId = true;
-    return $render->pnFormExecute('School_user_editstudent.htm', $formobj);
-}
-*/
-
 function School_user_tuition()
 {
     $ret = School_checkuser($user, $familyid);
