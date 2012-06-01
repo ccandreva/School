@@ -71,10 +71,10 @@ class School_user_newstudentHandler extends pnFormHandler
     
     $formData['id'] = $this->studentid;
     if ($this->insert) {
-        LogUtil::registerStatus("Student Applicaiton Saved.");
+        LogUtil::registerStatus("Student Application Saved.");
         DBUtil::insertObject ($formData, 'School_register', true);
     } else {
-        LogUtil::registerStatus("Student Applicaiton Updated");
+        LogUtil::registerStatus("Student Application Updated");
         DBUtil::updateObject ($formData, 'School_register');
     }
 
