@@ -49,6 +49,11 @@ class School_user_tuitionHandler extends pnFormHandler
 
     $formData[id] = $this->familyid;
     DBUtil::updateObject ($formData, 'School_tuition');
+    pnModAPIFunc('School', 'user', 'MailFormUpdated',
+	    array('formname'=>'Tuition Information',
+		'familyid'=>$this->familyid,
+	    ));
+    
     return pnRedirect ( pnModURL('School', 'user') );
   }
 
