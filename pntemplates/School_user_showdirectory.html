@@ -1,0 +1,22 @@
+<!--[* School_user_showdirectory.html  *]-->
+
+<!--[pnimg modname=core src=button_ok.gif set=icons/extrasmall alt='Done' assign=Done]-->
+<!--[pnimg modname=core src=button_cancel.gif set=icons/extrasmall alt='Notdone' assign=Notdone]-->
+
+  <h1>School Directory <!--[$ThisYear]--></h1>
+
+      <div id="BluebookPrint">
+
+        <!--[foreach item=d from=$data]-->
+          <div>
+            <b><!--[$d.FamilyName]--></b><br />
+            <!--[$d.Address]--><br />
+            <!--[$d.City]-->, <!--[$d.State]--> <!--[$d.Zip]--><br />
+            <!--[$d.Phone]--><br />
+            <!--[$d.Students]--><br />
+            <!--[$d.Email]--><br />
+            <br />
+          </div>
+
+        <!--[/foreach]-->
+      </div>

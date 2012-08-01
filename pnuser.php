@@ -87,17 +87,6 @@ function School_user_apply()
     return $Render->fetch('School_user_apply.htm');
 }
 
-/* function School_user_application()
-{
-    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_READ)) {
-        return __("Not authorised to access School module.");
-    }
-
-    $render = FormUtil::newpnForm('School');
-    $formobj = new School_user_applicationHandler();
-    return $render->pnFormExecute('School_user_application.htm', $formobj);
-} */
-
 function School_user_emergencyForm()
 {
     $ret = School_checkuser($user, $familyid);
@@ -192,4 +181,22 @@ function School_user_tuition()
     $formobj->familyid = $familyid;
     RenderSchoolYear($Render);
     return $Render->pnFormExecute('School_user_tuition.html', $formobj);
+}
+
+function School_user_showdirectory()
+{
+    $ret = School_checkuser($user, $familyid);
+    if ($ret) return $ret;
+
+    $view = FormUtil::getPassedValue('view');
+    $render = pnRender::getInstance('School', false);
+    if ($view) {
+        $objArray = DBUtil::selectObjectArray ('School_directory', '', 'FamilyName');
+        $render->assign('data', $objArray);
+        $render->assign('view', $view);
+
+    }
+    RenderSchoolYear($render);
+    return $render->fetch('School_user_showdirectory.html');
+
 }
