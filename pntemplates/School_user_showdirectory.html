@@ -5,8 +5,10 @@
 
   <h1>School Directory <!--[$ThisYear]--></h1>
 
+    <!--[pager rowcount=$pager.numitems 
+        limit=$pager.itemsperpage maxpages='10' 
+        posvar='startnum']-->
       <div id="BluebookPrint">
-
         <!--[foreach item=d from=$data]-->
           <div>
             <b><!--[$d.FamilyName]--></b><br />

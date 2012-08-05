@@ -187,15 +187,20 @@ function School_user_showdirectory()
 {
     $ret = School_checkuser($user, $familyid);
     if ($ret) return $ret;
+    $startnum = (int) FormUtil::getPassedValue('startnum', null, 'GET');
+    $numrows = 10;
 
-    $view = FormUtil::getPassedValue('view');
     $render = pnRender::getInstance('School', false);
-    if ($view) {
-        $objArray = DBUtil::selectObjectArray ('School_directory', '', 'FamilyName');
-        $render->assign('data', $objArray);
-        $render->assign('view', $view);
+    $objArray = DBUtil::selectObjectArray ('School_directory', '', 'FamilyName', $startnum, $numrows );
+    $render->assign('data', $objArray);
+    $render->assign('view', $view);
+    // Assign the values for the smarty plugin to produce a pager.
+    $render->assign('pager', array(
+        'numitems' => DBUtil::selectObjectCount('School_directory'),
+        'itemsperpage' => $numrows,
+        )
+    );
 
-    }
     RenderSchoolYear($render);
     return $render->fetch('School_user_showdirectory.html');
 
