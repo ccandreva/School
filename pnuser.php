@@ -188,7 +188,7 @@ function School_user_showdirectory()
     $ret = School_checkuser($user, $familyid);
     if ($ret) return $ret;
     $startnum = (int) FormUtil::getPassedValue('startnum', null, 'GET');
-    $numrows = 10;
+    $numrows = 12;
 
     $render = pnRender::getInstance('School', false);
     $objArray = DBUtil::selectObjectArray ('School_directory', '', 'FamilyName', $startnum, $numrows );
