@@ -205,3 +205,36 @@ function School_user_showdirectory()
     return $render->fetch('School_user_showdirectory.html');
 
 }
+
+function School_user_classlist()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_READ)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $render = pnRender::getInstance('School', false);
+
+    $grade = FormUtil::getPassedValue('grade');
+    $render->assign('grade1', $grade);
+    if ($grade) {
+        // Build where clause to show only registered students
+        $tables = pnDBGetTables();
+        $studentcolumn = $tables['School_student_column'];
+        $where = "$studentcolumn[Accepted]=1 and $studentcolumn[Grade]=$grade";
+        
+        $students = DBUtil::selectObjectArray ("School_student", 
+                $where,
+                'ClassYear DESC, Teacher, LastName, FirstName', -1, -1, '',null, null,
+                array('id', 'FirstName', 'LastName', 'ClassYear', 'Teacher', 'Gender' )
+                );
+        $render->assign('students', $students);
+        $render->assign('oldgrade', array($grade => 'selected'));
+    }
+    $render->assign('GradeItems', 
+            array('', 'PK3', 'PK4', 'K', 1,2,3,4,5,6,7,8)
+            );
+    $render->assign('EnrollStart', EnrollStart() );
+    RenderSchoolYear($render);
+    return $render->fetch('School_user_classlist.html');
+
+}

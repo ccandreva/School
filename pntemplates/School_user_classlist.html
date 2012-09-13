@@ -1,0 +1,34 @@
+<!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
+<!--[* include file="School_admin_menu.htm" *]-->
+
+  <h2><!--[pnml name="$ThisYear Class List"]--> <!--[$grade1]--></h2>
+  <form method="post">
+      Grade: <select name="grade">
+          <!--[foreach item=GradeItem from=$GradeItems]-->
+          <option value="<!--[$GradeItem]-->" <!--[$oldgrade.$GradeItem]-->><!--[$GradeItem]--></option>
+          <!--[/foreach]-->
+      </select>
+      <input type="submit" value="Submit" />
+  </form>
+
+<!--[foreach item=student from=$students]-->
+      <!--[ if ($student.Teacher != $LastTeacher) || ($student.ClassYear != $LastYear) ]-->
+          <!--[if $LastTeacher]-->
+	    <p><strong>Male: </strong><!--[$male]--> <strong>Female: </strong><!--[$female]--></p>
+	    </div>
+          <!--[/if]-->
+          <!--[assign var=male value=0]-->
+          <!--[assign var=female value=0]-->
+          <!--[assign var=LastTeacher value=$student.Teacher]-->
+          <!--[assign var=LastYear value=$student.ClassYear]-->
+	  <div  class="z-floatleft">
+          <h2><!--[$LastTeacher]--> (<!--[$LastYear|year2grade]-->)</h2>
+      <!--[/if]-->
+      <!--[if $student.Gender=='Male']-->
+        <!--[assign var=male value=$male+1]-->
+      <!--[else]-->
+        <!--[assign var=female value=$female+1]-->
+      <!--[/if]-->
+      <p><!--[$student.LastName]-->, <!--[$student.FirstName]--></p>
+
+<!--[/foreach]-->
