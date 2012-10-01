@@ -31,6 +31,16 @@
                     <!--[pnformlabel for=BusNumber text='Bus Number']-->
                     <!--[pnformtextinput id=BusNumber width=6em maxLength=5 ]-->
                 </li>
+		<!--[ if $admin]-->
+		<li>
+		    <!--[pnformlabel for=Accepted cssClass="Checkbox" text="Accepted: "]-->
+		    <!--[pnformcheckbox id="Accepted" ]-->
+		</li>
+		<li>
+		    <!--[pnformlabel for=Withdrawn cssClass="Checkbox" text="Withdrawn: "]-->
+		    <!--[pnformcheckbox id="Withdrawn" ]-->
+		</li>
+		<!--[/if]-->
             </ul>
         </li>
 

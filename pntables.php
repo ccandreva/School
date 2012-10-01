@@ -135,7 +135,8 @@ function School_pntables()
 	'OrthodontistPhone'	=> 'School_family_OrthodontistPhone',
 	'EmergencyLastUpdate'	=> 'School_emergency_lu_date',
 	'EmergencyUpdatedBy'	=> 'School_emergency_lu_uid',
-	'Accepted'		=> 'School_family_Accepted'
+	'Accepted'		=> 'School_family_Accepted',
+	'Withdrawn'		=> 'School_family_Withdrawn'
     );
 
 
@@ -206,7 +207,8 @@ function School_pntables()
 	'OrthodontistPhone'		=> 'C(255)',
 	'EmergencyLastUpdate'		=> 'T',
 	'EmergencyUpdatedBy'		=> 'I4',
-	'Accepted'		=> 'L NOTNULL DEFAULT 0'
+	'Accepted'		=> 'L NOTNULL DEFAULT 0',
+	'Withdrawn'		=> 'L NOTNULL DEFAULT 0'
     );
     ObjectUtil::addStandardFieldsToTableDefinition(
             $table['School_family_column'],
@@ -556,7 +558,6 @@ function School_pntables()
             $table['School_teachers_column_def']
             );
 
-    
     return $table;
 
 }

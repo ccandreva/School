@@ -34,7 +34,8 @@ function School_admin_showemergencyforms()
     }
 
     $render = pnRender::getInstance('School', false);
-    $objArray = DBUtil::selectObjectArray ('School_family', '', 'LastName');
+    $where = "School_family_Withdrawn=0";
+    $objArray = DBUtil::selectObjectArray ('School_family', $where, 'LastName');
     $render->assign('data', $objArray);
     return $render->fetch('School_admin_showemergencyforms.html');
 
@@ -118,6 +119,7 @@ function School_admin_editemergencyform()
     $familyid = FormUtil::getPassedValue('familyid');
     
     $render = FormUtil::newpnForm('School');
+    $render->assign('admin', 1);
     $formobj = new School_user_emergencyHandler();
     $formobj->familyid = $familyid;
     $formobj->showId = true;
