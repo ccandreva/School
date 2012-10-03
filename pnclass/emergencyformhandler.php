@@ -111,6 +111,7 @@ class School_user_emergencyHandler extends pnFormHandler
 	    array('formname'=>'Emergency', 'familyid'=>$familyid)
 	    );
     LogUtil::registerStatus('Your form has been saved. You may review and make additional changes, or navigate to another page.');
+    if ($this->showId) return pnRedirect ( pnModURL('School', 'admin', 'showemergencyforms') );
     return $result;
   }
 
