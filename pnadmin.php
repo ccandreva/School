@@ -671,7 +671,6 @@ function School_admin_teachers()
     }
 
     $teachers = DBUtil::selectObjectArray ('School_teachers', '', 'Grade, Name');
-    8
     $render = FormUtil::newpnForm('School');
     $render->assign('Teachers', $teachers);
     $editid = FormUtil::getPassedValue('editid');
