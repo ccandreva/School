@@ -1,0 +1,90 @@
+
+<!--[ include file="School_admin_menu.htm"]-->
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
+<!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall alt='Delete' assign=delIcon]-->
+
+<div class="z-admincontainer">
+    <div class="z-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='Settings' ]--></div>
+    <h2>Class Parents</h2>
+  
+    <!--[if $errormsg != '']-->
+        <div class="validationSummary pn-errormsg">
+        <!--[$errormsg]-->
+        </div>
+    <!--[/if]-->
+
+    <!--[pnform cssClass="application"]-->
+    <!--[pnformvalidationsummary]-->
+
+	<fieldset class="z-floatright">
+	<!--[if $id]-->
+	<legend>Edit Parent</legend>
+	<!--[else]-->
+	<legend>Add Parent</legend>
+	<!--[/if]-->
+	    <ul>
+		<li>
+		    <ul>
+			<li>
+			    <!--[pnformlabel for=Name text="Class Parent Name" ]-->
+	                    <!--[pnformtextinput id=Name width=20em maxLength=50 mandatory=1]-->
+			</li>
+			<!--[*
+			<li>
+			    <!--[pnformlabel for=Grade text="Grade" ]-->
+	                    <!--[pnformtextinput id=Grade width=3em maxLength=3 mandatory=1]-->
+			</li>
+			*]-->
+			<li>
+			    <!--[pnformlabel for="Teacher" text="Teacher" ]-->
+			    <!--[pnformdropdownlist id="Teacher" ]-->
+			</li>
+		    </ul>
+		</li>
+		<li>
+		    <ul>
+		      <li>
+			  <!--[pnformlabel for="Phone" text="Phone"]-->
+			  <!--[pnformtextinput id="Phone" width=15em maxLength=50 ]-->
+		      </li>
+		      <li>
+			  <!--[pnformlabel for="Email" text="Email"]-->
+			  <!--[pnformtextinput id="Email" width=15em maxLength=50 mandatory=1]-->
+		      </li>
+		    </ul>
+		</li>
+		<li>
+		    <label for="submit">&nbsp;</label>
+		    <!--[pnformbutton commandName="submit" text="Submit" ]-->
+		</li>
+	    </ul>
+	</fieldset>
+	
+    <!--[/pnform]-->
+
+    
+    <table class="z-datatable" style="width: 40em">
+	<thead>
+	    <tr>
+		<th>Grade</th>
+		<th>Teacher</th>
+		<th>&nbsp;</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <!--[foreach from=$Teachers item=teacher]-->
+	    <tr class="<!--[cycle values="z-odd,z-even"]-->" >
+		<td class="z-center"><!--[$teacher.Grade]--></td>
+		<td><!--[$teacher.Name]--></td>
+		<td class="z-center">
+		    <a href="<!--[pnmodurl modname="school" type="admin" func="teachers" editid=$teacher.id ]-->"
+		       title="Edit this teacher"><!--[$editIcon.imgtag]--></a>
+		</td>
+
+	    </tr>
+	    <!--[/foreach]-->
+	</tbody>
+    </table>
+    
+    
+</div>

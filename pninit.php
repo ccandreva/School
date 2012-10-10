@@ -27,6 +27,7 @@ function School_init()
     if ( !DBUtil::createTable('School_tuition')) return false;
     if ( !DBUtil::createTable('School_districts')) return false;
     if ( !DBUtil::createTable('School_teachers')) return false;
+    if ( !DBUtil::createTable('School_classparents')) return false;
     if ( !DBUtil::createTable('School_register')) return false;
 
     return true;
@@ -60,6 +61,9 @@ function School_upgrade($oldversion)
         $where = " < '2011-10-01'";
         DBUtil::updateObject($obj, 'School_family', $FamCrDate . $where);
         DBUtil::updateObject($obj, 'School_student', $StuCrDate . $where);
+      case '0.4.7';
+	if ( !DBUtil::createTable('School_classparents')) return false;
+
     }
 
     return true;

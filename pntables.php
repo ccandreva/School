@@ -558,6 +558,34 @@ function School_pntables()
             $table['School_teachers_column_def']
             );
 
+    $table['School_classparents'] = DBUtil::getLimitedTablename('School_classparents');
+
+    $table['School_classparents_column'] = array(
+	'id'	    => 'School_classparents_id',
+	'Name'	    => 'School_classparents_Name',
+	'Grade'	    => 'School_classparents_Grade',
+	'Teacher'	=>	'School_classparents_Teacher',
+	'Phone'		=> 'School_classparents_Phone',
+	'Email'		=> 'School_classparents_Email',
+    );
+    $table['School_classparents_column_def'] = array(
+	'id'	    => 'I NOTNULL PRIMARY AUTOINCREMENT',
+	'Name'	    => 'C(255)',
+	'Grade'	    => 'C(3)',
+	'Teacher'   =>	'I NOTNULL',
+	'Phone'	    => 'C(15)',
+	'Email'	    => 'C(50)',
+    );
+    ObjectUtil::addStandardFieldsToTableDefinition(
+            $table['School_classparents_column'],
+            'School_classparents_'
+            );
+    ObjectUtil::addStandardFieldsToTableDataDefinition(
+            $table['School_classparents_column_def']
+            );
+
+
+    
     return $table;
 
 }

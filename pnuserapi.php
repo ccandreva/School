@@ -171,3 +171,18 @@ function School_userapi_AssignID($args)
     pnUserSetVar('FamilyID', $familyid);
     return $familyid;
 }
+
+function School_userapi_GetTeachers($args)
+{
+    $teachers = DBUtil::selectObjectArray('School_teachers', '', 'Grade, Name',
+	   -1, -1, '',null, null,
+	    array('id', 'Name', Grade)
+	    );
+    $teacherItems = array(array('text'=>'', 'value'=>''));
+    foreach ($teachers as $teacher) {
+	if ($teacher['id'] > 0)
+	$teacherItems[] = array('text' => $teacher['Name'], 'value' => $teacher['id']);
+    }
+
+    return $teacherItems;
+}

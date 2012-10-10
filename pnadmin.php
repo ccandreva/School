@@ -12,6 +12,7 @@ require_once('pnclass/directoryformhandler.php');
 require_once('pnclass/familyhandler.php');
 require_once('pnclass/studenthandler.php');
 require_once('pnclass/teacherhandler.php');
+require_once('pnclass/classparenthandler.php');
 require_once('pnclass/districthandler.php');
 require_once('pnclass/confighandler.php');
 require_once('pnclass/searchstudenthandler.php');
@@ -670,13 +671,30 @@ function School_admin_teachers()
     }
 
     $teachers = DBUtil::selectObjectArray ('School_teachers', '', 'Grade, Name');
-    
+    8
     $render = FormUtil::newpnForm('School');
     $render->assign('Teachers', $teachers);
     $editid = FormUtil::getPassedValue('editid');
     $formobj = new School_admin_teacherHandler();
     if ($editid) $formobj->id = $editid;
     return $render->pnFormExecute('School_admin_teachers.html', $formobj);
+
+}
+
+function School_admin_classparents()
+{
+    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
+        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
+    }
+
+    $cps = DBUtil::selectObjectArray ('School_classparents', '', 'Grade, Name');
+    
+    $render = FormUtil::newpnForm('School');
+    $render->assign('ClassParents', $cps);
+    $editid = FormUtil::getPassedValue('editid');
+    $formobj = new School_admin_classparentHandler();
+    if ($editid) $formobj->id = $editid;
+    return $render->pnFormExecute('School_admin_classparents.html', $formobj);
 
 }
 

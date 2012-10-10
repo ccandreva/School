@@ -44,6 +44,8 @@ class School_user_studentHandler extends pnFormHandler
             array('text' => 'Male', 'value' => 'Male'),
             array('text' => 'Female', 'value' => 'Female'),
         );
+      
+        
 	$TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'), true);
 	$TeacherItems[] = array('text' => 'N/A', 'value' => 'N/A');
         $Sacraments=array('Baptism' =>'Baptism', 'Reconciliation'=>'Reconciliation',
