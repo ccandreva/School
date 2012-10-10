@@ -105,7 +105,6 @@ function School_user_directoryForm()
     $render = FormUtil::newpnForm('School');
     $formobj = new School_user_directoryHandler();
     $formobj->familyid = $familyid;
-    $formobj->showId = true;
     return $render->pnFormExecute('School_user_directoryForm.html', $formobj);
 }
 
