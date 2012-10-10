@@ -57,7 +57,6 @@ function Grade2Year($grade)
     $mon = date('n');
     $year = date('Y');
     if ($mon > 6) $year++;
-    $d = $class - $year;
 
     switch ($grade) {
         case 'K':
