@@ -220,7 +220,8 @@ function School_user_classlist()
         // Build where clause to show only registered students
         $tables = pnDBGetTables();
         $studentcolumn = $tables['School_student_column'];
-        $where = "$studentcolumn[Accepted]=1 and $studentcolumn[Grade]=$grade";
+	$classyear = Grade2Year($grade);
+        $where = "$studentcolumn[Accepted]=1 and $studentcolumn[ClassYear]=$classyear";
         
         $students = DBUtil::selectObjectArray ("School_student", 
                 $where,
