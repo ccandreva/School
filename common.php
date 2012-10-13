@@ -35,6 +35,11 @@ function EnrollStart()
     return pnModGetVar('School', 'EnrollStart');  //2010-12-01
 }
 
+function LatestAlumniClass()
+{
+    return pnModGetVar('School', 'LatestAlumniCLass');
+}
+
 function Year2Grade($class, $promote)
 {
     $mon = date('n');
