@@ -59,12 +59,13 @@ function school_formstatusblock_display($blockinfo)
     $directoryObj =  pnModAPIFunc('School', 'user', 'LoadDirectory', $args);
     
     $Render = pnRender::getInstance('School');
-    $startdate = '2011-08-01';
+    $startdate = '2012-10-01';
     $n=0;
     if ($emergencyObj['EmergencyLastUpdate'] < $startdate) {
         $Render->assign('EmergencyDate', true);
 	$n++;
     }
+    $startdate = '2012-10-20';
     if ($directoryObj['lu_date'] < $startdate) {
         $Render->assign('DirectoryDate', true);
 	$n++;
