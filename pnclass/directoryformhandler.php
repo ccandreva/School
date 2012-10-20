@@ -17,39 +17,47 @@ class School_user_directoryHandler extends pnFormHandler
       $formData = DBUtil::selectObjectByID('School_directory', $familyid);
       if (! is_array($formData)) {
           $formData['id'] = $familyid;
-          $obj =  DBUtil::selectObjectByID('School_emergencyform', $familyid);
+          $obj =  DBUtil::selectObjectByID('School_family', $familyid);
           $formData['FamilyName'] = $obj['LastName']
-            . ', ' . preg_replace('/^(\S+).*$/','$1', $obj['MotherName'] )
-            . ' & ' . preg_replace('/^(\S+).*$/','$1', $obj['FatherName'] ) ;
+            . ', ' . preg_replace('/^(\S+).*$/','$1', $obj['MotherFirstName'] )
+            . ' & ' . preg_replace('/^(\S+).*$/','$1', $obj['FatherFirstName'] ) ;
           $formData['Address'] = $obj['Address'];
           $formData['City'] = $obj['City'] ;
           $formData['State'] = $obj['State'] ;
           $formData['Zip'] = $obj['Zip'] ;
           $formData['Phone'] = $obj['Phone'] ;
           $formData['Email'] = pnUserGetVar('email');
-          $tables = pnDBGetTables();
-          $StudentCol = $tables['School_emergencyStudent_column'][familyid];
-          $where = "WHERE $StudentCol=$familyid";
-
-          $students = DBUtil::selectObjectArray('School_emergencyStudent', $where, 'StudentName');
-                  //null, null, null, null, array('StudentName', 'Grade'));
-          if (is_array($students) ) {
-                $names = '';
-                foreach ($students as $s) {
-                        if ($names) $names = $names . ', ';
-                        $names = $names . $s['StudentName'] . ' ' . $s['Grade'];
-                }
-                $formData['Students'] = $names;
-          }
           $this->ShouldInsert = true;
           LogUtil::registerStatus('It seems this is the first time you are filling out this form. ' .
-                  'The information below is taken from your emergency form data. ' .
+                  'The information below is taken from your main registration data. ' .
                   'Please review it and make any needed changes. ' .
                   'You will not be in the directory if you do not click <strong>Submit</strong>');
       }
+      $tables = pnDBGetTables();
+      $StudentCol = $tables['School_student_column']['Familyid'];
+      $YearCol = $tables['School_student_column']['ClassYear'];
+      $where = "WHERE $StudentCol=$familyid and $YearCol>" . LatestAlumniClass();
 
+      $students = DBUtil::selectObjectArray('School_student', $where, 'FirstName',
+	      -1, -1, '',null, null,
+	      array('id', 'FirstName', 'NickName', 'ClassYear', 'Teacher') );
+      foreach ($students as $student) {
+          $id = $student['id'];
+          $formData['NickName'.$id] = $student['NickName'];
+          $formData['Teacher'.$id] = $student['Teacher'];
+	  $grade = Year2Grade($student['ClassYear']);
+	  if (is_numeric($grade)) {
+	    $where = "School_teachers_Grade='" . $grade . "'";
+	  } else {
+	    $where = "School_teachers_Grade='M' or School_teachers_Grade='K'";
+	  }
+          $formData['Teacher'.$id.'Items'] = initListValues(
+		  DBUtil::selectFieldArray('School_teachers', 'Name', $where), true);
+      }
+    
       $render->assign($formData);
-      // if ($this->showId) $render->assign('showId', true);
+      $render->assign('students', $students);
+      if ($this->showId) $render->assign('showId', true);
       return true;
   }
 
