@@ -3,11 +3,17 @@
         modname=School filename=school_user_directoryForm.js ]-->
 
 <h1>Resurrection School Directory</h1>
- <p>Each year we print a directory of our families, also known as the Blue Book
-     or Family Directory. We would like to include your Family Information and e-mail
-     addresses in this directory which we will send home to families who have paid their
-     PTO dues. This will hopefully make correspondence easier for the Class Mom’s, Committee
-     Heads and the P.T.O.
+<p>
+    Each year we publish a Family Directory, which makes correspondence easier for the Class Mom’s, 
+    Committee Heads and the P.T.O. .  
+    We would like to include your Family Information and 
+    e-mail address in this directory.  
+</p>
+<p>
+    <strong>New</strong> this year our Family Directory 
+    will be posted on the web site, but it will be password protected.  Only 
+    other families enrolled in Resurrect School will have access to the directory.
+    This directory 
 </p>
 
 <p>In oder to have your family information published in this directory, please fill out
@@ -18,10 +24,6 @@
         PLEASE REVIEW THE INFORMATIONIN THE FORM AND RESUBMIT IT.) </font>
 </p>
 
-<p>
-    Under the form you will see a preview of your entry,
-    exactly as it will appear in the directory.
-</p>
 
 <!--[if $showId]--><h2>Family ID: <!--[$id]--></h2> <!--[/if]-->
 
@@ -34,6 +36,7 @@
 <!--[$errormsg]-->
 </div>
 <!--[/if]-->
+
 
 <fieldset id="Emergency" >
     <legend>Family Information</legend>
@@ -67,10 +70,12 @@
                 <!--[pnformlabel for=Phone text="Home Phone (only 1)"]-->
                 <!--[pnformtextinput id=Phone width=10em maxLength=15 ]-->
             </li>
+            <!--[*
             <li>
                 <!--[pnformlabel for=Students text="Childrens names and grade"]-->
                 <!--[pnformtextinput id=Students width=25em maxLength=90 ]-->
             </li>
+            *]-->
         <li>
           <ul>
             <li>
@@ -86,26 +91,33 @@
       </li>
 
     </ul>
-
-    <input type="button" id="Preview" name="Preview" value="Preview" />
-    <input type="hidden" id="Students" value="<!--[$Students]-->" />
+    
+    <h4>Confirm each student's teacher is correct below. You may also enter an 
+    optional nickname to use. <br />
+    If the Nickname field is blank their First Name will be used.</h4>
+    <table class="School">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Grade</th>
+                <th>Teacher</th>
+                <th>Nickname</th>
+            </tr>
+        </thead>
+    <!--[foreach from=$students item=student]-->
+    <tr>
+        <!--[* pnformtextinput id=id textMode="hidden" width=25em maxLength=50 *]-->
+        <td><!--[$student.FirstName]--></td>
+        <td><!--[$student.ClassYear|year2grade]--> </td>
+        <td><!--[pnformdropdownlist id="Teacher`$student.id`" mandatory=1]--></td>
+        <td><!--[pnformtextinput id="NickName`$student.id`" width=8em maxLength=50]--></td>
+    </tr>
+    <!--[/foreach]-->
+    </table>
+    
+    <br />
+    <!--[pnformbutton commandName="submit" text="Submit" ]-->
 </fieldset>
 
-<br />
-<div id="PreviewBlock" style="border: 1px solid black; padding: 10px;">
-<div id="BlueBookPrint">
-
-
-<h2>This is how your entry will look:</h2>
-    <div>
-        <span id="CXC"></span>
-    </div>
-</div>
-
-<p>Once you are satisfied with your entry, submit your information to the
-   school directory here.
-</p>
-    <!--[pnformbutton commandName="submit" text="Submit" ]-->
-</div>
 
 <!--[/pnform]-->
