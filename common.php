@@ -37,7 +37,7 @@ function EnrollStart()
 
 function LatestAlumniClass()
 {
-    return pnModGetVar('School', 'LatestAlumniCLass');
+    return pnModGetVar('School', 'LatestAlumniClass');
 }
 
 function Year2Grade($class, $promote)
