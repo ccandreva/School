@@ -65,8 +65,8 @@ function school_formstatusblock_display($blockinfo)
         $Render->assign('EmergencyDate', true);
 	$n++;
     }
-    $startdate = '2012-10-20';
-    if ($directoryObj['lu_date'] < $startdate) {
+    //$startdate = '2012-10-20';
+    if ($directoryObj['lu_date'] < DirectoryEditDate()) {
         $Render->assign('DirectoryDate', true);
 	$n++;
     }

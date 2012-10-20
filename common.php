@@ -17,6 +17,11 @@ function initListValues($list, $firstnull)
         return $temp;
 }
 
+function DirectoryEditDate()
+{
+        return pnModGetVar('School', 'DirectoryEditDate'); //'yyyy-mm-dd'
+}
+
 /* The year enrollments are being accepted for */
 function EnrollYear()
 {

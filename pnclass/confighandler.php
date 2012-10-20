@@ -2,7 +2,8 @@
 class School_user_configHandler extends pnFormHandler
 {
 
-  var $fields = array('ThisYear', 'NextYear', 'NextYearStart', 'EnrollStart', 'ReregOpen', 'LatestAlumniClass');
+  var $fields = array('ThisYear', 'NextYear', 'NextYearStart', 'EnrollStart', 
+      'ReregOpen', 'LatestAlumniClass', 'DirectoryEditDate');
   
   function initialize(&$render)
   {
