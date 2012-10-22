@@ -54,7 +54,6 @@ class School_user_studentHandler extends pnFormHandler
         $Evaluations = array('Edu'=>'Educational', 'Psych'=>'Psychological',
             'Speech'=>'Speech','Other'=>'Other',
             );
-        $GradeItems = initListValues(array('', 'PK3', 'PK4', 'K', 1,2,3,4,5,6,7,8));
         $yesno = initListValues(array( 'No', 'Yes'));
         $yesnoBool = array( array('text' => '', 'value' => ''),
             array('text' => 'Yes', 'value' => 1),
@@ -71,7 +70,7 @@ class School_user_studentHandler extends pnFormHandler
         }
         $render->assign( array(
             'GenderItems' => $gender,
-            'GradeItems'  => $GradeItems,
+            'GradeItems'  => GradeItems(),
 	    'TeacherItems' => $TeacherItems,
             'Sacraments' => $Sacraments,
             'CustodialParentItems' => $Custodial,

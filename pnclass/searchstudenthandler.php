@@ -14,7 +14,6 @@ class School_admin_searchstudentHandler extends pnFormHandler
 	array('text' => 'Male', 'value' => 'Male'),
 	array('text' => 'Female', 'value' => 'Female'),
     );
-    $GradeItems = initListValues(array('', 'PK3', 'PK4', 'K', 1,2,3,4,5,6,7,8));
     $TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'), true);
     $TeacherItems[] = array('text' => 'N/A', 'value' => 'N/A');
     $SessionPK3Items = initListValues(array('', 'AM (8:30-11:00)', 'PM (12:00-2:30)', 'Either'));
@@ -24,7 +23,7 @@ class School_admin_searchstudentHandler extends pnFormHandler
     
     $render->assign( array(
 	'GenderItems' => $gender,
-	'GradeItems'  => $GradeItems,
+	'GradeItems'  => GradeItems(),
 	'TeacherItems' => $TeacherItems,
 	'AcceptedItems' => $yesnoBool,
 	'ReturningItems' => $yesnoBool,

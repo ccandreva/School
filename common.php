@@ -91,7 +91,13 @@ function Grade2Year($grade)
     return EnrollYear() + $d;
 }
 
-
+/*
+ * Return an item-list of the valid grades.
+ */
+function GradeItems()
+{
+        return initListValues(array('', 'PK3', 'PK4', 'K', 1,2,3,4,5,6,7,8));
+}
 
 function School_checkuser(&$user, &$familyid, $application)
 {
