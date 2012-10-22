@@ -27,14 +27,12 @@
 		    <ul>
 			<li>
 			    <!--[pnformlabel for=Name text="Class Parent Name" ]-->
-	                    <!--[pnformtextinput id=Name width=20em maxLength=50 mandatory=1]-->
+	                    <!--[pnformtextinput id=Name width=15em maxLength=50 mandatory=1]-->
 			</li>
-			<!--[*
 			<li>
 			    <!--[pnformlabel for=Grade text="Grade" ]-->
-	                    <!--[pnformtextinput id=Grade width=3em maxLength=3 mandatory=1]-->
+	                    <!--[pnformdropdownlist id=Grade mandatory=1]-->
 			</li>
-			*]-->
 			<li>
 			    <!--[pnformlabel for="Teacher" text="Teacher" ]-->
 			    <!--[pnformdropdownlist id="Teacher" ]-->
@@ -68,17 +66,19 @@
 	    <tr>
 		<th>Grade</th>
 		<th>Teacher</th>
+		<th>Parent</th>
 		<th>&nbsp;</th>
 	    </tr>
 	</thead>
 	<tbody>
-	    <!--[foreach from=$Teachers item=teacher]-->
+	    <!--[foreach from=$ClassParents item=parent]-->
 	    <tr class="<!--[cycle values="z-odd,z-even"]-->" >
-		<td class="z-center"><!--[$teacher.Grade]--></td>
-		<td><!--[$teacher.Name]--></td>
+		<td class="z-center"><!--[$parent.Grade]--></td>
+		<td class="z-center"><!--[$parent.Teacher]--></td>
+		<td><!--[$parent.Name]--></td>
 		<td class="z-center">
-		    <a href="<!--[pnmodurl modname="school" type="admin" func="teachers" editid=$teacher.id ]-->"
-		       title="Edit this teacher"><!--[$editIcon.imgtag]--></a>
+		    <a href="<!--[pnmodurl modname="school" type="admin" func="classparents" editid=$parent.id ]-->"
+		       title="Edit this parent"><!--[$editIcon.imgtag]--></a>
 		</td>
 
 	    </tr>

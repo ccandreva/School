@@ -13,7 +13,10 @@ class School_admin_classparentHandler extends pnFormHandler
 	  $formData = DBUtil::selectObjectByID('School_classparents', $this->id);
 	  $render->assign($formData);
       }
-    $render->assign('TeacherItems', pnModAPIFunc('School', 'user', 'GetTeachers'));
+    $render->assign( array (
+	'TeacherItems' => pnModAPIFunc('School', 'user', 'GetTeachers'),
+	'GradeItems' => GradeItems(),
+    ));
     return true;
   }
 
@@ -30,8 +33,16 @@ class School_admin_classparentHandler extends pnFormHandler
 	DBUtil::insertObject($formData, 'School_classparents');
 	LogUtil::registerStatus("The new class parent has been added.");
     }
+  $clearData = array (
+      'Name' => '',
+      'Phone' => '',
+      'Email' => '',
+      'Grade' => $formData['Grade'],
+      'Teacher' => $formData['Teacher']
+  );
+    $render->pnFormSetValues( $clearData);
     $classparents = DBUtil::selectObjectArray ('School_classparents', '', 'Name');
-    $render->assign('Teachers', $classparents);
+    $render->assign('ClassParents', $classparents);
 
     return;
   }
