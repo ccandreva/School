@@ -186,3 +186,23 @@ function School_userapi_GetTeachers($args)
 
     return $teacherItems;
 }
+
+function School_userapi_GetClassParents($args)
+{
+    //$cps = DBUtil::selectObjectArray ('School_classparents', '', 'Grade, Name');
+    
+    $joininfo = array ( array (
+	'join_table' => 'School_teachers',
+	'join_field' => array('Name'),
+	'join_method' => 'LEFT JOIN',
+	'object_field_name' => array('TeacherName'),
+	'compare_field_table' => 'Teacher',
+	'compare_field_join' => 'id',
+    ));
+
+    $cps = DBUtil::selectExpandedObjectArray ('School_classparents', $joininfo,
+	    '', 'Grade, Name');
+    
+    return $cps;
+
+}

@@ -686,8 +686,7 @@ function School_admin_classparents()
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
 
-    $cps = DBUtil::selectObjectArray ('School_classparents', '', 'Grade, Name');
-    
+    $cps = pnModAPIFunc('School', 'user', 'GetClassParents') ;
     $render = FormUtil::newpnForm('School');
     $render->assign('ClassParents', $cps);
     $editid = FormUtil::getPassedValue('editid');

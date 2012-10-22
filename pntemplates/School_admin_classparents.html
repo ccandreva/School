@@ -74,7 +74,7 @@
 	    <!--[foreach from=$ClassParents item=parent]-->
 	    <tr class="<!--[cycle values="z-odd,z-even"]-->" >
 		<td class="z-center"><!--[$parent.Grade]--></td>
-		<td class="z-center"><!--[$parent.Teacher]--></td>
+		<td class="z-center"><!--[$parent.TeacherName]--></td>
 		<td><!--[$parent.Name]--></td>
 		<td class="z-center">
 		    <a href="<!--[pnmodurl modname="school" type="admin" func="classparents" editid=$parent.id ]-->"

@@ -41,7 +41,7 @@ class School_admin_classparentHandler extends pnFormHandler
       'Teacher' => $formData['Teacher']
   );
     $render->pnFormSetValues( $clearData);
-    $classparents = DBUtil::selectObjectArray ('School_classparents', '', 'Name');
+    $classparents = pnModAPIFunc('School', 'user', 'GetClassParents') ;
     $render->assign('ClassParents', $classparents);
 
     return;
