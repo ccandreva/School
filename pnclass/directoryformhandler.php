@@ -36,7 +36,8 @@ class School_user_directoryHandler extends pnFormHandler
       $tables = pnDBGetTables();
       $StudentCol = $tables['School_student_column']['Familyid'];
       $YearCol = $tables['School_student_column']['ClassYear'];
-      $where = "WHERE $StudentCol=$familyid and $YearCol>" . LatestAlumniClass();
+      $ReturningCol = $tables['School_student_column']['Returning'];
+      $where = "WHERE $StudentCol=$familyid and $ReturningCol=true and $YearCol>" . LatestAlumniClass();
 
       $students = DBUtil::selectObjectArray('School_student', $where, 'FirstName',
 	      -1, -1, '',null, null,
