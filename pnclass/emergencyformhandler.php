@@ -43,7 +43,7 @@ class School_user_emergencyHandler extends pnFormHandler
       unset ($formData['ContactData']);
       unset ($formData['StudentData']);
       
-      $TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'));
+      $TeacherItems = pnModAPIFunc('School','user','GetTeacherItems', array('text' => 1));
       for ($i=1;$i<=$NumStudents;$i++) {
           $render->assign('Teacher' . $i . 'Items', $TeacherItems);
       }

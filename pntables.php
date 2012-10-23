@@ -542,7 +542,7 @@ function School_pntables()
 
     $table['School_teachers_column'] = array(
 	'id'	    => 'School_teachers_id',
-	'Name'	    => 'School_teachers_Name',
+//	'Name'	    => 'School_teachers_Name',
 	'Title'	    => 'School_teachers_Title',
         'FirstName' => 'School_teachers_FirstName',
         'LastName'  => 'School_teachers_LastName',
@@ -550,7 +550,7 @@ function School_pntables()
     );
     $table['School_teachers_column_def'] = array(
 	'id'	    => 'I NOTNULL PRIMARY AUTOINCREMENT',
-	'Name'	    => 'C(255)',
+//	'Name'	    => 'C(255)',
 	'Title'	    => 'C(255)',
 	'FirstName' => 'C(255)',
 	'LastName'  => 'C(255)',

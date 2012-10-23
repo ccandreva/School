@@ -14,7 +14,7 @@ class School_admin_classparentHandler extends pnFormHandler
 	  $render->assign($formData);
       }
     $render->assign( array (
-	'TeacherItems' => pnModAPIFunc('School', 'user', 'GetTeachers'),
+	'TeacherItems' => pnModAPIFunc('School', 'user', 'GetTeacherItems'),
 	'GradeItems' => GradeItems(),
     ));
     return true;

@@ -670,7 +670,7 @@ function School_admin_teachers()
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
 
-    $teachers = DBUtil::selectObjectArray ('School_teachers', '', 'Grade, Name');
+    $teachers = DBUtil::selectObjectArray ('School_teachers', '', 'Grade, LastName');
     $render = FormUtil::newpnForm('School');
     $render->assign('Teachers', $teachers);
     $editid = FormUtil::getPassedValue('editid');

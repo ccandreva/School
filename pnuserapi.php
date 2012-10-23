@@ -172,16 +172,24 @@ function School_userapi_AssignID($args)
     return $familyid;
 }
 
-function School_userapi_GetTeachers($args)
+function School_userapi_GetTeacherItems($args)
 {
-    $teachers = DBUtil::selectObjectArray('School_teachers', '', 'Grade, Name',
+    if ($args['text']) $text = true;
+    if ($args['where']) $where = $args['where']; else $where = '';
+    $teachers = DBUtil::selectObjectArray('School_teachers', $where, 'Grade, LastName',
 	   -1, -1, '',null, null,
-	    array('id', 'Name', Grade)
+	    array('id', 'Title', 'LastName', 'Grade')
 	    );
     $teacherItems = array(array('text'=>'', 'value'=>''));
     foreach ($teachers as $teacher) {
 	if ($teacher['id'] > 0)
-	$teacherItems[] = array('text' => $teacher['Name'], 'value' => $teacher['id']);
+            $name = $teacher['Title'] . ' ' . $teacher['LastName'];
+            if ($text) $value = $name;
+            else $value = $teacher['id'];
+            $teacherItems[] = array(
+                'text' => $name,
+                'value' => $value
+            );
     }
 
     return $teacherItems;

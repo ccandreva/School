@@ -24,8 +24,20 @@
 	<!--[/if]-->
 	    <ul>
                 <li>
-                    <!--[pnformlabel for=Name text="Teacher Name" ]-->
-                    <!--[pnformtextinput id=Name width=20em maxLength=50 mandatory=1]-->
+                    <ul>
+                        <li>
+                            <!--[pnformlabel for=Title text="Title" ]-->
+                            <!--[pnformdropdownlist id=Title mandatory=1]-->
+                        </li>
+                        <li>
+                            <!--[pnformlabel for=FirstName text="First Name" ]-->
+                            <!--[pnformtextinput id=FirstName width=8em maxLength=50 mandatory=1]-->
+                        </li>
+                        <li>
+                            <!--[pnformlabel for=LastName text="Last Name" ]-->
+                            <!--[pnformtextinput id=LastName width=8em maxLength=50 mandatory=1]-->
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <!--[pnformlabel for=Grade text="Grade" ]-->
@@ -53,7 +65,7 @@
 	    <!--[foreach from=$Teachers item=teacher]-->
 	    <tr class="<!--[cycle values="z-odd,z-even"]-->" >
 		<td class="z-center"><!--[$teacher.Grade]--></td>
-		<td><!--[$teacher.Name]--></td>
+		<td><!--[$teacher.Title]--> <!--[$teacher.FirstName]--> <!--[$teacher.LastName]--></td>
 		<td class="z-center">
 		    <a href="<!--[pnmodurl modname="school" type="admin" func="teachers" editid=$teacher.id ]-->"
 		       title="Edit this teacher"><!--[$editIcon.imgtag]--></a>

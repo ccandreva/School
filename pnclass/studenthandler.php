@@ -46,7 +46,7 @@ class School_user_studentHandler extends pnFormHandler
         );
       
         
-	$TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'), true);
+        $TeacherItems = pnModAPIFunc('School','user','GetTeacherItems', array('text' => 1));
 	$TeacherItems[] = array('text' => 'N/A', 'value' => 'N/A');
         $Sacraments=array('Baptism' =>'Baptism', 'Reconciliation'=>'Reconciliation',
             'Communion'=>'First Holy Communion', 'Confirmation' => 'Confirmation');

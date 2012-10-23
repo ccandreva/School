@@ -14,7 +14,7 @@ class School_admin_searchstudentHandler extends pnFormHandler
 	array('text' => 'Male', 'value' => 'Male'),
 	array('text' => 'Female', 'value' => 'Female'),
     );
-    $TeacherItems = initListValues(DBUtil::selectFieldArray('School_teachers', 'Name'), true);
+    $TeacherItems = pnModAPIFunc('School','user','GetTeacherItems', array('text' => 1));
     $TeacherItems[] = array('text' => 'N/A', 'value' => 'N/A');
     $SessionPK3Items = initListValues(array('', 'AM (8:30-11:00)', 'PM (12:00-2:30)', 'Either'));
     $SessionPK4Items = initListValues(array('', 'AM (8:30-11:00)', 'Full Day'));

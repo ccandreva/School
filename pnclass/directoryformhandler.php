@@ -51,8 +51,8 @@ class School_user_directoryHandler extends pnFormHandler
 	  } else {
 	    $where = "School_teachers_Grade='M' or School_teachers_Grade='K'";
 	  }
-          $formData['Teacher'.$id.'Items'] = initListValues(
-		  DBUtil::selectFieldArray('School_teachers', 'Name', $where), true);
+          $formData['Teacher'.$id.'Items'] = 
+            pnModAPIFunc('School','user','GetTeacherItems',array('where' => $where));
       }
     
       $render->assign($formData);
