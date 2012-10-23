@@ -8,7 +8,7 @@ class School_user_directoryHandler extends pnFormHandler
   var $familyid;
   var $ShouldInsert = false;
   var $redirect;
-
+  var $columnArray = array('id', 'FirstName', 'NickName', 'ClassYear', 'Teacher');
   function initialize(&$render)
   {
       //if ($this->familyid < 1) return false;
@@ -33,15 +33,11 @@ class School_user_directoryHandler extends pnFormHandler
                   'Please review it and make any needed changes. ' .
                   'You will not be in the directory if you do not click <strong>Submit</strong>');
       }
-      $tables = pnDBGetTables();
-      $StudentCol = $tables['School_student_column']['Familyid'];
-      $YearCol = $tables['School_student_column']['ClassYear'];
-      $ReturningCol = $tables['School_student_column']['Returning'];
-      $where = "WHERE $StudentCol=$familyid and $ReturningCol=true and $YearCol>" . LatestAlumniClass();
 
-      $students = DBUtil::selectObjectArray('School_student', $where, 'FirstName',
-	      -1, -1, '',null, null,
-	      array('id', 'FirstName', 'NickName', 'ClassYear', 'Teacher') );
+      $students = pnModAPIFunc('School', 'user', 'GetStudents', 
+	    array('familyid' => $familyid, 'status' => 'active',
+	    'columnArray' => $this->columnArray));
+
       foreach ($students as $student) {
           $id = $student['id'];
           $formData['NickName'.$id] = $student['NickName'];
@@ -53,7 +49,7 @@ class School_user_directoryHandler extends pnFormHandler
 	    $where = "School_teachers_Grade='M' or School_teachers_Grade='K'";
 	  }
           $formData['Teacher'.$id.'Items'] = 
-            pnModAPIFunc('School','user','GetTeacherItems',array('where' => $where));
+            pnModAPIFunc('School','user','GetTeacherItems',array('where' => $where, 'text' => true));
       }
     
       $render->assign($formData);
@@ -79,6 +75,18 @@ class School_user_directoryHandler extends pnFormHandler
       DBUtil::updateObject ($formData, 'School_directory');
     }
 
+    // Load all students, then we have to take the form data and update all students with it.
+    $students = pnModAPIFunc('School', 'user', 'GetStudents', 
+	array('familyid' => $familyid, 'status' => 'active',
+	'columnArray' => $this->columnArray));
+    foreach ($students as $student) {
+	$id = $student['id'];
+	$newObj = array('id' => $id,
+	    'NickName' => $formData['NickName'.$id],
+	    'Teacher'  => $formData['Teacher'.$id],
+	    );
+	DBUtil::updateObject ($newObj, 'School_student');
+    }
     if ($this->redirect) {
         LogUtil::registerStatus('Changes have been saved.');
         return pnRedirect($this->redirect);
