@@ -63,6 +63,15 @@ function School_upgrade($oldversion)
         DBUtil::updateObject($obj, 'School_student', $StuCrDate . $where);
       case '0.4.7';
 	if ( !DBUtil::createTable('School_classparents')) return false;
+      case '0.4.8';
+        if ( !DBUtil::changeTable('School_teachers')) return false;
+        $teachers = DBUtil::selectObjectArray ('School_teachers');
+        foreach ($teachers as $t) {
+            $p = preg_split('/\s/', $t['Name'], 2);
+            $t['Title'] = $p[0];
+            $t['LastName'] = $p[1];
+            DBUtil::updateObject($t, 'School_teachers');
+        }
 
     }
 

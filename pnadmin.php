@@ -23,7 +23,7 @@ function School_admin_main()
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
-
+    
     $pnRender = pnRender::getInstance('School', false);
     return $pnRender->fetch('School_admin_main.htm');
 }
