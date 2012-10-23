@@ -13,7 +13,8 @@ class School_admin_teacherHandler extends pnFormHandler
 	  $formData = DBUtil::selectObjectByID('School_teachers', $this->id);
 	  $render->assign($formData);
       }
-
+    $gradeItems = initListValues(array('','M','K',1,2,3,4,5,6,7,8));
+    $render->assign('GradeItems', $gradeItems);
     return true;
   }
 
