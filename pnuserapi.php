@@ -58,13 +58,11 @@ function School_userapi_LoadEmergencyForm($args)
         $familyidCol = $tables['School_emergencyContact_column'][familyid];
         $where = "WHERE $familyidCol=$familyid";
         $contactData = DBUtil::selectObjectArray ('School_emergencyContact', $where, 'id');
-
-        $familyidCol = $tables['School_student_column'][Familyid];
-        $where = "WHERE $familyidCol=$familyid";
-        $studentData = DBUtil::selectObjectArray ('School_student', $where);
-
         $formData['ContactData'] = $contactData;
-        $formData['StudentData'] = $studentData;
+
+	$formData['StudentData'] = pnModAPIFunc('School', 'user', 'GetStudents', 
+	    array('familyid' => $familyid, 'status' => 'active'));
+	
     } else {
         // Insert empty object, populated from account data
         $formData = array(
@@ -100,14 +98,35 @@ function School_userapi_GetStudents($args)
     // Only procede if familyid is a positive integer
     if (!(preg_match('/^\d+$/', $familyid))) return false;
 
+    if ($args['columnArray']) {
+	$columnArray = $args['columnArray'];
+    } else {
+	$columnArray = null;
+    }
+    if ($args['orderby']) {
+	$orderby = $args['orderby'];
+    } else {
+	$orderby = 'FirstName';
+    }
+    
     $tables = pnDBGetTables();
-
-    $cols = $tables['School_student_column'];
+    $cols = &$tables['School_student_column'];
+    
     $familyidCol = $cols[Familyid];
+    $YearCol = $cols['ClassYear'];
+    $ReturningCol = $cols['Returning'];
     $where = "WHERE $familyidCol=$familyid";
+
+    switch($args['status'])
+    {
+	case 'active';
+	    $where .= " and $ReturningCol=true and $YearCol>" . LatestAlumniClass();
+	    break;
+    }
+    
     // $showcols = array($cols[id], $cols[FirstName], $cols[Grade], $cols[Teacher]);
-    $studentData = DBUtil::selectObjectArray ('School_student', $where );
-    //        '', -1, -1, '', null, $showcols);
+    $studentData = DBUtil::selectObjectArray ('School_student', $where, $orderby,
+	    	      -1, -1, '',null, null, $columnArray);
 
     return $studentData;
 
