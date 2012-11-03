@@ -43,8 +43,8 @@ function School_adminapi_LoadEmergencyForms($args)
         $obj['FatherWorkAddress'] = preg_replace('/(^|\s)([A-Z])([A-Z]+)/e',"'$1$2' . strtolower('\\3')", $obj['FatherWorkAddress'] );
         $where = "WHERE $ContactCol=$familyid";
         $obj['contactData'] = DBUtil::selectObjectArray ('School_emergencyContact', $where);
-        $where = "WHERE $StudentCol=$familyid";
-        $obj['studentData'] = DBUtil::selectObjectArray ('School_student', $where);
+        $obj['studentData'] = pnModAPIFunc('School', 'user', 'GetStudents',
+            array('familyid' => $familyid, 'status' => 'active'));
     }
     unset($obj);
 
