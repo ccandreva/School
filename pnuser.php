@@ -230,7 +230,7 @@ function School_user_classlist()
         $tables = pnDBGetTables();
         $studentcolumn = $tables['School_student_column'];
 	$classyear = Grade2Year($grade);
-        $where = "$studentcolumn[Accepted]=1 and $studentcolumn[ClassYear]=$classyear";
+        $where = "$studentcolumn[Accepted]=1 and $studentcolumn[ClassYear]=$classyear and $studentcolumn[lu_date] >= '" . DirectoryEditDate() . "'";
         
         $students = DBUtil::selectObjectArray ("School_student", 
                 $where,
