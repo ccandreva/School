@@ -220,9 +220,9 @@ function School_userapi_GetClassParents($args)
     
     $joininfo = array ( array (
 	'join_table' => 'School_teachers',
-	'join_field' => array('Name'),
+	'join_field' => array('Title', 'FirstName', 'LastName'),
 	'join_method' => 'LEFT JOIN',
-	'object_field_name' => array('TeacherName'),
+	'object_field_name' => array('TeacherTitle', 'TeacherFirstName', 'TeacherLastName'),
 	'compare_field_table' => 'Teacher',
 	'compare_field_join' => 'id',
     ));
