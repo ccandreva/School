@@ -190,13 +190,23 @@ function School_user_showdirectory()
     $numrows = 12;
 
     $render = pnRender::getInstance('School', false);
-    $objArray = DBUtil::selectObjectArray ('School_directory', '', 'FamilyName', $startnum, $numrows );
+    $where = "School_directory_lu_date >= '" . DirectoryEditDate() . "'";
+    $rowcount = DBUtil::selectObjectCount('School_directory', $where);
+    $objArray = DBUtil::selectObjectArray ('School_directory', $where, 'FamilyName', $startnum, $numrows );
+    $columnArray = array('id', 'FirstName', 'NickName', 'ClassYear');
+    
+    foreach ($objArray as &$family) {
+	$family['students'] = pnModAPIFunc('School', 'user', 'GetStudents', 
+	    array('familyid' => $family['id'], 'status' => 'active',
+	    'columnArray' => $columnArray));
+    }
     $render->assign('data', $objArray);
     $render->assign('view', $view);
     // Assign the values for the smarty plugin to produce a pager.
     $render->assign('pager', array(
         'numitems' => DBUtil::selectObjectCount('School_directory'),
         'itemsperpage' => $numrows,
+	'rowcount' => $rowcount,
         )
     );
 

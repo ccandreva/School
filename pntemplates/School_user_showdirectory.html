@@ -3,11 +3,12 @@
 <!--[pnimg modname=core src=button_ok.gif set=icons/extrasmall alt='Done' assign=Done]-->
 <!--[pnimg modname=core src=button_cancel.gif set=icons/extrasmall alt='Notdone' assign=Notdone]-->
 
-  <h1>School Directory <!--[$ThisYear]--></h1>
+  <h1>School Directory <!--[$ThisYear]--> </h1>
 
     <!--[pager rowcount=$pager.numitems 
         limit=$pager.itemsperpage maxpages='10' 
-        posvar='startnum']-->
+        posvar='startnum' rowcount=$pager.rowcount
+	template='pageritems.html']-->
       <div id="BluebookPrint">
         <!--[foreach item=d from=$data]-->
           <div>
@@ -15,7 +16,10 @@
             <!--[$d.Address]--><br />
             <!--[$d.City]-->, <!--[$d.State]--> <!--[$d.Zip]--><br />
             <!--[$d.Phone]--><br />
-            <!--[$d.Students]--><br />
+	    <!--[foreach from=$d.students item=s name=foo]-->
+		<!--[if $s.NickName]--><!--[$s.NickName]--><!--[else]--><!--[$s.FirstName]--><!--[/if]-->
+		<!--[$s.ClassYear|Year2Grade]--><!--[if !$smarty.foreach.foo.last]-->, <!--[/if]-->
+	    <!--[/foreach]--><br />
             <!--[$d.Email]--><br />
             <br />
           </div>
