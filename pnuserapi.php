@@ -228,7 +228,7 @@ function School_userapi_GetClassParents($args)
     ));
 
     $cps = DBUtil::selectExpandedObjectArray ('School_classparents', $joininfo,
-	    '', 'Grade, Name');
+	    '', 'Grade, TeacherLastName, Name');
     
     return $cps;
 
