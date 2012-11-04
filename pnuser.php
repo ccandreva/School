@@ -215,7 +215,7 @@ function School_user_showdirectory()
 
 }
 
-function School_user_classlist()
+function School_user_showclasslist()
 {
     if (!SecurityUtil::checkPermission('School::', '::', ACCESS_READ)) {
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
@@ -245,6 +245,6 @@ function School_user_classlist()
             );
     $render->assign('EnrollStart', EnrollStart() );
     RenderSchoolYear($render);
-    return $render->fetch('School_user_classlist.html');
+    return $render->fetch('School_user_showclasslist.html');
 
 }
