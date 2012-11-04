@@ -27,7 +27,8 @@ function School_adminapi_getlinks()
 
 function School_adminapi_LoadEmergencyForms($args)
 {
-    $where = $args['where'];
+    //$where = $args['where'];
+    $where = "School_family_Withdrawn=0";
     
     $tables = pnDBGetTables();
     $ContactCol = $tables['School_emergencyContact_column'][familyid];
