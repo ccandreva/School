@@ -420,10 +420,18 @@ function School_admin_classlist()
     
     // Build where clause to show only registered students
     $tables = pnDBGetTables();
-    $familycolumn = $tables['School_student_column'];
-    $where = "$familycolumn[Accepted]=1";
+    $studentcolumn = $tables['School_student_column'];
+    $where = "$studentcolumn[Accepted]=1 and $studentcolumn[Returning]=1 and School_family_Withdrawn=0";
 
-    $students = DBUtil::selectObjectArray ("School_student", 
+    $joinInfo = array( array (
+	'join_table' => 'School_family',
+	'join_field' => array('Withdrawn'),
+	'join_method' => 'LEFT JOIN',
+	'object_field_name' => array('Withdrawn'),
+	'compare_field_table' => 'Familyid',
+	'compare_field_join' => 'id'
+	) );
+    $students = DBUtil::selectExpandedObjectArray ("School_student", $joinInfo,
             $where, 'ClassYear DESC, Teacher, LastName, FirstName', -1, -1, '',null, null,
             array('id', 'FirstName', 'LastName', 'ClassYear', 'Teacher', 'Returning', 'LastSaveValid', 'lu_date')
             );
