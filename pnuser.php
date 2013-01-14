@@ -248,3 +248,14 @@ function School_user_showclasslist()
     return $render->fetch('School_user_showclasslist.html');
 
 }
+function School_user_showclassparents()
+{
+    $ret = School_checkuser($user, $familyid);
+    if ($ret) return $ret;
+
+    $cps = pnModAPIFunc('School', 'user', 'GetClassParents') ;
+    $render = pnRender::getInstance('School', false);
+    $render->assign('ClassParents', $cps);
+    return $render->fetch('School_user_showclassparents.html');
+
+}

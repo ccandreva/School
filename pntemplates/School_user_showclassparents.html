@@ -1,0 +1,25 @@
+<!--[* School_user_showclassparents.html  *]-->
+
+<h1>School Directory <!--[$ThisYear]--></h1>
+<!--[include file="School_user_directorymenu.tpl"]-->
+
+    <h2>Class Parents</h2>
+    
+    <table class="z-datatable" style="width: 40em">
+	<thead>
+	    <tr>
+		<th>Grade</th>
+		<th>Teacher</th>
+		<th>Parent</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <!--[foreach from=$ClassParents item=parent]-->
+	    <tr class="<!--[cycle values="z-odd,z-even"]-->" >
+		<td class="z-center"><!--[$parent.Grade]--></td>
+		<td class="z-center"><!--[$parent.TeacherTitle]--> <!--[$parent.TeacherLastName]--></td>
+		<td><!--[$parent.Name]--></td>
+	    </tr>
+	    <!--[/foreach]-->
+	</tbody>
+    </table>
