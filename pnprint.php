@@ -132,9 +132,9 @@ function School_print_textbook()
 
 function School_print_emergencyforms()
 {
-    if (!SecurityUtil::checkPermission('School::', '::', ACCESS_ADMIN)) {
-        return pnVarPrepHTMLDisplay(_MODULENOAUTH);
-    }
+    $ret = School_checkuser($user, $familyid);
+    if ($ret) return $ret;
+
     $Render = pnRender::getInstance('School');
     $Render->caching=0;
     $Render->assign('Families', pnModAPIFunc('School', 'admin', 'LoadEmergencyForms'));
@@ -143,3 +143,27 @@ function School_print_emergencyforms()
    
 }
 
+function School_print_showclasslist()
+{
+    $ret = School_checkuser($user, $familyid);
+    if ($ret) return $ret;
+
+    $render = pnRender::getInstance('School', false);
+
+    // Build where clause to show only registered students
+    $tables = pnDBGetTables();
+    $studentcolumn = $tables['School_student_column'];
+    $where = "$studentcolumn[Accepted]=1 and $studentcolumn[lu_date] >= '" . DirectoryEditDate() . "'";
+
+    $students = DBUtil::selectObjectArray ("School_student", 
+	    $where,
+	    'ClassYear DESC, Teacher, LastName, FirstName', -1, -1, '',null, null,
+	    array('id', 'FirstName', 'LastName', 'ClassYear', 'Teacher', 'Gender' )
+	    );
+    $render->assign('students', $students);
+
+    $render->assign('EnrollStart', EnrollStart() );
+    RenderSchoolYear($render);
+    return $render->fetch('School_print_showclasslist.html');
+
+}
