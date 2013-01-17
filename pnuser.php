@@ -226,17 +226,7 @@ function School_user_showclasslist()
     $grade = FormUtil::getPassedValue('grade');
     $render->assign('grade1', $grade);
     if ($grade) {
-        // Build where clause to show only registered students
-        $tables = pnDBGetTables();
-        $studentcolumn = $tables['School_student_column'];
-	$classyear = Grade2Year($grade);
-        $where = "$studentcolumn[Accepted]=1 and $studentcolumn[ClassYear]=$classyear and $studentcolumn[lu_date] >= '" . DirectoryEditDate() . "'";
-        
-        $students = DBUtil::selectObjectArray ("School_student", 
-                $where,
-                'ClassYear DESC, Teacher, LastName, FirstName', -1, -1, '',null, null,
-                array('id', 'FirstName', 'LastName', 'ClassYear', 'Teacher', 'Gender' )
-                );
+	$students = pnModAPIFunc('School', 'user', 'GetClassList', array('grade' => $grade)) ;
         $render->assign('students', $students);
         $render->assign('oldgrade', array($grade => 'selected'));
     }

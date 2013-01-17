@@ -1,16 +1,5 @@
-<!--[* School_user_showdirectory.html  *]-->
-
-  <h1>School Directory <!--[$ThisYear]--></h1>
-    <!--[include file="School_user_directorymenu.tpl"]-->
-    <p>      <a href="<!--[pnmodurl modname='School' type='print' func='showdirectory']-->" 
-	 target="_res_print">Print Directory</a>
-    </p>
-
-    <!--[pager rowcount=$pager.numitems 
-        limit=$pager.itemsperpage maxpages='10' 
-        posvar='startnum' rowcount=$pager.rowcount
-	template='pageritems.html']-->
-      <div id="BluebookPrint">
+	<div id="BluebookPrint">
+	<h1>Blue Book <!--[$ThisYear]--></h1>
         <!--[foreach item=d from=$data]-->
           <div>
             <b><!--[$d.FamilyName]--></b><br />
@@ -23,7 +12,6 @@
 	    <!--[/foreach]--><br />
             <!--[$d.Email]--><br />
             <br />
-          </div>
-
+           </div>
         <!--[/foreach]-->
-      </div>
+	</div>

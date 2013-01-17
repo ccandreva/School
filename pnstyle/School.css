@@ -136,7 +136,23 @@ form.application u li,
         background-position: 0 0;
         margin: 0px 0 10px 0;
 }
-
+.nobreak{
+    page-break-inside: avoid;
+}
+#ClasslistPrint
+{
+    width: 900px;
+    height: auto;
+    margin: 0 0 0 40px;
+    font-size: 10pt;
+}
+div#ClasslistPrint em
+{
+        color: red;
+}
+div#ClasslistPrint h2{
+    font-size: 10pt;
+}
 
 #middle-column1 form.application ul ul li,
 #middle-column2 form.application ul ul li,

@@ -1,6 +1,5 @@
 <!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
 <!--[* include file="School_admin_menu.htm" *]-->
-
   <h2><!--[pnml name="$ThisYear Class List"]--> <!--[$grade1]--></h2>
     <!--[include file="School_user_directorymenu.tpl"]-->
   <form method="post">
@@ -10,6 +9,8 @@
           <!--[/foreach]-->
       </select>
       <input type="submit" value="Submit" />
+      <a href="<!--[pnmodurl modname='School' type='print' func='showclasslist']-->" 
+	 target="_res_print">Print Class List</a>
   </form>
 
 <!--[foreach item=student from=$students]-->

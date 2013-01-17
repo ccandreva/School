@@ -150,20 +150,33 @@ function School_print_showclasslist()
 
     $render = pnRender::getInstance('School', false);
 
-    // Build where clause to show only registered students
-    $tables = pnDBGetTables();
-    $studentcolumn = $tables['School_student_column'];
-    $where = "$studentcolumn[Accepted]=1 and $studentcolumn[lu_date] >= '" . DirectoryEditDate() . "'";
-
-    $students = DBUtil::selectObjectArray ("School_student", 
-	    $where,
-	    'ClassYear DESC, Teacher, LastName, FirstName', -1, -1, '',null, null,
-	    array('id', 'FirstName', 'LastName', 'ClassYear', 'Teacher', 'Gender' )
-	    );
+    $students = pnModAPIFunc('School', 'user', 'GetClassList') ;
     $render->assign('students', $students);
 
     $render->assign('EnrollStart', EnrollStart() );
     RenderSchoolYear($render);
     return $render->fetch('School_print_showclasslist.html');
+}
+
+function School_print_showdirectory()
+{
+    $ret = School_checkuser($user, $familyid);
+    if ($ret) return $ret;
+
+    $render = pnRender::getInstance('School', false);
+    $where = "School_directory_lu_date >= '" . DirectoryEditDate() . "'";
+    $objArray = DBUtil::selectObjectArray ('School_directory', $where, 'FamilyName');
+    $columnArray = array('id', 'FirstName', 'NickName', 'ClassYear');
+    
+    foreach ($objArray as &$family) {
+	$family['students'] = pnModAPIFunc('School', 'user', 'GetStudents', 
+	    array('familyid' => $family['id'], 'status' => 'active',
+	    'columnArray' => $columnArray));
+    }
+    $render->assign('data', $objArray);
+    $render->assign('view', $view);
+
+    RenderSchoolYear($render);
+    return $render->fetch('School_print_showdirectory.html');
 
 }

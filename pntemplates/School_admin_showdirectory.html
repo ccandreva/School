@@ -22,27 +22,7 @@
    <!--[assign var=updated value=0]-->
    <!--[assign var=notup value=0]-->
   <!--[if $view == 'print']-->
-      <div id="BluebookPrint">
-      <h1>Blue Book <!--[$ThisYear]--></h1>
-
-        <!--[foreach item=d from=$data]-->
-          <div>
-            <b><!--[$d.FamilyName]--></b><br />
-            <!--[$d.Address]--><br />
-            <!--[$d.City]-->, <!--[$d.State]--> <!--[$d.Zip]--><br />
-            <!--[$d.Phone]--><br />
-            <!--[$d.Students]--><br />
-            <!--[$d.Email]--><br />
-            <br />
-          </div>
-  	  <!--[if $d.lu_date < '2012-05-01']-->
-	      <!--[assign var=notup value=`$notup+1`]-->
-	  <!--[else]-->
-	      <!--[assign var=updated value=`$updated+1`]-->
-	  <!--[/if]-->
-
-        <!--[/foreach]-->
-      </div>
+	<!--[include file='School_printdirectory.tpl']-->
   <!--[elseif $view == 'table']-->
       <table class="z-datatable">
 	  <thead>

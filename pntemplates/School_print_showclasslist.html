@@ -1,20 +1,27 @@
-<!--[* $Id: School_admin_main.htm 22371 2007-07-10 12:47:15Z rgasch $ *]-->
-<!--[* include file="School_admin_menu.htm" *]-->
-
+<!--[* $Id: School_print_showclasslist.html *]-->
+<!--[pnajaxheader nobehaviour=true noscriptaculous=true
+        modname=School filename=school_print_auto.js]-->
+<div class="print" id="ClasslistPrint">
   <h2><!--[pnml name="$ThisYear Class List"]--> <!--[$grade1]--></h2>
-ent-	
+
 <!--[foreach item=student from=$students]-->
       <!--[ if ($student.Teacher != $LastTeacher) || ($student.ClassYear != $LastYear) ]-->
           <!--[if $LastTeacher]-->
 	    <p><strong>Male: </strong><!--[$male]--> <strong>Female: </strong><!--[$female]--></p>
 	    </div>
-	    <!--[if ($student.ClassYear != $LastYear) ]--><br clear="left"><!--[/if]-->
+	    <!--[if ($student.ClassYear != $LastYear) ]-->
+		<!--[if $LastYear]-->
+		    <br clear="left">
+		</div>
+		<!--[/if]-->
+		<div class="nobreak">
+	    <!--[/if]-->
           <!--[/if]-->
           <!--[assign var=male value=0]-->
           <!--[assign var=female value=0]-->
           <!--[assign var=LastTeacher value=$student.Teacher]-->
           <!--[assign var=LastYear value=$student.ClassYear]-->
-	  <div  class="z-floatleft">
+	  <div  class="z-floatleft nobreak">
           <h2><!--[$LastTeacher]--> (<!--[$LastYear|year2grade]-->)</h2>
       <!--[/if]-->
       <!--[if $student.Gender=='Male']-->
@@ -25,6 +32,8 @@ ent-
       <p><!--[$student.LastName]-->, <!--[$student.FirstName]--></p>
 
 <!--[/foreach]-->
-
+<!--[if $LastTeacher]-->
 	    <p><strong>Male: </strong><!--[$male]--> <strong>Female: </strong><!--[$female]--></p>
 	    </div>
+<!--[/if]-->
+</div>

@@ -233,3 +233,25 @@ function School_userapi_GetClassParents($args)
     return $cps;
 
 }
+
+function School_userapi_GetClassList($args)
+{
+    // Build where clause to show only registered students
+    $tables = pnDBGetTables();
+    $studentcolumn = $tables['School_student_column'];
+    $where = "$studentcolumn[Accepted]=1 and $studentcolumn[Teacher] > '' and $studentcolumn[Teacher] != 'Mrs. Romeo' and $studentcolumn[lu_date] >= '" . DirectoryEditDate() . "'";
+    if ($args['grade']) {
+	$classyear = Grade2Year($args['grade']);
+	$where .= "and $studentcolumn[ClassYear]=$classyear";
+    } else {
+	$where .= "and $studentcolumn[ClassYear]!='New'";
+    }
+
+    return DBUtil::selectObjectArray ("School_student", 
+	    $where,
+	    'ClassYear DESC, Teacher, LastName, FirstName', -1, -1, '',null, null,
+	    array('id', 'FirstName', 'LastName', 'ClassYear', 'Teacher', 'Gender' )
+	    );
+    
+    
+}
