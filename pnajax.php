@@ -20,15 +20,19 @@ function School_ajax_getfamilies()
     $pntable = pnDBGetTables();
     $familycolumn = $pntable['School_family_column'];
 
-    $where = 'WHERE ' . $familycolumn['LastName'] . ' REGEXP \'(' . DataUtil::formatForStore($fragment) . ')\'';
+    $where = 'WHERE School_family_Withdrawn=0 and ' . $familycolumn['LastName'] . ' REGEXP \'(' . DataUtil::formatForStore($fragment) . ')\'';
     $results = DBUtil::selectObjectArray('School_family', $where);
 
     $out = '<ul>';
     // $out .= '<li>Lincoln<input type="hidden" id="Lincoln" value="666" /></li>';
+    $prevname = '';
     if (is_array($results) && count($results) > 0) {
         foreach($results as $result) {
             $lastname = DataUtil::formatForDisplay($result['LastName']);
-            $out .= '<li>' . $lastname .'<input type="hidden" id="' . $lastname . '" value="' . $result['id'] . '" /></li>';
+	    if ($lastname != $prevname) {
+		$out .= '<li>' . $lastname .'<input type="hidden" id="' . $lastname . '" value="' . $result['id'] . '" /></li>';
+		$prevname = $lastname;
+	    }
         }
     }
     $out .= '</ul>';
