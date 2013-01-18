@@ -191,6 +191,13 @@ function School_user_showdirectory()
 
     $render = pnRender::getInstance('School', false);
     $where = "School_directory_lu_date >= '" . DirectoryEditDate() . "'";
+    $familyname = FormUtil::getpassedValue('familyname');
+    if ($familyname) {
+        $table = pnDBGetTables();
+        $familycolumn = $table['School_family_column'];
+        $where .= $familycolumn['LastName'] . " = '$familyname'";
+    }
+
     $rowcount = DBUtil::selectObjectCount('School_directory', $where);
     $objArray = DBUtil::selectObjectArray ('School_directory', $where, 'FamilyName', $startnum, $numrows );
     $columnArray = array('id', 'FirstName', 'NickName', 'ClassYear');
