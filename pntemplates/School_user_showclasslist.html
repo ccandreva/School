@@ -9,8 +9,11 @@
           <!--[/foreach]-->
       </select>
       <input type="submit" value="Submit" />
+      Print: 
+      <a href="<!--[pnmodurl modname='School' type='print' func='showclasslist' grade=$grade1]-->" 
+	 target="_res_print">This Class</a>
       <a href="<!--[pnmodurl modname='School' type='print' func='showclasslist']-->" 
-	 target="_res_print">Print Class List</a>
+	 target="_res_print">All Classes</a>
   </form>
 
 <!--[foreach item=student from=$students]-->

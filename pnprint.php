@@ -149,8 +149,10 @@ function School_print_showclasslist()
     if ($ret) return $ret;
 
     $render = pnRender::getInstance('School', false);
-
-    $students = pnModAPIFunc('School', 'user', 'GetClassList') ;
+    $grade = FormUtil::getPassedValue('grade');
+    $args = array();
+    if ($grade) $args['grade'] = $grade;
+    $students = pnModAPIFunc('School', 'user', 'GetClassList', $args) ;
     $render->assign('students', $students);
 
     $render->assign('EnrollStart', EnrollStart() );
