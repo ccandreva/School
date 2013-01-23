@@ -83,10 +83,17 @@ form.application ul ul
         margin: 0;
 }
 
+.nobreak{
+    page-break-inside: avoid;
+}
 .print + .print,
 .newpage
 {
     page-break-before: always;
+}
+.breakafter
+{
+    page-break-after: always;
 }
 .print, .print table{
     font-size: 11px;
@@ -135,9 +142,6 @@ form.application u li,
         background: none;
         background-position: 0 0;
         margin: 0px 0 10px 0;
-}
-.nobreak{
-    page-break-inside: avoid;
 }
 #ClasslistPrint
 {
