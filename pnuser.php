@@ -191,15 +191,14 @@ function School_user_showdirectory()
 
     $render = pnRender::getInstance('School', false);
     $where = "School_directory_lu_date >= '" . DirectoryEditDate() . "'";
-    $familyname = FormUtil::getpassedValue('familyname');
-    if ($familyname) {
-        $table = pnDBGetTables();
-        $familycolumn = $table['School_family_column'];
-        $where .= $familycolumn['LastName'] . " = '$familyname'";
-    }
+    $letter = FormUtil::getpassedValue('letter');
+    if (!$letter) $letter = 'A';
+    $table = pnDBGetTables();
+    $directorycolumn = $table['School_directory_column'];
+    $where .= ' and ' . $directorycolumn['FamilyName'] . " LIKE '$letter%'";
 
-    $rowcount = DBUtil::selectObjectCount('School_directory', $where);
-    $objArray = DBUtil::selectObjectArray ('School_directory', $where, 'FamilyName', $startnum, $numrows );
+    // $rowcount = DBUtil::selectObjectCount('School_directory', $where);
+    $objArray = DBUtil::selectObjectArray ('School_directory', $where, 'FamilyName'); //, $startnum, $numrows );
     $columnArray = array('id', 'FirstName', 'NickName', 'ClassYear');
     
     foreach ($objArray as &$family) {
