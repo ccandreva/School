@@ -24,13 +24,15 @@ function user_application_init()
 
 function user_editstudent_onGrade()
 {
-    if ( $('Grade').value=='PK3')
+/*
+     if ( $('Grade').value=='PK3')
     {
 	$('sessionsPK3').show();
     }
     else {
 	$('sessionsPK3').hide();
     }
+    */
     if ( $('Grade').value=='PK4')
     {
 	$('sessionsPK4').show();

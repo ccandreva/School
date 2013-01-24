@@ -61,7 +61,7 @@ class School_user_studentHandler extends pnFormHandler
         $ey = EnrollYear();
         $newyear = $ey + 11;
         $ClassYearItems = array ( array(text=>"New ($newyear)", value=>$newyear));
-	$SessionPK3Items = initListValues(array('', 'AM (8:30-11:00)', 'PM (12:00-2:30)', 'Either'));
+	// $SessionPK3Items = initListValues(array('', 'AM (8:30-11:00)', 'PM (12:00-2:30)', 'Either'));
 	$SessionPK4Items = initListValues(array('', 'AM (8:30-11:00)', 'Full Day'));
 	$SessionKItems = initListValues(array('', 'Montessori', 'Traditional'));
         for ($y = $ey+10; $y >=$ey; $y-- ) {
@@ -81,7 +81,7 @@ class School_user_studentHandler extends pnFormHandler
             'IEPItems' => $yesno,
             '504PlanItems' => $yesno,
             'ClassYearItems' => $ClassYearItems,
-	    'SessionPK3Items' => $SessionPK3Items,
+//	    'SessionPK3Items' => $SessionPK3Items,
 	    'SessionPK4Items' => $SessionPK4Items,
 	    'SessionKItems' => $SessionKItems,
         ) );
@@ -104,7 +104,8 @@ class School_user_studentHandler extends pnFormHandler
     }
 
     $Grade = $formData['Grade'];
-    if ($Grade < 1) {
+//    if ($Grade < 1) {
+    if ($Grade == 'PK4' || $Grade == 'K') {
 	    $sesKey = "Session$Grade";
 	    if ($formData[$sesKey]) {
 		$formData['Session'] = $formData[$sesKey];
