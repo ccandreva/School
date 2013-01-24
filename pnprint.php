@@ -64,6 +64,7 @@ function School_print_student()
     }
 
     School_initStudent($Render);
+    RenderSchoolYear($Render);
 
     return $Render->fetch('School_print_student.htm');
 
