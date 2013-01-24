@@ -157,7 +157,13 @@ div#ClasslistPrint em
 div#ClasslistPrint h2{
     font-size: 10pt;
 }
-
+div.ClasslistYear {
+    margin: 10px;
+    page-break-after: always;
+}
+div.ClasslistClass {
+    margin: 0 20px;
+}
 #middle-column1 form.application ul ul li,
 #middle-column2 form.application ul ul li,
 .print fieldset ul ul li
