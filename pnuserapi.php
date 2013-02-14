@@ -239,7 +239,9 @@ function School_userapi_GetClassList($args)
     // Build where clause to show only registered students
     $tables = pnDBGetTables();
     $studentcolumn = $tables['School_student_column'];
-    $where = "$studentcolumn[Accepted]=1 and $studentcolumn[Teacher] > '' and $studentcolumn[Teacher] != 'Mrs. Romeo' and $studentcolumn[lu_date] >= '" . DirectoryEditDate() . "'";
+// I have no idea why I hard-coded removng Mrs. Romeo.
+//    $where = "$studentcolumn[Accepted]=1 and $studentcolumn[Teacher] > '' and $studentcolumn[Teacher] != 'Mrs. Romeo' and $studentcolumn[lu_date] >= '" . DirectoryEditDate() . "'";
+    $where = "$studentcolumn[Accepted]=1 and $studentcolumn[Teacher] > '' and $studentcolumn[lu_date] >= '" . DirectoryEditDate() . "'";
     if ($args['grade']) {
 	$classyear = Grade2Year($args['grade']);
 	$where .= "and $studentcolumn[ClassYear]=$classyear";
