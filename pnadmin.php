@@ -24,8 +24,8 @@ function School_admin_main()
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
     
-    $pnRender = pnRender::getInstance('School', false);
-    return $pnRender->fetch('School_admin_main.htm');
+    $render = pnRender::getInstance('School', false);
+    return $render->fetch('School_admin_main.htm');
 }
 
 function School_admin_showemergencyforms()
