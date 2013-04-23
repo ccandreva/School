@@ -185,7 +185,10 @@ function School_userapi_MailFormUpdated($args)
 
 function School_userapi_AssignID($args)
 {
-    $familyid = DBUtil::selectFieldMax('School_family', 'id') + 1;
+    // Get the current highest faimly id + 1, directly accesss object tables.
+    // Not recomended, but what can we do ?
+    $results = DBUtil::executeSQL("select max(cast(oba_value as unsigned)) from zk_objectdata_attributes where oba_attribute_name='FamilyID'");
+    $familyid = $results->fields[0] + 1;
     if ($familyid < 910000) $familyid = 910000;
     pnUserSetVar('FamilyID', $familyid);
     return $familyid;
